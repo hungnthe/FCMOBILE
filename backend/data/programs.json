@@ -1,0 +1,69 @@
+[
+  {
+    "program_id": 1,
+    "code": "tots",
+    "name": "TOTS",
+    "display_name": "Team of the Season",
+    "active": true
+  },
+  {
+    "program_id": 2,
+    "code": "the-world-game-26",
+    "name": "The world game 26",
+    "display_name": "The World Game 26",
+    "active": true
+  },
+  {
+    "program_id": 3,
+    "code": "utots",
+    "name": "UTOTS",
+    "display_name": "Ultimate TOTS",
+    "active": true
+  },
+  {
+    "program_id": 4,
+    "code": "nha-vo-dich",
+    "name": "Nhà Vô Địch",
+    "display_name": "Nhà Vô Địch",
+    "active": true
+  },
+  {
+    "program_id": 5,
+    "code": "pitch-perfect",
+    "name": "Pitch Perfect",
+    "display_name": "Pitch Perfect",
+    "active": true
+  },
+  {
+    "program_id": 6,
+    "code": "mua-he-dac-biet",
+    "name": "Mùa hè đặc biệt",
+    "display_name": "Mùa hè đặc biệt",
+    "active": true
+  },
+  {
+    "program_id": 7,
+    "code": "quoc-gia",
+    "name": "Quốc gia",
+    "display_name": "Quốc gia",
+    "active": true
+  },
+  {
+    "name": "The Changer",
+    "code": "chan",
+    "display_name": "The Changer",
+    "active": true,
+    "program_id": 8,
+    "createdAt": "2026-09-03T10:39:08.373Z",
+    "updatedAt": "2026-09-03T10:39:08.373Z"
+  },
+  {
+    "name": "Numero",
+    "code": "num",
+    "display_name": "Numero",
+    "active": true,
+    "program_id": 9,
+    "createdAt": "2026-09-03T10:39:20.103Z",
+    "updatedAt": "2026-09-03T10:39:20.103Z"
+  }
+]

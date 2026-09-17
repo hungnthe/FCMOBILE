@@ -1,0 +1,1281 @@
+[
+  {
+    "player_id": 1,
+    "current_card_id": 1001,
+    "objectId": "000000000000000000000001",
+    "program": [
+      "The world game 26"
+    ],
+    "ovr": 122,
+    "position": [
+      "lw",
+      "st"
+    ],
+    "nation": {
+      "nation_id": 1
+    },
+    "Status_I_H_M": "Matching",
+    "number": 10,
+    "name": "Kylian Mbappe",
+    "stats": {
+      "goalAmounts": 96,
+      "assistAmounts": 66,
+      "match": 195,
+      "bestPlayerAmount": 32,
+      "sessionAmount": 2
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 4
+    },
+    "imageCard": [
+      "public/ImageCard/mbappe-card.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [
+        "",
+        ""
+      ],
+      "createdAt": "2026-08-21"
+    },
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "player_id": 2,
+    "current_card_id": 1002,
+    "objectId": "000000000000000000000002",
+    "program": [
+      "The world game 26"
+    ],
+    "ovr": 119,
+    "position": [
+      "st",
+      "lw",
+      "cf"
+    ],
+    "nation": {
+      "nation_id": 2
+    },
+    "Status_I_H_M": "Matching",
+    "number": 7,
+    "name": "Son Heung-Min",
+    "stats": {
+      "goalAmounts": 115,
+      "assistAmounts": 73,
+      "match": 192,
+      "bestPlayerAmount": 42,
+      "sessionAmount": 2
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 4
+    },
+    "imageCard": [
+      "public/ImageCard/Son_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "image": "",
+      "createdAt": "2026-08-21"
+    },
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "player_id": 3,
+    "current_card_id": 1003,
+    "objectId": "000000000000000000000003",
+    "program": "Nhà Vô Địch",
+    "ovr": 121,
+    "position": [
+      "cm",
+      "lm"
+    ],
+    "nation": {
+      "nation_id": 5
+    },
+    "Status_I_H_M": "Icon",
+    "number": 31,
+    "name": "Bastian Schweinsteiger",
+    "stats": {
+      "goalAmounts": 28,
+      "assistAmounts": 55,
+      "match": 185,
+      "bestPlayerAmount": 8,
+      "sessionAmount": 2
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 3
+    },
+    "imageCard": [
+      "public/ImageCard/Schweinsteiger_256_fc_25_download (3).png"
+    ],
+    "metadata": {
+      "note": "",
+      "image": "",
+      "createdAt": "2026-08-21"
+    },
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "player_id": 4,
+    "current_card_id": 1004,
+    "objectId": "000000000000000000000004",
+    "program": "Pitch Perfect",
+    "ovr": 119,
+    "position": [
+      "cm",
+      "cam"
+    ],
+    "nation": {
+      "nation_id": 4
+    },
+    "Status_I_H_M": "Hero",
+    "number": 17,
+    "name": "Marek Hamšík",
+    "stats": {
+      "goalAmounts": 22,
+      "assistAmounts": 19,
+      "match": 83,
+      "bestPlayerAmount": 7,
+      "sessionAmount": 2
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": null,
+          "value": "10*"
+        },
+        {
+          "session_id": null,
+          "value": "10*"
+        },
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 4
+    },
+    "imageCard": [
+      "public/ImageCard/Ham_k_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "image": "",
+      "createdAt": "2026-08-21"
+    },
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "player_id": 5,
+    "current_card_id": 1005,
+    "objectId": "000000000000000000000005",
+    "program": [
+      "Nhà Vô Địch"
+    ],
+    "ovr": 122,
+    "position": [
+      "rw",
+      "lw",
+      "st"
+    ],
+    "nation": {
+      "nation_id": 3
+    },
+    "Status_I_H_M": "Icon",
+    "number": 11,
+    "name": "Gareth Bale",
+    "stats": {
+      "goalAmounts": 71,
+      "assistAmounts": 55,
+      "match": 162,
+      "bestPlayerAmount": 25,
+      "sessionAmount": 2
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 3
+    },
+    "imageCard": [
+      "public/ImageCard/Bale_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-08-21",
+      "updatedAt": "2026-08-21T14:43:41.642Z"
+    },
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "player_id": 6,
+    "current_card_id": 1006,
+    "objectId": "000000000000000000000006",
+    "program": [
+      "Utots"
+    ],
+    "ovr": 119,
+    "position": [
+      "cdm",
+      "cm"
+    ],
+    "nation": {
+      "nation_id": 6
+    },
+    "Status_I_H_M": "Matching",
+    "number": 41,
+    "name": "Declan Rice",
+    "stats": {
+      "goalAmounts": 15,
+      "assistAmounts": 22,
+      "match": 183,
+      "bestPlayerAmount": 4,
+      "sessionAmount": 2
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": null,
+          "value": "10*"
+        },
+        {
+          "session_id": null,
+          "value": "10*"
+        },
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 4
+    },
+    "imageCard": [
+      "public/ImageCard/Rice_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-08-21",
+      "updatedAt": "2026-08-21T15:04:34.324Z"
+    },
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "player_id": 7,
+    "current_card_id": 1007,
+    "objectId": "000000000000000000000007",
+    "program": [
+      "The world game 26"
+    ],
+    "ovr": 119,
+    "position": [
+      "lb",
+      "cb"
+    ],
+    "nation": {
+      "nation_id": 7
+    },
+    "Status_I_H_M": "Matching",
+    "number": 5,
+    "name": "Piero Hincapié",
+    "stats": {
+      "goalAmounts": 1,
+      "assistAmounts": 4,
+      "match": 195,
+      "bestPlayerAmount": 1,
+      "sessionAmount": 2
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 4
+    },
+    "imageCard": [
+      "public/ImageCard/Hincapi_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-08-21",
+      "updatedAt": "2026-08-21T15:05:52.869Z"
+    },
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "player_id": 8,
+    "current_card_id": 1008,
+    "objectId": "000000000000000000000008",
+    "program": [
+      "Nhà Vô Địch"
+    ],
+    "ovr": 117,
+    "position": [
+      "cb"
+    ],
+    "nation": {
+      "nation_id": 5
+    },
+    "Status_I_H_M": "Matching",
+    "number": 3,
+    "name": "Jonathan Tah",
+    "stats": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 39,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 2
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 0
+    },
+    "imageCard": [
+      "public/ImageCard/Tah_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-08-21",
+      "updatedAt": "2026-08-21T15:09:07.060Z"
+    },
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "player_id": 9,
+    "current_card_id": 1009,
+    "objectId": "000000000000000000000009",
+    "program": [
+      "Tots",
+      "The world game 26"
+    ],
+    "ovr": 119,
+    "position": [
+      "cb"
+    ],
+    "nation": {
+      "nation_id": 1
+    },
+    "Status_I_H_M": "Matching",
+    "number": 2,
+    "name": "William Saliba",
+    "stats": {
+      "goalAmounts": 2,
+      "assistAmounts": 2,
+      "match": 135,
+      "bestPlayerAmount": 2,
+      "sessionAmount": 2
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": null,
+          "value": "10*"
+        },
+        {
+          "session_id": null,
+          "value": "10*"
+        },
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 4
+    },
+    "imageCard": [
+      "public/ImageCard/Saliba_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-08-21",
+      "updatedAt": "2026-08-21T15:07:35.595Z"
+    },
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "player_id": 10,
+    "current_card_id": 1010,
+    "objectId": "000000000000000000000010",
+    "program": [
+      "The world game 26"
+    ],
+    "ovr": 120,
+    "position": [
+      "rb",
+      "rm"
+    ],
+    "nation": {
+      "nation_id": 13
+    },
+    "Status_I_H_M": "Matching",
+    "number": 21,
+    "name": "Castagne",
+    "stats": {
+      "goalAmounts": 1,
+      "assistAmounts": 9,
+      "match": 139,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 2
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 4
+    },
+    "imageCard": [
+      "public/ImageCard/Castagne_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-08-21",
+      "updatedAt": "2026-08-21T15:03:23.437Z"
+    },
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "player_id": 11,
+    "current_card_id": 1011,
+    "objectId": "000000000000000000000011",
+    "program": [
+      "Mùa hè đặc biệt"
+    ],
+    "ovr": 119,
+    "position": [
+      "gk"
+    ],
+    "nation": {
+      "nation_id": 14
+    },
+    "Status_I_H_M": "Icon",
+    "number": 1,
+    "name": "Peter Schmeichel",
+    "stats": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 195,
+      "bestPlayerAmount": 1,
+      "sessionAmount": 2
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 4
+    },
+    "imageCard": [
+      "public/ImageCard/Schmeichel_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-08-21",
+      "updatedAt": "2026-08-21T15:08:12.972Z"
+    },
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "name": "Francesco Totti",
+    "ovr": 116,
+    "number": 9,
+    "nation": {
+      "nation_id": 9
+    },
+    "program": [
+      "Quốc gia"
+    ],
+    "position": [
+      "cam",
+      "st"
+    ],
+    "Status_I_H_M": "Icon",
+    "stats": {
+      "goalAmounts": 2,
+      "assistAmounts": 3,
+      "match": 11,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 1
+    },
+    "active": {
+      "HTH": [],
+      "lastWeekCup": 0
+    },
+    "imageCard": [
+      "public/ImageCard/Totti_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-08-21",
+      "updatedAt": "2026-08-21T14:52:23.997Z"
+    },
+    "player_id": 12,
+    "current_card_id": 1012,
+    "objectId": "000000000000000000000012",
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "name": "Federico Valverde",
+    "ovr": 120,
+    "number": 8,
+    "nation": {
+      "nation_id": 15
+    },
+    "program": [
+      "Nhà Vô Địch"
+    ],
+    "position": [
+      "cm",
+      "cdm",
+      "rb"
+    ],
+    "Status_I_H_M": "Matching",
+    "stats": {
+      "goalAmounts": 28,
+      "assistAmounts": 35,
+      "match": 135,
+      "bestPlayerAmount": 12,
+      "sessionAmount": 2
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 2
+    },
+    "imageCard": [
+      "public/ImageCard/Valverde_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-08-21",
+      "updatedAt": "2026-08-21T14:56:34.899Z"
+    },
+    "player_id": 13,
+    "current_card_id": 1013,
+    "objectId": "000000000000000000000013",
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "name": "Lionel Messi",
+    "ovr": 119,
+    "number": 10,
+    "nation": {
+      "nation_id": 10
+    },
+    "program": [
+      "Utots"
+    ],
+    "position": [
+      "rw",
+      "cam",
+      "st",
+      "cf"
+    ],
+    "Status_I_H_M": "Matching",
+    "stats": {
+      "goalAmounts": 13,
+      "assistAmounts": 5,
+      "match": 36,
+      "bestPlayerAmount": 3,
+      "sessionAmount": 1
+    },
+    "active": {
+      "HTH": [
+        "10*",
+        "10*",
+        "20*",
+        "20*"
+      ],
+      "lastWeekCup": 1
+    },
+    "imageCard": [
+      "public/ImageCard/Messi_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-08-21",
+      "updatedAt": "2026-08-21T14:58:27.700Z"
+    },
+    "player_id": 14,
+    "current_card_id": 1014,
+    "objectId": "000000000000000000000014",
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "name": "Gabriel Magalhaes",
+    "ovr": 118,
+    "number": 3,
+    "nation": {
+      "nation_id": 12
+    },
+    "program": [
+      "UTOTS"
+    ],
+    "position": [
+      "cb"
+    ],
+    "Status_I_H_M": "Matching",
+    "stats": {
+      "goalAmounts": 0,
+      "assistAmounts": 1,
+      "match": 36,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 1
+    },
+    "active": {
+      "HTH": [
+        "10*",
+        "10*",
+        "20*",
+        "20*"
+      ],
+      "lastWeekCup": 1
+    },
+    "imageCard": [
+      "public/ImageCard/Gabriel_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-08-21",
+      "updatedAt": "2026-08-21T15:00:10.524Z"
+    },
+    "player_id": 15,
+    "current_card_id": 1015,
+    "objectId": "000000000000000000000015",
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "name": "Dani Olmo",
+    "ovr": 118,
+    "number": 8,
+    "nation": {
+      "nation_id": 11
+    },
+    "program": [
+      "The world game 26"
+    ],
+    "position": [
+      "cam",
+      "cm"
+    ],
+    "Status_I_H_M": "Matching",
+    "stats": {
+      "goalAmounts": 0,
+      "assistAmounts": 2,
+      "match": 7,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 1
+    },
+    "active": {
+      "HTH": [
+        "20*",
+        "20*"
+      ],
+      "lastWeekCup": 1
+    },
+    "imageCard": [
+      "public/ImageCard/Dani_Olmo_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-08-21",
+      "updatedAt": "2026-08-21T15:01:18.259Z"
+    },
+    "player_id": 16,
+    "current_card_id": 1016,
+    "objectId": "000000000000000000000016",
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "name": "Moisés Caicedo",
+    "ovr": 119,
+    "number": 25,
+    "nation": {
+      "nation_id": 7
+    },
+    "program": [
+      "Nhà Vô Địch"
+    ],
+    "position": [
+      "cdm"
+    ],
+    "Status_I_H_M": "Matching",
+    "stats": {
+      "goalAmounts": 4,
+      "assistAmounts": 3,
+      "match": 18,
+      "bestPlayerAmount": 1,
+      "sessionAmount": 1
+    },
+    "active": {
+      "HTH": [
+        "20*"
+      ],
+      "lastWeekCup": 1
+    },
+    "imageCard": [
+      "public/ImageCard/Caicedo_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-08-21",
+      "updatedAt": "2026-08-21T15:02:28.843Z"
+    },
+    "player_id": 17,
+    "current_card_id": 1017,
+    "objectId": "000000000000000000000017",
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "name": "Joško Gvardiol",
+    "nation": {
+      "nation_id": 16
+    },
+    "position": [
+      "lb",
+      "cb"
+    ],
+    "number": 24,
+    "stats": {
+      "goalAmounts": 1,
+      "assistAmounts": 7,
+      "match": 114,
+      "bestPlayerAmount": 1,
+      "sessionAmount": 1
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 2
+    },
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-09-03",
+      "updatedAt": "2026-09-03T10:38:21.776Z"
+    },
+    "objectId": "2011972ebfd4ee14523b7496",
+    "current_card_id": 1018,
+    "program": [],
+    "ovr": 75,
+    "Status_I_H_M": "Gold",
+    "imageCard": [],
+    "player_id": 18,
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "name": "Ole Gunnar Solskjær",
+    "nation": {
+      "nation_id": 17
+    },
+    "position": [
+      "st"
+    ],
+    "number": 20,
+    "stats": {
+      "goalAmounts": 1,
+      "assistAmounts": 0,
+      "match": 11,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 1
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 1
+    },
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-09-03",
+      "updatedAt": "2026-09-03T10:40:41.552Z"
+    },
+    "objectId": "1a2f4d7741e736503b79a533",
+    "current_card_id": 1019,
+    "program": [],
+    "ovr": 75,
+    "Status_I_H_M": "Gold",
+    "imageCard": [],
+    "player_id": 19,
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "name": "Cesc Fàbregas",
+    "nation": {
+      "nation_id": 11
+    },
+    "position": [
+      "cm",
+      "cam",
+      "st"
+    ],
+    "number": 4,
+    "stats": {
+      "goalAmounts": 4,
+      "assistAmounts": 7,
+      "match": 41,
+      "bestPlayerAmount": 4,
+      "sessionAmount": 1
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 1
+    },
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-09-03",
+      "updatedAt": "2026-09-03T10:41:27.710Z"
+    },
+    "objectId": "77d5b242b29f27ad50ca9b0f",
+    "current_card_id": 1020,
+    "program": [],
+    "ovr": 75,
+    "Status_I_H_M": "Gold",
+    "imageCard": [],
+    "player_id": 20,
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "name": "Nico Schlotterbeck",
+    "nation": {
+      "nation_id": 5
+    },
+    "position": [
+      "cb"
+    ],
+    "number": 3,
+    "stats": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 64,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 1
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 1
+    },
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-09-03",
+      "updatedAt": "2026-09-03T10:42:22.506Z"
+    },
+    "objectId": "d46a457ef265d13ff7db2520",
+    "current_card_id": 1021,
+    "program": [],
+    "ovr": 75,
+    "Status_I_H_M": "Gold",
+    "imageCard": [],
+    "player_id": 21,
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "name": "Garrincha",
+    "nation": {
+      "nation_id": 12
+    },
+    "position": [
+      "rw"
+    ],
+    "number": 14,
+    "stats": {
+      "goalAmounts": 2,
+      "assistAmounts": 1,
+      "match": 3,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 1
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 1
+    },
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-09-04",
+      "updatedAt": "2026-09-08T11:33:00.567Z"
+    },
+    "objectId": "c51445499914887210b7f1ca",
+    "current_card_id": 1022,
+    "program": [],
+    "ovr": 75,
+    "Status_I_H_M": "Gold",
+    "imageCard": [],
+    "player_id": 22,
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "name": "Philipp Lahm",
+    "nation": {
+      "nation_id": 5
+    },
+    "position": [
+      "rb",
+      "cdm",
+      "lb"
+    ],
+    "number": 21,
+    "stats": {
+      "goalAmounts": 1,
+      "assistAmounts": 3,
+      "match": 55,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 1
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": 2,
+          "value": "30*"
+        }
+      ],
+      "lastWeekCup": 0
+    },
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-09-08",
+      "updatedAt": "2026-09-08T11:31:04.629Z"
+    },
+    "objectId": "16e2402494ec82a7d8015d39",
+    "current_card_id": 1023,
+    "program": [],
+    "ovr": 75,
+    "Status_I_H_M": "Gold",
+    "imageCard": [],
+    "player_id": 23,
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  },
+  {
+    "name": "Andrea Barzagli",
+    "nation": {
+      "nation_id": 9
+    },
+    "position": [
+      "cb"
+    ],
+    "number": 15,
+    "stats": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 2,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 1
+    },
+    "active": {
+      "HTH": [],
+      "lastWeekCup": 0
+    },
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-09-17",
+      "updatedAt": "2026-09-17T02:22:54.945Z"
+    },
+    "objectId": "19ae48db9118825163b9392d",
+    "current_card_id": 1024,
+    "program": [],
+    "ovr": 75,
+    "Status_I_H_M": "Gold",
+    "imageCard": [],
+    "player_id": 24,
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0
+    }
+  }
+]

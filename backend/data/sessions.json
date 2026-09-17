@@ -1,0 +1,683 @@
+[
+  {
+    "session_id": 1,
+    "Title": "Mùa giải Champions",
+    "season": "2026",
+    "description": "Mùa giải khởi đầu đầy cảm hứng với lối chơi tấn công rực lửa và tinh thần chiến đấu không khoan nhượng.",
+    "status": "ĐÃ KẾT THÚC",
+    "image": "public/SessionImages/champions-season.png",
+    "awardImage": "public/SessionImages/champions-award.png",
+    "awards": {
+      "golden_ball": {
+        "title": "Quả bóng vàng",
+        "player_id": 2
+      },
+      "silver_ball": {
+        "title": "Quả bóng bạc",
+        "player_id": 1
+      },
+      "top_scorer": {
+        "title": "Vua phá lưới",
+        "player_id": 2
+      },
+      "top_assist": {
+        "title": "Vua kiến tạo",
+        "player_id": 2
+      },
+      "best_transfer": {
+        "title": "Bản hợp đồng xuất sắc nhất",
+        "player_id": 3
+      },
+      "best_goal": {
+        "title": "Bàn thắng đẹp nhất",
+        "player_id": 2,
+        "video": "public/Video/63636956821940360 (1).mp4"
+      }
+    },
+    "player_match": [
+      {
+        "player_id": 1,
+        "objectId": "000000000000000000000001",
+        "player_card_id": 1001,
+        "stats": {
+          "matches": 65,
+          "goals": 37,
+          "assists": 25,
+          "bestPlayer": 14
+        }
+      },
+      {
+        "player_id": 2,
+        "objectId": "000000000000000000000002",
+        "player_card_id": 1002,
+        "stats": {
+          "matches": 65,
+          "goals": 39,
+          "assists": 28,
+          "bestPlayer": 12
+        }
+      },
+      {
+        "player_id": 3,
+        "objectId": "000000000000000000000003",
+        "player_card_id": 1003,
+        "stats": {
+          "matches": 55,
+          "goals": 8,
+          "assists": 23,
+          "bestPlayer": 2
+        }
+      },
+      {
+        "player_id": 4,
+        "objectId": "000000000000000000000004",
+        "player_card_id": 1004,
+        "stats": {
+          "matches": 65,
+          "goals": 20,
+          "assists": 17,
+          "bestPlayer": 7
+        }
+      },
+      {
+        "player_id": 5,
+        "objectId": "000000000000000000000005",
+        "player_card_id": 1005,
+        "stats": {
+          "matches": 32,
+          "goals": 19,
+          "assists": 8,
+          "bestPlayer": 7
+        }
+      },
+      {
+        "player_id": 6,
+        "objectId": "000000000000000000000006",
+        "player_card_id": 1006,
+        "stats": {
+          "matches": 65,
+          "goals": 5,
+          "assists": 9,
+          "bestPlayer": 2
+        }
+      },
+      {
+        "player_id": 7,
+        "objectId": "000000000000000000000007",
+        "player_card_id": 1007,
+        "stats": {
+          "matches": 65,
+          "goals": 0,
+          "assists": 3,
+          "bestPlayer": 0
+        }
+      },
+      {
+        "player_id": 8,
+        "objectId": "000000000000000000000008",
+        "player_card_id": 1008,
+        "stats": {
+          "matches": 34,
+          "goals": 0,
+          "assists": 0,
+          "bestPlayer": 0
+        }
+      },
+      {
+        "player_id": 9,
+        "objectId": "000000000000000000000009",
+        "player_card_id": 1009,
+        "stats": {
+          "matches": 65,
+          "goals": 0,
+          "assists": 1,
+          "bestPlayer": 1
+        }
+      },
+      {
+        "player_id": 10,
+        "objectId": "000000000000000000000010",
+        "player_card_id": 1010,
+        "stats": {
+          "matches": 65,
+          "goals": 1,
+          "assists": 4,
+          "bestPlayer": 0
+        }
+      },
+      {
+        "player_id": 11,
+        "objectId": "000000000000000000000011",
+        "player_card_id": 1011,
+        "stats": {
+          "matches": 65,
+          "goals": 0,
+          "assists": 0,
+          "bestPlayer": 0
+        }
+      },
+      {
+        "player_id": 12,
+        "objectId": "000000000000000000000012",
+        "player_card_id": 1012,
+        "stats": {
+          "matches": 11,
+          "goals": 2,
+          "assists": 3,
+          "bestPlayer": 0
+        }
+      },
+      {
+        "player_id": 13,
+        "objectId": "000000000000000000000013",
+        "player_card_id": 1013,
+        "stats": {
+          "matches": 7,
+          "goals": 1,
+          "assists": 5,
+          "bestPlayer": 0
+        }
+      },
+      {
+        "player_id": 14,
+        "objectId": "000000000000000000000014",
+        "player_card_id": 1014,
+        "stats": {
+          "matches": 36,
+          "goals": 13,
+          "assists": 5,
+          "bestPlayer": 3
+        }
+      },
+      {
+        "player_id": 15,
+        "objectId": "000000000000000000000015",
+        "player_card_id": 1015,
+        "stats": {
+          "matches": 36,
+          "goals": 0,
+          "assists": 1,
+          "bestPlayer": 0
+        }
+      },
+      {
+        "player_id": 16,
+        "objectId": "000000000000000000000016",
+        "player_card_id": 1016,
+        "stats": {
+          "matches": 7,
+          "goals": 0,
+          "assists": 2,
+          "bestPlayer": 0
+        }
+      },
+      {
+        "player_id": 17,
+        "objectId": "000000000000000000000017",
+        "player_card_id": 1017,
+        "stats": {
+          "matches": 18,
+          "goals": 4,
+          "assists": 3,
+          "bestPlayer": 1
+        }
+      }
+    ],
+    "Archive": "20*",
+    "lastWeekCup": "2",
+    "updatedAt": "2026-09-10T11:26:45.837Z",
+    "player_ranking": [
+      2,
+      1,
+      4,
+      3,
+      5,
+      6,
+      9,
+      7,
+      10,
+      11,
+      14,
+      15,
+      17,
+      12
+    ],
+    "awards_published": true,
+    "player_ranking_published": false
+  },
+  {
+    "Title": "Mùa giải Numero",
+    "season": "2026",
+    "description": "",
+    "status": "ĐANG DIỄN RA",
+    "image": "public/SessionImages/numero-season.png",
+    "awardImage": "public/SessionImages/numero-award.jpeg",
+    "lastWeekCup": "1",
+    "player_match": [
+      {
+        "player_id": 1,
+        "objectId": "000000000000000000000001",
+        "player_card_id": 1001,
+        "stats": {
+          "matches": 130,
+          "goals": 59,
+          "assists": 41,
+          "bestPlayer": 18
+        }
+      },
+      {
+        "player_id": 5,
+        "objectId": "000000000000000000000005",
+        "player_card_id": 1005,
+        "stats": {
+          "matches": 130,
+          "goals": 52,
+          "assists": 47,
+          "bestPlayer": 18
+        }
+      },
+      {
+        "player_id": 3,
+        "objectId": "000000000000000000000003",
+        "player_card_id": 1003,
+        "stats": {
+          "matches": 130,
+          "goals": 20,
+          "assists": 32,
+          "bestPlayer": 6
+        }
+      },
+      {
+        "player_id": 20,
+        "objectId": "77d5b242b29f27ad50ca9b0f",
+        "player_card_id": 1020,
+        "stats": {
+          "matches": 41,
+          "goals": 4,
+          "assists": 7,
+          "bestPlayer": 4
+        }
+      },
+      {
+        "player_id": 10,
+        "objectId": "000000000000000000000010",
+        "player_card_id": 1010,
+        "stats": {
+          "matches": 74,
+          "goals": 0,
+          "assists": 5,
+          "bestPlayer": 0
+        }
+      },
+      {
+        "player_id": 13,
+        "objectId": "000000000000000000000013",
+        "player_card_id": 1013,
+        "stats": {
+          "matches": 128,
+          "goals": 27,
+          "assists": 30,
+          "bestPlayer": 12
+        }
+      },
+      {
+        "player_id": 18,
+        "objectId": "2011972ebfd4ee14523b7496",
+        "player_card_id": 1018,
+        "stats": {
+          "matches": 114,
+          "goals": 1,
+          "assists": 7,
+          "bestPlayer": 1
+        }
+      },
+      {
+        "player_id": 21,
+        "objectId": "d46a457ef265d13ff7db2520",
+        "player_card_id": 1021,
+        "stats": {
+          "matches": 64,
+          "goals": 0,
+          "assists": 0,
+          "bestPlayer": 0
+        }
+      },
+      {
+        "player_id": 4,
+        "objectId": "000000000000000000000004",
+        "player_card_id": 1004,
+        "stats": {
+          "matches": 18,
+          "goals": 2,
+          "assists": 2,
+          "bestPlayer": 0
+        }
+      },
+      {
+        "player_id": 2,
+        "objectId": "000000000000000000000002",
+        "player_card_id": 1002,
+        "stats": {
+          "matches": 127,
+          "goals": 76,
+          "assists": 45,
+          "bestPlayer": 30
+        }
+      },
+      {
+        "player_id": 6,
+        "objectId": "000000000000000000000006",
+        "player_card_id": 1006,
+        "stats": {
+          "matches": 118,
+          "goals": 10,
+          "assists": 13,
+          "bestPlayer": 2
+        }
+      },
+      {
+        "player_id": 7,
+        "objectId": "000000000000000000000007",
+        "player_card_id": 1007,
+        "stats": {
+          "matches": 130,
+          "goals": 1,
+          "assists": 1,
+          "bestPlayer": 1
+        }
+      },
+      {
+        "player_id": 11,
+        "objectId": "000000000000000000000011",
+        "player_card_id": 1011,
+        "stats": {
+          "matches": 130,
+          "goals": 0,
+          "assists": 0,
+          "bestPlayer": 1
+        }
+      },
+      {
+        "player_id": 9,
+        "objectId": "000000000000000000000009",
+        "player_card_id": 1009,
+        "stats": {
+          "matches": 70,
+          "goals": 2,
+          "assists": 1,
+          "bestPlayer": 1
+        }
+      },
+      {
+        "player_id": 19,
+        "objectId": "1a2f4d7741e736503b79a533",
+        "player_card_id": 1019,
+        "stats": {
+          "matches": 11,
+          "goals": 1,
+          "assists": 0,
+          "bestPlayer": 0
+        }
+      },
+      {
+        "player_id": 22,
+        "objectId": "c51445499914887210b7f1ca",
+        "player_card_id": 1022,
+        "stats": {
+          "matches": 3,
+          "goals": 2,
+          "assists": 1,
+          "bestPlayer": 0
+        }
+      },
+      {
+        "player_id": 8,
+        "objectId": "000000000000000000000008",
+        "player_card_id": 1008,
+        "stats": {
+          "matches": 5,
+          "goals": 0,
+          "assists": 0,
+          "bestPlayer": 0
+        }
+      },
+      {
+        "player_id": 23,
+        "objectId": "16e2402494ec82a7d8015d39",
+        "player_card_id": 1023,
+        "stats": {
+          "matches": 55,
+          "goals": 1,
+          "assists": 3,
+          "bestPlayer": 0
+        }
+      },
+      {
+        "player_id": 24,
+        "objectId": "19ae48db9118825163b9392d",
+        "player_card_id": 1024,
+        "stats": {
+          "matches": 2,
+          "goals": 0,
+          "assists": 0,
+          "bestPlayer": 0
+        }
+      }
+    ],
+    "awards_published": true,
+    "player_ranking_published": false,
+    "awards": {
+      "golden_ball": {
+        "title": "Quả bóng vàng",
+        "player_id": null
+      },
+      "silver_ball": {
+        "title": "Quả bóng bạc",
+        "player_id": null
+      },
+      "top_scorer": {
+        "title": "Vua phá lưới",
+        "player_id": null
+      },
+      "top_assist": {
+        "title": "Vua kiến tạo",
+        "player_id": null
+      },
+      "best_transfer": {
+        "title": "Bản hợp đồng xuất sắc nhất",
+        "player_id": null
+      },
+      "best_goal": {
+        "title": "Bàn thắng đẹp nhất",
+        "player_id": null,
+        "video": ""
+      }
+    },
+    "player_ranking": [],
+    "Archive": "30*",
+    "session_id": 2,
+    "createdAt": "2026-09-03T12:50:31.976Z",
+    "updatedAt": "2026-09-17T04:15:22.576Z",
+    "stats_baseline": {
+      "1": {
+        "matches": 118,
+        "goals": 57,
+        "assists": 38,
+        "bestPlayer": 16
+      },
+      "2": {
+        "matches": 115,
+        "goals": 71,
+        "assists": 42,
+        "bestPlayer": 30
+      },
+      "3": {
+        "matches": 118,
+        "goals": 18,
+        "assists": 31,
+        "bestPlayer": 5
+      },
+      "4": {
+        "matches": 18,
+        "goals": 2,
+        "assists": 2,
+        "bestPlayer": 0
+      },
+      "5": {
+        "matches": 118,
+        "goals": 46,
+        "assists": 45,
+        "bestPlayer": 15
+      },
+      "6": {
+        "matches": 106,
+        "goals": 10,
+        "assists": 13,
+        "bestPlayer": 2
+      },
+      "7": {
+        "matches": 118,
+        "goals": 1,
+        "assists": 1,
+        "bestPlayer": 1
+      },
+      "8": {
+        "matches": 5,
+        "goals": 0,
+        "assists": 0,
+        "bestPlayer": 0
+      },
+      "9": {
+        "matches": 70,
+        "goals": 2,
+        "assists": 1,
+        "bestPlayer": 1
+      },
+      "10": {
+        "matches": 74,
+        "goals": 0,
+        "assists": 5,
+        "bestPlayer": 0
+      },
+      "11": {
+        "matches": 118,
+        "goals": 0,
+        "assists": 0,
+        "bestPlayer": 1
+      },
+      "13": {
+        "matches": 116,
+        "goals": 24,
+        "assists": 25,
+        "bestPlayer": 9
+      },
+      "18": {
+        "matches": 102,
+        "goals": 1,
+        "assists": 7,
+        "bestPlayer": 1
+      },
+      "19": {
+        "matches": 11,
+        "goals": 1,
+        "assists": 0,
+        "bestPlayer": 0
+      },
+      "20": {
+        "matches": 41,
+        "goals": 4,
+        "assists": 7,
+        "bestPlayer": 4
+      },
+      "21": {
+        "matches": 54,
+        "goals": 0,
+        "assists": 0,
+        "bestPlayer": 0
+      },
+      "22": {
+        "matches": 3,
+        "goals": 2,
+        "assists": 1,
+        "bestPlayer": 0
+      },
+      "23": {
+        "matches": 43,
+        "goals": 1,
+        "assists": 3,
+        "bestPlayer": 0
+      },
+      "24": {
+        "matches": 0,
+        "goals": 0,
+        "assists": 0,
+        "bestPlayer": 0
+      }
+    },
+    "last_week_cup_batches": [
+      {
+        "batch_id": "lwc-1788449213433-go4pcz",
+        "player_ids": [
+          1,
+          5,
+          3,
+          10,
+          13,
+          4,
+          2,
+          7,
+          6,
+          11,
+          9
+        ],
+        "applied_at": "2026-09-03T15:26:53.439Z"
+      },
+      {
+        "batch_id": "lwc-1788451730746-neac4d",
+        "player_ids": [
+          1,
+          5,
+          3,
+          10,
+          4,
+          2,
+          6,
+          7,
+          9,
+          11,
+          18
+        ],
+        "applied_at": "2026-09-03T16:08:50.751Z"
+      },
+      {
+        "batch_id": "lwc-1788706957918-u516ct",
+        "player_ids": [
+          1,
+          5,
+          20,
+          3,
+          10,
+          13,
+          18,
+          21,
+          4,
+          2,
+          6,
+          7,
+          11,
+          9,
+          19,
+          22
+        ],
+        "applied_at": "2026-09-06T15:02:37.923Z"
+      }
+    ],
+    "honor_updates": {
+      "hth": {
+        "applied": true,
+        "archive": "30*",
+        "applied_at": "2026-09-11T14:15:22.432Z"
+      }
+    }
+  }
+]

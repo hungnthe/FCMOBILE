@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-label="Home dashboard image placeholder">
+  <rect width="1200" height="520" rx="18" fill="#fafafa" stroke="#e6e8eb"/>
+  <path d="M0 420h1200" stroke="#f0d3d7" stroke-width="2"/>
+  <path d="M0 420 270 300l220 80 260-145 450 125" fill="none" stroke="#d71932" stroke-opacity=".18" stroke-width="3"/>
+  <text x="600" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#68717d">Upload home-dashboard.png to frontend/public</text>
+  <text x="600" y="284" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#9aa1a8">This placeholder will be replaced automatically.</text>
+</svg>

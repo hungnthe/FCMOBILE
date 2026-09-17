@@ -1,0 +1,121 @@
+[
+  {
+    "nation_id": 1,
+    "name": "Pháp",
+    "code": "FR",
+    "flag_url": "https://flagcdn.com/w320/fr.png",
+    "player_ids": [1, 9]
+  },
+  {
+    "nation_id": 2,
+    "name": "Hàn Quốc",
+    "code": "KR",
+    "flag_url": "https://flagcdn.com/w320/kr.png",
+    "player_ids": [2]
+  },
+  {
+    "nation_id": 3,
+    "name": "Xứ Wales",
+    "code": "GB-WLS",
+    "flag_url": "https://flagcdn.com/w320/gb-wls.png",
+    "player_ids": [3]
+  },
+  {
+    "nation_id": 4,
+    "name": "Slovakia",
+    "code": "SK",
+    "flag_url": "https://flagcdn.com/w320/sk.png",
+    "player_ids": [4]
+  },
+  {
+    "nation_id": 5,
+    "name": "Đức",
+    "code": "DE",
+    "flag_url": "https://flagcdn.com/w320/de.png",
+    "player_ids": [5]
+  },
+  {
+    "nation_id": 6,
+    "name": "Anh",
+    "code": "GB-ENG",
+    "flag_url": "https://flagcdn.com/w320/gb-eng.png",
+    "player_ids": [6]
+  },
+  {
+    "nation_id": 7,
+    "name": "Ecuador",
+    "code": "EC",
+    "flag_url": "https://flagcdn.com/w320/ec.png",
+    "player_ids": [7]
+  },
+  {
+    "nation_id": 8,
+    "name": "Uruguay",
+    "code": "UY",
+    "flag_url": "https://flagcdn.com/w320/uy.png",
+    "player_ids": [8]
+  },
+  {
+    "nation_id": 9,
+    "name": "Ý",
+    "code": "IT",
+    "flag_url": "https://flagcdn.com/w320/it.png",
+    "player_ids": [10]
+  },
+  {
+    "nation_id": 10,
+    "name": "Argentina",
+    "code": "AR",
+    "flag_url": "https://flagcdn.com/w320/ar.png",
+    "player_ids": [11]
+  },
+  {
+    "nation_id": 11,
+    "name": "Tây Ban Nha",
+    "code": "ES",
+    "flag_url": "https://flagcdn.com/w320/es.png",
+    "player_ids": [12, 13]
+  },
+  {
+    "nation_id": 12,
+    "name": "Brazil",
+    "code": "BR",
+    "flag_url": "https://flagcdn.com/w320/br.png",
+    "player_ids": [14]
+  },
+  {
+    "nation_id": 13,
+    "name": "Bỉ",
+    "code": "BE",
+    "flag_url": "https://flagcdn.com/w320/be.png",
+    "player_ids": [10]
+  },
+  {
+    "nation_id": 14,
+    "name": "Đan Mạch",
+    "code": "DK",
+    "flag_url": "https://flagcdn.com/w320/dk.png",
+    "player_ids": [11]
+  },
+  {
+  "nation_id": 15,
+  "name": "Uruguay",
+  "code": "UY",
+  "flag_url": "https://flagcdn.com/w320/uy.png",
+  "player_ids": []
+},
+{
+  "nation_id": 16,
+  "name": "Croatia",
+  "code": "HR",
+  "flag_url": "https://flagcdn.com/w320/hr.png",
+  "player_ids": []
+},
+{
+  "nation_id": 17,
+  "name": "Na Uy",
+  "code": "NO",
+  "flag_url": "https://flagcdn.com/w320/no.png",
+  "player_ids": []
+}
+]

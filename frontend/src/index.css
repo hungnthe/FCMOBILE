@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { min-height: 100%; }
+body { margin: 0; background: #fff; font-family: "Times New Roman", Times, serif; }
+*, *::before, *::after { font-family: "Times New Roman", Times, serif !important; }
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .glass-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .text-glow-gold {
+    text-shadow: 0 0 12px rgba(245, 197, 66, 0.6);
+  }
+
+  .text-glow-toty {
+    text-shadow: 0 0 12px rgba(59, 130, 246, 0.8);
+  }
+
+  .card-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-shimmer::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      60deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.15) 50%,
+      transparent 70%
+    );
+    transform: rotate(30deg);
+    transition: transform 0.8s ease;
+  }
+
+  .card-shimmer:hover::after {
+    transform: rotate(30deg) translate(20%, 20%);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track { background: #f5f6f7; }
+::-webkit-scrollbar-thumb {
+  background: #cfd4d9;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #abb3bb;
+}
