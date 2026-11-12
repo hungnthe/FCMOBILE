@@ -1,4 +1,6 @@
 const { readCollection, addRecord, updateRecord, removeRecord } = require('../jsonStore');
+const { normalizeOvrAppearance, normalizeOvrPrograms, normalizeOvrPositions } = require('./ovrService');
+const { hasDefensivePosition } = require('./defensiveStats');
 
 const PLAYERS_FILE = 'players.json';
 const PROGRAMS_FILE = 'programs.json';
@@ -50,7 +52,9 @@ function getPlayerCards(playerId) {
 
 function resolvePlayerCard(card) {
   if (!card) return null;
-  return { ...card, program: getProgramById(card.program_id) };
+  const appearance = normalizeOvrAppearance({}, card);
+  const selection = normalizeOvrPrograms({}, card, appearance);
+  return { ...card, ...appearance, ...selection, ...normalizeOvrPositions({}, card, appearance), program: selection.program_id ? getProgramById(selection.program_id) : null };
 }
 
 function getCurrentPlayerCard(playerOrId) {
@@ -64,43 +68,64 @@ function resolvePlayer(player) {
   const cards = getPlayerCards(player.player_id).map(resolvePlayerCard);
   const currentCard = resolvePlayerCard(getCurrentPlayerCard(player));
   const fallbackProgram = arrayOr(player.program).filter(Boolean);
-  const programName = currentCard?.program?.name;
+  const appearance = currentCard || normalizeOvrAppearance({}, player);
+  const selection = currentCard || normalizeOvrPrograms({}, { ...player, program_id: player.program_id || getProgramById(fallbackProgram[0])?.program_id }, appearance);
+  const selectedProgram = currentCard?.program || (selection.program_id ? getProgramById(selection.program_id) : null);
+  const positions = currentCard || normalizeOvrPositions({}, player, appearance);
+  const imageCard = [...new Set([
+    appearance.imageCard,
+    ...arrayOr(player.imageCard),
+    ...arrayOr(player.metadata?.imageCard),
+    ...cards.flatMap((card) => [...Object.values(objectOr(card.ovr_images)), ...arrayOr(card.imageCard)])
+  ].filter((image) => typeof image === 'string').map((image) => image.trim()).filter(Boolean))];
   return {
     ...player,
     cards,
     currentCard,
     // These are read-only compatibility projections for existing list/UI code.
-    program: programName ? [programName] : fallbackProgram,
+    program: selectedProgram ? [selectedProgram.name] : (currentCard || player.ovr_programs ? [] : fallbackProgram),
+    program_id: selection.program_id,
+    ovr_programs: selection.ovr_programs,
     ovr: currentCard?.ovr ?? player.ovr ?? 0,
-    position: currentCard?.position ?? arrayOr(player.position),
-    imageCard: currentCard?.imageCard ? [currentCard.imageCard] : arrayOr(player.imageCard),
+    ovr_options: currentCard?.ovr_options ?? player.ovr_options ?? [player.ovr ?? 0],
+    ovr_images: appearance.ovr_images,
+    position: positions.position,
+    tracksDefensiveStats: hasDefensivePosition(positions.position),
+    ovr_positions: positions.ovr_positions,
+    imageCard,
     Status_I_H_M: currentCard?.Status_I_H_M ?? player.Status_I_H_M ?? 'Matching'
   };
 }
 
+function normalizeCardPrograms(input, existing = {}, appearance = normalizeOvrAppearance(input, existing)) {
+  const programInput = input.program !== undefined && input.program_id === undefined ? { ...input, program_id: getProgramById(input.program)?.program_id } : input;
+  const selection = normalizeOvrPrograms(programInput, existing, appearance);
+  if (!selection.program_id || Object.values(selection.ovr_programs).some((id) => !getProgramById(id))) {
+    const error = new Error('Choose an existing Program for the selected OVR.');
+    error.statusCode = 400;
+    throw error;
+  }
+  return selection;
+}
+
 function normalizeCard(input, existing = {}) {
   const player = getPlayerById(input.player_id ?? existing.player_id);
-  const program = getProgramById(input.program_id ?? existing.program_id ?? input.program);
   if (!player) {
     const error = new Error(`Player ${input.player_id ?? existing.player_id} does not exist.`);
     error.statusCode = 400;
     throw error;
   }
-  if (!program) {
-    const error = new Error(`Program ${input.program_id ?? existing.program_id ?? input.program} does not exist.`);
-    error.statusCode = 400;
-    throw error;
-  }
+  const appearance = normalizeOvrAppearance(input, existing);
+  const selection = normalizeCardPrograms(input, existing, appearance);
   const metadata = { ...objectOr(existing.metadata), ...objectOr(input.metadata) };
   return {
     ...existing,
     ...input,
     player_id: Number(player.player_id),
-    program_id: Number(program.program_id),
-    ovr: numberOr(input.ovr ?? input.rating ?? existing.ovr),
-    position: arrayOr(input.position, existing.position || []).map((position) => String(position).trim().toLowerCase()).filter(Boolean),
+    ...appearance,
+    ...selection,
+    ...normalizeOvrPositions(input, existing, appearance),
     Status_I_H_M: String(input.Status_I_H_M ?? input.cardType ?? existing.Status_I_H_M ?? 'Matching'),
-    imageCard: String(input.imageCard ?? existing.imageCard ?? '').trim(),
     metadata: {
       ...metadata,
       note: metadata.note || '',
@@ -150,6 +175,7 @@ module.exports = {
   resolvePlayerCard,
   resolvePlayer,
   normalizeCard,
+  normalizeCardPrograms,
   createPlayerCard,
   updatePlayerCard,
   setCurrentPlayerCard,

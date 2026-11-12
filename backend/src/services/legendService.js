@@ -1,6 +1,7 @@
 const AWARD_DEFINITIONS = [
   { key: 'golden_ball', title: 'Quả bóng vàng', icon: '🥇' },
   { key: 'silver_ball', title: 'Quả bóng bạc', icon: '🥈' },
+  { key: 'bronze_ball', title: 'Quả bóng đồng', icon: '🥉' },
   { key: 'top_scorer', title: 'Vua phá lưới', icon: '⚽' },
   { key: 'top_assist', title: 'Vua kiến tạo', icon: '🎯' },
   { key: 'best_transfer', title: 'Bản hợp đồng xuất sắc nhất', icon: '🤝' },

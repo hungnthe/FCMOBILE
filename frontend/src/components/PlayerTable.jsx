@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { UserRound, Search, Filter, ArrowUpDown, Plus, ChevronRight, Edit3, Trash2 } from 'lucide-react';
 import AjaxLogo from './AjaxLogo';
 import PlayerStatsSummary from './PlayerStatsSummary';
@@ -11,6 +11,7 @@ const fallbackPlayers = [
 ];
 
 export default function PlayerTable({ players = [], loading = false, useFallback = false, nations = [], search = '', setSearch, cardTypeFilter = 'ALL', setCardTypeFilter, positionFilter = 'ALL', setPositionFilter, nationFilter = 'ALL', setNationFilter, sortBy = 'rating', setSortBy, onOpenAddModal, onEditPlayer, onDeletePlayer, onRecalculateStats }) {
+  const [clubStatusFilter, setClubStatusFilter] = useState('ALL');
   const sourcePlayers = useFallback ? fallbackPlayers : players;
   const query = String(search || '').trim().toLowerCase();
   const nationFor = (value) => {
@@ -23,6 +24,7 @@ export default function PlayerTable({ players = [], loading = false, useFallback
   const displayPlayers = sourcePlayers
     .filter((player) => !query || [player.name, nationNameFor(player.nation), ...(Array.isArray(player.program) ? player.program : [player.program]), player.currentCard?.program?.name].some((value) => String(value || '').toLowerCase().includes(query)))
     .filter((player) => cardTypeFilter === 'ALL' || String(player.Status_I_H_M || '').toLowerCase() === String(cardTypeFilter).toLowerCase())
+    .filter((player) => clubStatusFilter === 'ALL' || (clubStatusFilter === 'ACTIVE' ? player.is_active !== false : player.is_active === false))
     .filter((player) => positionFilter === 'ALL' || (Array.isArray(player.position) ? player.position : [player.position]).some((value) => String(value || '').toLowerCase() === String(positionFilter).toLowerCase()))
     .filter((player) => nationFilter === 'ALL' || String(nationIdFor(player.nation)) === String(nationFilter))
     .sort((left, right) => {
@@ -39,7 +41,7 @@ export default function PlayerTable({ players = [], loading = false, useFallback
   return <div className="players-page">
     <section className="players-hero"><div className="players-hero-art" /><div className="players-logo"><div className="hero-stars"><i>★</i><i>★</i><i>★</i></div><AjaxLogo size={138} /></div><div className="hero-divider" /><div><h1>Phòng thay đồ</h1><p><b />save name</p></div></section>
     <div className="players-toolbar"><div className="toolbar-actions toolbar-actions-right"><button className="secondary-player-button" onClick={onRecalculateStats}>Đồng bộ thống kê</button><button className="primary-button" onClick={onOpenAddModal}><Plus /> Add Player</button></div></div>
-    <div className="filters-row"><label className="search-field"><Search /><input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search name, nation, program..." /></label><label className="filter-field"><Filter /><select value={positionFilter} onChange={(e) => setPositionFilter(e.target.value)}>{positions.map((p) => <option key={p} value={p}>{p === 'ALL' ? 'All positions' : `Position: ${p}`}</option>)}</select></label><label className="filter-field"><Filter /><select value={nationFilter} onChange={(e) => setNationFilter(e.target.value)}><option value="ALL">All nations</option>{nationOptions.map((nation) => <option key={nation.nation_id || nation.name} value={nation.nation_id || nation.name}>{nation.name}</option>)}</select></label><label className="filter-field"><span className="filter-label">STATUS</span><select value={cardTypeFilter} onChange={(e) => setCardTypeFilter(e.target.value)}>{cardTypes.map((c) => <option key={c} value={c}>{c === 'ALL' ? 'All statuses' : `Status: ${c}`}</option>)}</select></label><label className="filter-field"><ArrowUpDown /><select value={sortBy} onChange={(e) => setSortBy(e.target.value)}><option value="rating">Sort by: OVR</option><option value="goals">Sort by: Goals</option><option value="assists">Sort by: Assists</option><option value="matches">Sort by: Matches</option><option value="motm">Sort by: Best player</option><option value="session">Sort by: Session</option></select></label></div>
+    <div className="filters-row"><label className="search-field"><Search /><input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search name, nation, program..." /></label><label className="filter-field"><Filter /><select value={positionFilter} onChange={(e) => setPositionFilter(e.target.value)}>{positions.map((p) => <option key={p} value={p}>{p === 'ALL' ? 'All positions' : `Position: ${p}`}</option>)}</select></label><label className="filter-field"><Filter /><select value={nationFilter} onChange={(e) => setNationFilter(e.target.value)}><option value="ALL">All nations</option>{nationOptions.map((nation) => <option key={nation.nation_id || nation.name} value={nation.nation_id || nation.name}>{nation.name}</option>)}</select></label><label className="filter-field"><span className="filter-label">STATUS</span><select value={cardTypeFilter} onChange={(e) => setCardTypeFilter(e.target.value)}>{cardTypes.map((c) => <option key={c} value={c}>{c === 'ALL' ? 'All statuses' : `Status: ${c}`}</option>)}</select></label><label className="filter-field"><span className="filter-label">CLUB</span><select value={clubStatusFilter} onChange={(e) => setClubStatusFilter(e.target.value)}><option value="ALL">All players</option><option value="ACTIVE">Active</option><option value="DEACTIVE">DeActive</option></select></label><label className="filter-field"><ArrowUpDown /><select value={sortBy} onChange={(e) => setSortBy(e.target.value)}><option value="rating">Sort by: OVR</option><option value="goals">Sort by: Goals</option><option value="assists">Sort by: Assists</option><option value="matches">Sort by: Matches</option><option value="motm">Sort by: Best player</option><option value="session">Sort by: Session</option></select></label></div>
     <div className="player-list-header" aria-hidden="true"><span>PLAYER</span><span>PROGRAM</span><span>NATION</span><span>POSITION</span><span>PERFORMANCE</span><span>OVR</span><span>ACTION</span></div>
     {loading ? <div className="loading-state compact"><div className="spinner" /><p>Loading player database...</p></div> : <div className="arrivals-list">{displayPlayers.map((player) => {
       const currentCard = player.currentCard;
@@ -49,7 +51,7 @@ export default function PlayerTable({ players = [], loading = false, useFallback
       const nationFlag = nationFlagFor(player.nation);
       const stats = { matches: player.stats?.match ?? 0, goals: player.stats?.goalAmounts ?? 0, assists: player.stats?.assistAmounts ?? 0, bestPlayer: player.stats?.bestPlayerAmount ?? 0 };
       return <div className="arrival-row" key={player.player_id || player.id || player.name}>
-        <div className="arrival-player-main"><span className="arrival-player-avatar">{cardImage ? <img src={cardImage.startsWith('public/') ? `/${cardImage.slice(7)}` : cardImage} alt="" /> : <UserRound />}</span><div className="arrival-player-identity"><strong>{player.name}</strong></div></div>
+        <div className="arrival-player-main"><span className="arrival-player-avatar">{cardImage ? <img src={cardImage.startsWith('public/') ? `/${cardImage.slice(7)}` : cardImage} alt="" /> : <UserRound />}</span><div className="arrival-player-identity"><strong>{player.name}</strong><span className={`arrival-club-status ${player.is_active === false ? 'is-inactive' : ''}`}>{player.is_active === false ? 'DeActive' : 'Active'}</span></div></div>
         <span className="arrival-program" title={currentCard?.program?.name || player.program?.[0] || '—'}>{currentCard?.program?.name || player.program?.[0] || '—'}</span>
         <span className="arrival-player-nation" title={nationName}>{nationFlag ? <img src={nationFlag} alt={nationName} /> : '—'}</span>
         <span className="arrival-position">{positionsText}</span>

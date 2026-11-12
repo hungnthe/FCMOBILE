@@ -4,6 +4,8 @@ const { readCollection, addRecord, updateRecord, removeRecord } = require('../js
 const { PLAYER_CARDS_FILE, getProgramById } = require('../services/playerCardService');
 
 const PROGRAMS_FILE = 'programs.json';
+const usesProgram = (card, id) => Number(card.program_id) === Number(id)
+  || Object.values(card.ovr_programs || {}).some((programId) => Number(programId) === Number(id));
 
 function sendError(res, error, fallback) {
   res.status(error.statusCode || 500).json({ error: error.message || fallback });
@@ -41,7 +43,7 @@ router.get('/', (req, res) => {
     const cards = readCollection(PLAYER_CARDS_FILE);
     const programs = readCollection(PROGRAMS_FILE).map((program) => ({
       ...program,
-      card_count: cards.filter((card) => Number(card.program_id) === Number(program.program_id)).length
+      card_count: cards.filter((card) => usesProgram(card, program.program_id)).length
     }));
     res.json(programs);
   } catch (error) { sendError(res, error, 'Failed to fetch programs'); }
@@ -51,7 +53,7 @@ router.get('/:id', (req, res) => {
   try {
     const program = getProgramById(req.params.id);
     if (!program) return res.status(404).json({ error: 'Program not found' });
-    const cards = readCollection(PLAYER_CARDS_FILE).filter((card) => Number(card.program_id) === Number(program.program_id));
+    const cards = readCollection(PLAYER_CARDS_FILE).filter((card) => usesProgram(card, program.program_id));
     res.json({ ...program, cards });
   } catch (error) { sendError(res, error, 'Failed to fetch program'); }
 });
@@ -74,7 +76,7 @@ router.delete('/:id', (req, res) => {
   try {
     const id = Number(req.params.id);
     if (!getProgramById(id)) return res.status(404).json({ error: 'Program not found' });
-    const usedBy = readCollection(PLAYER_CARDS_FILE).filter((card) => Number(card.program_id) === id);
+    const usedBy = readCollection(PLAYER_CARDS_FILE).filter((card) => usesProgram(card, id));
     if (usedBy.length) return res.status(409).json({ error: 'Cannot delete a program that is still used by player cards.', card_count: usedBy.length });
     removeRecord(PROGRAMS_FILE, id, 'program_id');
     res.json({ message: 'Program deleted successfully' });

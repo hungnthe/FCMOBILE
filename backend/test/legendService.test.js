@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const test = require('node:test');
 const { aggregatePlayerAwards } = require('../src/services/legendService');
 
-test('aggregates only published six-category player awards and ignores legacy best_player', () => {
+test('aggregates only published seven-category player awards and ignores legacy best_player', () => {
   const players = [
     { player_id: 1, name: 'Zidane', currentCard: { imageCard: 'public/ImageCard/zidane.png' } },
     { player_id: 2, name: 'Ajax Player' }
@@ -21,7 +21,7 @@ test('aggregates only published six-category player awards and ignores legacy be
   assert.equal(data.summary.totalAwards, 3);
   assert.equal(data.summary.seasons, 2);
   assert.deepEqual(data.legends[0].awards, {
-    golden_ball: 1, silver_ball: 0, top_scorer: 1, top_assist: 0, best_transfer: 0, best_goal: 1
+    golden_ball: 1, silver_ball: 0, bronze_ball: 0, top_scorer: 1, top_assist: 0, best_transfer: 0, best_goal: 1
   });
   assert.equal(data.categories.best_goal.history[0].video, 'public/Video/goal.mp4');
 });

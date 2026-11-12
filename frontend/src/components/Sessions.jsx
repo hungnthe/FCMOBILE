@@ -7,6 +7,7 @@ import SeasonPlayerRanking from './SeasonPlayerRanking';
 import SeasonMatches from './SeasonMatches';
 import PlayerStatsSummary from './PlayerStatsSummary';
 import { applyLastWeekCup, applySeasonHth, getSessionImages, getSessionVideos } from '../services/api';
+import { supportsMatchResult } from '../services/seasonCapabilities';
 
 const blankSession = {
   Title: '', season: '', description: '', status: 'ĐÃ LƯU TRỮ', image: '', awardImage: '',
@@ -24,6 +25,7 @@ const DEFAULT_SESSION_VIDEOS = ['public/Video/63636956821940360 (1).mp4'];
 const AWARD_ICONS = {
   golden_ball: '🥇',
   silver_ball: '🥈',
+  bronze_ball: '🥉',
   top_scorer: '⚽',
   top_assist: '🎯',
   best_transfer: '🤝',
@@ -32,6 +34,7 @@ const AWARD_ICONS = {
 const DEFAULT_AWARDS = {
   golden_ball: { title: 'Quả bóng vàng', player_id: null },
   silver_ball: { title: 'Quả bóng bạc', player_id: null },
+  bronze_ball: { title: 'Quả bóng đồng', player_id: null },
   top_scorer: { title: 'Vua phá lưới', player_id: null },
   top_assist: { title: 'Vua kiến tạo', player_id: null },
   best_transfer: { title: 'Bản hợp đồng xuất sắc nhất', player_id: null },
@@ -79,31 +82,57 @@ export function getSeasonPlayers(session, players = []) {
 }
 
 function seasonTotals(session) {
-  return (session?.player_match || []).reduce((totals, item) => ({
+  const playerTotals = (session?.player_match || []).reduce((current, item) => ({
     // A match is a season-wide event, so use the highest player's match count
     // instead of adding the same matches once per registered player.
-    matches: Math.max(totals.matches, Number(item.stats?.matches) || 0),
-    goals: totals.goals + (Number(item.stats?.goals) || 0),
-    assists: totals.assists + (Number(item.stats?.assists) || 0),
-    bestPlayer: totals.bestPlayer + (Number(item.stats?.bestPlayer) || 0)
-  }), { matches: 0, goals: 0, assists: 0, bestPlayer: 0 });
+    matches: Math.max(current.matches, Number(item.stats?.matches) || 0),
+    goals: current.goals + (Number(item.stats?.goals) || 0),
+    assists: current.assists + (Number(item.stats?.assists) || 0),
+    bestPlayer: current.bestPlayer + (Number(item.stats?.bestPlayer) || 0),
+    goalsAgainst: current.goalsAgainst,
+    cleanSheets: current.cleanSheets
+  }), {
+    matches: 0,
+    goals: 0,
+    assists: 0,
+    bestPlayer: 0,
+    goalsAgainst: 0,
+    cleanSheets: 0
+  });
+  const totals = {
+    ...playerTotals,
+    goalsAgainst: Number(session?.season_match_stats?.goalsAgainst) || 0,
+    cleanSheets: Number(session?.season_match_stats?.cleanSheets) || 0
+  };
+  if (!supportsMatchResult(session)) return totals;
+  return {
+    ...totals,
+    wins: Math.max(0, ...(session?.player_match || []).map((item) => Number(item.stats?.wins) || 0)),
+    draws: Math.max(0, ...(session?.player_match || []).map((item) => Number(item.stats?.draws) || 0)),
+    losses: Math.max(0, ...(session?.player_match || []).map((item) => Number(item.stats?.losses) || 0))
+  };
 }
 
-function emptySeasonStats(item) {
+function emptySeasonStats(item, resultTrackingEnabled = false) {
   return {
     matches: Number(item?.stats?.matches) || 0,
     goals: Number(item?.stats?.goals) || 0,
     assists: Number(item?.stats?.assists) || 0,
-    bestPlayer: Number(item?.stats?.bestPlayer) || 0
+    bestPlayer: Number(item?.stats?.bestPlayer) || 0,
+    ...(resultTrackingEnabled ? {
+      wins: Number(item?.stats?.wins) || 0,
+      draws: Number(item?.stats?.draws) || 0,
+      losses: Number(item?.stats?.losses) || 0
+    } : {})
   };
 }
 
-function serializePlayerMatch(item, player) {
+function serializePlayerMatch(item, player, resultTrackingEnabled = false) {
   return {
     player_id: Number(item.player_id || player?.player_id),
     objectId: item.objectId || player?.objectId,
     player_card_id: Number(item.player_card_id || player?.seasonCard?.player_card_id || player?.current_card_id) || null,
-    stats: Object.fromEntries(Object.entries(emptySeasonStats(item)).map(([key, value]) => [key, Number(value) || 0]))
+    stats: Object.fromEntries(Object.entries(emptySeasonStats(item, resultTrackingEnabled)).map(([key, value]) => [key, Number(value) || 0]))
   };
 }
 
@@ -199,15 +228,17 @@ function RegisterPlayersModal({ players, nations, registeredIds, onClose, onRegi
   </section></div>;
 }
 
-function SeasonPlayerMobileCard({ entry, stats, editing, nations, onUpdateCard, onRemove, onSetStat }) {
+function SeasonPlayerMobileCard({ entry, stats, editing, nations, onUpdateCard, onRemove, onSetStat, resultTrackingEnabled }) {
   const image = playerImage(entry);
   const nationName = nationNameFor(entry, nations);
   const nationFlag = nationFlagFor(entry, nations);
-  return <article className="season-player-mobile-card"><div className="season-mobile-player-heading"><span className="season-player-avatar">{image ? <img src={image} alt="" /> : <UserRound />}</span><div><strong>{entry.name}</strong><span>{nationFlag ? <img src={nationFlag} alt={nationName} /> : '—'} {Array.isArray(entry.position) ? entry.position.join(' · ').toUpperCase() : '—'}</span></div><b>OVR {entry.seasonCard?.ovr ?? entry.ovr ?? 0}</b></div><label className="season-mobile-card-select">Thẻ<select value={entry.playerMatch?.player_card_id || entry.seasonCard?.player_card_id || ''} onChange={(event) => onUpdateCard(entry, event.target.value)}>{(entry.cards || []).map((card) => <option key={card.player_card_id} value={card.player_card_id}>{card.program?.name || `#${card.player_card_id}`} · {card.ovr}</option>)}</select></label><div className="season-mobile-stats">{[['matches', 'Trận'], ['goals', 'Bàn'], ['assists', 'KT'], ['bestPlayer', 'MVP']].map(([key, label]) => <label key={key}><span>{label}</span>{editing && onSetStat ? <input type="number" min="0" value={stats?.[key] ?? 0} onChange={(event) => onSetStat(entry.player_id, key, event.target.value)} /> : <strong>{stats?.[key] ?? 0}</strong>}</label>)}</div><button type="button" className="season-remove-player-button" title="Bỏ đăng ký" onClick={() => onRemove(entry)}><Trash2 /> Bỏ đăng ký</button></article>;
+  const statDefinitions = [['matches', 'Trận'], ['goals', 'Bàn'], ['assists', 'KT'], ['bestPlayer', 'MVP'], ...(resultTrackingEnabled ? [['wins', 'W'], ['draws', 'D'], ['losses', 'L']] : [])];
+  return <article className="season-player-mobile-card"><div className="season-mobile-player-heading"><span className="season-player-avatar">{image ? <img src={image} alt="" /> : <UserRound />}</span><div><strong>{entry.name}</strong><span>{nationFlag ? <img src={nationFlag} alt={nationName} /> : '—'} {Array.isArray(entry.position) ? entry.position.join(' · ').toUpperCase() : '—'}</span></div><b>OVR {entry.seasonCard?.ovr ?? entry.ovr ?? 0}</b></div><label className="season-mobile-card-select">Thẻ<select value={entry.playerMatch?.player_card_id || entry.seasonCard?.player_card_id || ''} onChange={(event) => onUpdateCard(entry, event.target.value)}>{(entry.cards || []).map((card) => <option key={card.player_card_id} value={card.player_card_id}>{card.program?.name || `#${card.player_card_id}`} · {card.ovr}</option>)}</select></label><div className="season-mobile-stats">{statDefinitions.map(([key, label]) => <label key={key}><span>{label}</span>{editing && onSetStat ? <input type="number" min="0" value={stats?.[key] ?? 0} onChange={(event) => onSetStat(entry.player_id, key, event.target.value)} /> : <strong>{stats?.[key] ?? 0}</strong>}</label>)}</div><button type="button" className="season-remove-player-button" title="Bỏ đăng ký" onClick={() => onRemove(entry)}><Trash2 /> Bỏ đăng ký</button></article>;
 }
 
 function SeasonPlayerTable({ session, players, nations, onRegister, onUpdateStats, onUpdatePlayerCard, onRemovePlayer }) {
   const seasonPlayers = getSeasonPlayers(session, players);
+  const resultTrackingEnabled = supportsMatchResult(session);
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState('position');
   const [nationFilter, setNationFilter] = useState('ALL');
@@ -216,7 +247,7 @@ function SeasonPlayerTable({ session, players, nations, onRegister, onUpdateStat
   const [draft, setDraft] = useState({});
 
   useEffect(() => {
-    setDraft(Object.fromEntries(seasonPlayers.map((entry) => [Number(entry.player_id), emptySeasonStats(entry.playerMatch)])));
+    setDraft(Object.fromEntries(seasonPlayers.map((entry) => [Number(entry.player_id), emptySeasonStats(entry.playerMatch, resultTrackingEnabled)])));
     setEditing(false);
   }, [session, players]);
 
@@ -232,13 +263,13 @@ function SeasonPlayerTable({ session, players, nations, onRegister, onUpdateStat
 
   const setStat = (playerId, key, value) => setDraft((current) => ({ ...current, [playerId]: { ...current[playerId], [key]: value } }));
   const cancel = () => {
-    setDraft(Object.fromEntries(seasonPlayers.map((entry) => [Number(entry.player_id), emptySeasonStats(entry.playerMatch)])));
+    setDraft(Object.fromEntries(seasonPlayers.map((entry) => [Number(entry.player_id), emptySeasonStats(entry.playerMatch, resultTrackingEnabled)])));
     setEditing(false);
   };
   const save = async () => {
     setSaving(true);
     try {
-      await onUpdateStats(seasonPlayers.map((entry) => serializePlayerMatch({ player_id: entry.player_id, objectId: entry.objectId, stats: draft[Number(entry.player_id)] }, entry)));
+      await onUpdateStats(seasonPlayers.map((entry) => serializePlayerMatch({ player_id: entry.player_id, objectId: entry.objectId, stats: draft[Number(entry.player_id)] }, entry, resultTrackingEnabled)));
       setEditing(false);
     } finally {
       setSaving(false);
@@ -247,7 +278,7 @@ function SeasonPlayerTable({ session, players, nations, onRegister, onUpdateStat
   const remove = async (entry) => {
     const playerId = Number(entry.player_id);
     const awards = Object.values(session.awards || {}).filter((award) => Number(award?.player_id) === playerId).map((award) => award.title);
-    const stats = emptySeasonStats(entry.playerMatch);
+    const stats = emptySeasonStats(entry.playerMatch, resultTrackingEnabled);
     const usedStats = Object.values(stats).some((value) => value > 0);
     const usage = [...(awards.length ? [`Danh hiệu: ${awards.join(', ')}`] : []), ...(usedStats ? [`Stats: ${stats.matches} trận, ${stats.goals} bàn, ${stats.assists} kiến tạo, ${stats.bestPlayer} MVP`] : [])];
     const message = usage.length ? `Không thể xóa ${entry.name} khỏi mùa giải mà không xác nhận.\n\nĐang được sử dụng tại:\n- ${usage.join('\n- ')}\n\nBạn có muốn xóa cưỡng bức và gỡ các liên kết danh hiệu không?` : `Bỏ đăng ký ${entry.name} khỏi mùa giải?`;
@@ -259,9 +290,10 @@ function SeasonPlayerTable({ session, players, nations, onRegister, onUpdateStat
     await onUpdatePlayerCard(playerMatch);
   };
 
+  const statDefinitions = [['matches', 'Trận'], ['goals', 'Bàn'], ['assists', 'KT'], ['bestPlayer', 'MVP'], ...(resultTrackingEnabled ? [['wins', 'W'], ['draws', 'D'], ['losses', 'L']] : [])];
   return <section className="session-detail-panel session-players-panel">
     <div className="session-detail-panel-heading"><div><span className="session-eyebrow">SEASON PLAYERS</span><h2>Cầu thủ tham dự</h2></div><div className="session-detail-panel-heading-actions"><span>{seasonPlayers.length} cầu thủ</span><button type="button" className="session-primary-button" onClick={onRegister}><Plus /> Đăng ký cầu thủ</button></div></div>
-    {seasonPlayers.length ? <><div className="season-player-toolbar"><label className="session-search-field"><Search /><input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Tìm cầu thủ trong mùa giải..." /></label><select value={nationFilter} onChange={(event) => setNationFilter(event.target.value)} aria-label="Lọc cầu thủ theo nation"><option value="ALL">Tất cả nation</option>{nations.map((nation) => <option key={nation.nation_id} value={nation.nation_id}>{nation.name}</option>)}</select><select value={sortBy} onChange={(event) => setSortBy(event.target.value)}><option value="position">Sắp xếp: Vị trí</option><option value="name">Sắp xếp: Tên</option><option value="ovr">Sắp xếp: OVR</option><option value="matches">Sắp xếp: Trận đấu</option><option value="goals">Sắp xếp: Bàn thắng</option><option value="assists">Sắp xếp: Kiến tạo</option><option value="bestPlayer">Sắp xếp: Best player</option></select>{editing ? <><button type="button" className="session-secondary-button" onClick={cancel}>Hủy</button><button type="button" className="session-primary-button" disabled={saving} onClick={save}><Save /> {saving ? 'Đang lưu...' : 'Lưu chỉ số'}</button></> : <button type="button" className="session-secondary-button" onClick={() => setEditing(true)}>Cập nhật chỉ số</button>}</div><div className="season-player-table-wrap"><table className="season-player-table"><thead><tr><th>Cầu thủ</th><th>Nation</th><th>POS</th><th>Thẻ</th><th>OVR</th><th colSpan="4" className="season-stats-group-heading">THỐNG KÊ MÙA GIẢI</th><th>Action</th></tr><tr className="season-player-subheader"><th colSpan="5"></th><th>Trận</th><th>Bàn</th><th>KT</th><th>MVP</th><th></th></tr></thead><tbody>{visiblePlayers.map((entry) => { const stats = editing ? draft[Number(entry.player_id)] : entry.seasonStats; const image = playerImage(entry); const nationName = nationNameFor(entry, nations); const nationFlag = nationFlagFor(entry, nations); return <tr key={entry.player_id}><td><div className="season-player-cell"><span className="season-player-avatar">{image ? <img src={image} alt="" /> : <UserRound />}</span><strong>{entry.name}</strong></div></td><td><span className="season-player-nation" title={nationName}>{nationFlag ? <img src={nationFlag} alt={nationName} /> : '—'}</span></td><td>{Array.isArray(entry.position) ? entry.position.join(' · ').toUpperCase() : '—'}</td><td><select className="season-card-select" value={entry.playerMatch?.player_card_id || entry.seasonCard?.player_card_id || ''} onChange={(event) => updateCard(entry, event.target.value)}>{(entry.cards || []).map((card) => <option key={card.player_card_id} value={card.player_card_id}>{card.program?.name || `#${card.player_card_id}`} · {card.ovr}</option>)}</select></td><td className="season-ovr-cell">{entry.seasonCard?.ovr ?? entry.ovr ?? 0}</td><PlayerStatsSummary variant="table" stats={stats} /> <td><button type="button" className="season-remove-player-button" title="Bỏ đăng ký" onClick={() => remove(entry)}><Trash2 /></button></td></tr>; })}</tbody></table><div className="season-player-mobile-list">{visiblePlayers.map((entry) => <SeasonPlayerMobileCard key={entry.player_id} entry={entry} stats={editing ? draft[Number(entry.player_id)] : entry.seasonStats} editing={editing} onUpdateCard={updateCard} onRemove={remove} />)}</div>{!visiblePlayers.length && <div className="session-empty-state">Không có cầu thủ khớp tìm kiếm.</div>}</div></> : <div className="session-empty-state session-player-empty"><UserRound /><h3>Chưa có cầu thủ nào được đăng ký</h3><p>Đăng ký cầu thủ từ danh sách player hiện có để bắt đầu mùa giải.</p><button type="button" className="session-primary-button" onClick={onRegister}><Plus /> Đăng ký cầu thủ</button></div>}
+    {seasonPlayers.length ? <><div className="season-player-toolbar"><label className="session-search-field"><Search /><input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Tìm cầu thủ trong mùa giải..." /></label><select value={nationFilter} onChange={(event) => setNationFilter(event.target.value)} aria-label="Lọc cầu thủ theo nation"><option value="ALL">Tất cả nation</option>{nations.map((nation) => <option key={nation.nation_id} value={nation.nation_id}>{nation.name}</option>)}</select><select value={sortBy} onChange={(event) => setSortBy(event.target.value)}><option value="position">Sắp xếp: Vị trí</option><option value="name">Sắp xếp: Tên</option><option value="ovr">Sắp xếp: OVR</option><option value="matches">Sắp xếp: Trận đấu</option><option value="goals">Sắp xếp: Bàn thắng</option><option value="assists">Sắp xếp: Kiến tạo</option><option value="bestPlayer">Sắp xếp: Best player</option>{resultTrackingEnabled && <><option value="wins">Sắp xếp: Thắng</option><option value="draws">Sắp xếp: Hòa</option><option value="losses">Sắp xếp: Thua</option></>}</select>{editing ? <><button type="button" className="session-secondary-button" onClick={cancel}>Hủy</button><button type="button" className="session-primary-button" disabled={saving} onClick={save}><Save /> {saving ? 'Đang lưu...' : 'Lưu chỉ số'}</button></> : <button type="button" className="session-secondary-button" onClick={() => setEditing(true)}>Cập nhật chỉ số</button>}</div><div className="season-player-table-wrap"><table className={`season-player-table ${resultTrackingEnabled ? 'has-result-tracking' : ''}`}><thead><tr><th>Cầu thủ</th><th>Nation</th><th>POS</th><th>Thẻ</th><th>OVR</th><th colSpan={resultTrackingEnabled ? 7 : 4} className="season-stats-group-heading">THỐNG KÊ MÙA GIẢI</th><th>Action</th></tr><tr className="season-player-subheader"><th colSpan="5"></th>{statDefinitions.map(([, label]) => <th key={label}>{label}</th>)}<th></th></tr></thead><tbody>{visiblePlayers.map((entry) => { const stats = editing ? draft[Number(entry.player_id)] : entry.seasonStats; const image = playerImage(entry); const nationName = nationNameFor(entry, nations); const nationFlag = nationFlagFor(entry, nations); return <tr key={entry.player_id}><td><div className="season-player-cell"><span className="season-player-avatar">{image ? <img src={image} alt="" /> : <UserRound />}</span><strong>{entry.name}</strong></div></td><td><span className="season-player-nation" title={nationName}>{nationFlag ? <img src={nationFlag} alt={nationName} /> : '—'}</span></td><td>{Array.isArray(entry.position) ? entry.position.join(' · ').toUpperCase() : '—'}</td><td><select className="season-card-select" value={entry.playerMatch?.player_card_id || entry.seasonCard?.player_card_id || ''} onChange={(event) => updateCard(entry, event.target.value)}>{(entry.cards || []).map((card) => <option key={card.player_card_id} value={card.player_card_id}>{card.program?.name || `#${card.player_card_id}`} · {card.ovr}</option>)}</select></td><td className="season-ovr-cell">{entry.seasonCard?.ovr ?? entry.ovr ?? 0}</td>{editing ? statDefinitions.map(([key, label]) => <td className="season-stat-cell" key={key}><input className="season-stat-input" type="number" min="0" step="1" aria-label={`${entry.name} ${label}`} value={stats?.[key] ?? 0} onChange={(event) => setStat(entry.player_id, key, event.target.value)} /></td>) : <PlayerStatsSummary variant="table" stats={stats} resultTrackingEnabled={resultTrackingEnabled} />} <td><button type="button" className="season-remove-player-button" title="Bỏ đăng ký" onClick={() => remove(entry)}><Trash2 /></button></td></tr>; })}</tbody></table><div className="season-player-mobile-list">{visiblePlayers.map((entry) => <SeasonPlayerMobileCard key={entry.player_id} entry={entry} stats={editing ? draft[Number(entry.player_id)] : entry.seasonStats} editing={editing} onUpdateCard={updateCard} onRemove={remove} onSetStat={setStat} resultTrackingEnabled={resultTrackingEnabled} />)}</div>{!visiblePlayers.length && <div className="session-empty-state">Không có cầu thủ khớp tìm kiếm.</div>}</div></> : <div className="session-empty-state session-player-empty"><UserRound /><h3>Chưa có cầu thủ nào được đăng ký</h3><p>Đăng ký cầu thủ từ danh sách player hiện có để bắt đầu mùa giải.</p><button type="button" className="session-primary-button" onClick={onRegister}><Plus /> Đăng ký cầu thủ</button></div>}
   </section>;
 }
 
@@ -318,8 +350,38 @@ function SeasonAwards({ session, seasonPlayers, onSave, onPublish, saving }) {
 
 function SeasonStats({ session, seasonPlayers }) {
   const totals = seasonTotals(session);
-  const leaders = [...seasonPlayers].sort((left, right) => Number(right.seasonStats?.goals) - Number(left.seasonStats?.goals));
-  return <section className="session-detail-panel session-stats-panel"><div className="session-detail-panel-heading"><div><span className="session-eyebrow">SEASON STATS</span><h2>Thống kê mùa giải</h2></div><span>{seasonPlayers.length} cầu thủ</span></div><div className="session-inline-stats"><div><strong>{totals.matches}</strong><span>Trận đấu</span></div><div><strong>{totals.goals}</strong><span>Bàn thắng</span></div></div><div className="season-leader-list">{leaders.map((player) => <div className="season-leader-row" key={player.player_id}><span>{player.name}</span><span>{player.seasonStats?.matches || 0} trận</span><strong>{player.seasonStats?.goals || 0} bàn</strong><strong>{player.seasonStats?.assists || 0} KT</strong><strong>{player.seasonStats?.bestPlayer || 0} MVP</strong></div>)}</div></section>;
+  const hasMatchResults = supportsMatchResult(session);
+  const resultTotal = totals.wins + totals.draws + totals.losses;
+  const winEnd = resultTotal ? (totals.wins / resultTotal) * 100 : 0;
+  const drawEnd = resultTotal ? winEnd + (totals.draws / resultTotal) * 100 : 0;
+  const resultChartStyle = resultTotal ? {
+    background: `conic-gradient(var(--season-win) 0 ${winEnd}%, var(--season-draw) ${winEnd}% ${drawEnd}%, var(--season-loss) ${drawEnd}% 100%)`,
+  } : undefined;
+  return <section className="session-detail-panel session-stats-panel">
+    <div className="session-detail-panel-heading"><div><span className="session-eyebrow">SEASON STATS</span><h2>Thống kê mùa giải</h2></div><span>{seasonPlayers.length} cầu thủ</span></div>
+    <div className="session-inline-stats">
+      <div><strong>{totals.matches}</strong><span>Tổng số trận</span></div>
+      <div><strong>{totals.goals}</strong><span>Bàn thắng</span></div>
+      <div><strong>{totals.goalsAgainst}</strong><span>Bàn thua</span></div>
+      <div><strong>{totals.cleanSheets}</strong><span>Giữ sạch lưới</span></div>
+      {hasMatchResults && <>
+        <div><strong>{totals.wins} / {totals.matches}</strong><span>Thắng / Tổng trận</span></div>
+        <div><strong>{totals.draws} / {totals.matches}</strong><span>Hòa / Tổng trận</span></div>
+        <div><strong>{totals.losses} / {totals.matches}</strong><span>Thua / Tổng trận</span></div>
+      </>}
+    </div>
+    {hasMatchResults && <div className="season-result-chart">
+      <div className={`season-result-donut ${resultTotal ? '' : 'is-empty'}`} style={resultChartStyle} role="img" aria-label={`Kết quả mùa giải: ${totals.wins} trận thắng, ${totals.draws} trận hòa, ${totals.losses} trận thua`}>
+        <span>{resultTotal}<small>kết quả</small></span>
+      </div>
+      <div className="season-result-legend" aria-label="Chú thích kết quả trận đấu">
+        <div><i className="season-result-dot is-win" /><span>Thắng</span><strong>{totals.wins}</strong></div>
+        <div><i className="season-result-dot is-draw" /><span>Hòa</span><strong>{totals.draws}</strong></div>
+        <div><i className="season-result-dot is-loss" /><span>Thua</span><strong>{totals.losses}</strong></div>
+        {!resultTotal && <p>Chưa có kết quả trận đấu</p>}
+      </div>
+    </div>}
+  </section>;
 }
 
 function SeasonHonorUpdates({ session, seasonPlayers, onChanged, onUpdateArchive }) {
@@ -470,7 +532,7 @@ export default function Sessions({ sessions = [], players = [], nations = [], on
   </>;
 
   return <div className="sessions-page">
-    {viewingSession ? <SessionDetail session={viewingSession} players={players} nations={nations} onBack={() => setViewingSession(null)} onEdit={() => openEditor(viewingSession)} onRegister={() => setRegisteringSession(viewingSession)} onUpdateStats={updatePlayerStats} onUpdatePlayerCard={updatePlayerCard} onRemovePlayer={removePlayer} onUpdateAwards={updateAwards} onPublishAwards={updateAwardsPublication} onSaveRanking={updateRanking} onPublishRanking={updateRankingPublication} onUpdateArchive={updateArchive} onMatchChanged={(updatedSession) => { if (updatedSession) setViewingSession(updatedSession); return onMatchChanged?.(updatedSession); }} onHonorChanged={(result) => { if (result?.session) setViewingSession(result.session); return onHonorChanged?.(result); }} registrationSaving={registrationSaving} saving={saving} /> : listContent}
+    {viewingSession ? <SessionDetail session={viewingSession} players={players} nations={nations} onBack={() => setViewingSession(null)} onEdit={() => openEditor(viewingSession)} onRegister={() => setRegisteringSession(viewingSession)} onUpdateStats={updatePlayerStats} onUpdatePlayerCard={updatePlayerCard} onRemovePlayer={removePlayer} onUpdateAwards={updateAwards} onPublishAwards={updateAwardsPublication} onSaveRanking={updateRanking} onPublishRanking={updateRankingPublication} onUpdateArchive={updateArchive} onMatchChanged={(result) => { const updatedSession = result?.session || result; if (updatedSession?.session_id) setViewingSession(updatedSession); return onMatchChanged?.(result); }} onHonorChanged={(result) => { if (result?.session) setViewingSession(result.session); return onHonorChanged?.(result); }} registrationSaving={registrationSaving} saving={saving} /> : listContent}
     {editingSession !== null && <SessionEditor key={editingSession?.session_id || 'new'} session={editingSession || null} players={players} onClose={() => setEditingSession(null)} onSave={saveSession} saving={saving} />}
     {registeringSession && <RegisterPlayersModal players={players} nations={nations} registeredIds={new Set(getSeasonPlayers(registeringSession, players).map((player) => Number(player.player_id)))} onClose={() => setRegisteringSession(null)} onRegister={registerPlayers} saving={registrationSaving} />}
   </div>;

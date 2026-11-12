@@ -5,7 +5,8 @@ const path = require('path');
 const { readCollection, addRecord, updateRecord, removeRecord, writeCollection } = require('../jsonStore');
 const { getPlayerCardById, getCurrentPlayerCard } = require('../services/playerCardService');
 const { recalculateAllPlayerStats } = require('../services/playerStatsService');
-const { getSessionPlayerUsage, removeMatchesForSession, baselineFromPlayerMatch, MATCHES_FILE } = require('../services/matchService');
+const { combineDefensiveStats } = require('../services/defensiveStats');
+const { getSessionPlayerUsage, removeMatchesForSession, baselineFromPlayerMatch, MATCHES_FILE, DEFENSIVE_STATS_VERSION } = require('../services/matchService');
 
 const SESSIONS_FILE = 'sessions.json';
 const SESSION_ID_KEY = 'session_id';
@@ -38,7 +39,7 @@ function playerReferenceOf(value) {
   return player ? { player_id: Number(player.player_id), objectId: String(player.objectId || '') } : null;
 }
 
-function normalizePlayerMatch(value, fallback = []) {
+function normalizePlayerMatch(value, fallback = [], resultTrackingEnabled = false) {
   const sourceList = arrayOr(value, fallback);
   const seen = new Set();
   return sourceList.map((item) => {
@@ -61,7 +62,13 @@ function normalizePlayerMatch(value, fallback = []) {
         matches: numberOr(stats.matches),
         goals: numberOr(stats.goals),
         assists: numberOr(stats.assists),
-        bestPlayer: numberOr(stats.bestPlayer)
+        bestPlayer: numberOr(stats.bestPlayer),
+        ...combineDefensiveStats(fallback.find((entry) => Number(entry.player_id) === reference.player_id)?.stats),
+        ...(resultTrackingEnabled || ['wins', 'draws', 'losses'].some((key) => Object.prototype.hasOwnProperty.call(stats, key)) ? {
+          wins: numberOr(stats.wins),
+          draws: numberOr(stats.draws),
+          losses: numberOr(stats.losses)
+        } : {})
       }
     };
   });
@@ -114,7 +121,14 @@ function normalizePlayerRanking(value, fallback = [], playerMatch = []) {
 function normalizeSession(input = {}, existing = {}) {
   const { force: _force, ...cleanInput } = input;
   const title = cleanInput.Title ?? cleanInput.title ?? existing.Title ?? existing.title ?? 'Mùa giải mới';
-  const playerMatch = normalizePlayerMatch(cleanInput.player_match, arrayOr(existing.player_match));
+  const hasCapability = Object.prototype.hasOwnProperty.call(cleanInput, 'result_tracking_enabled')
+    || Object.prototype.hasOwnProperty.call(existing, 'result_tracking_enabled')
+    || Object.prototype.hasOwnProperty.call(cleanInput, 'match_stats_version')
+    || Object.prototype.hasOwnProperty.call(existing, 'match_stats_version');
+  const resultTrackingEnabled = hasCapability
+    ? boolOr(cleanInput.result_tracking_enabled, existing.result_tracking_enabled ?? Number(existing.match_stats_version) >= 2)
+    : !Object.keys(existing).length;
+  const playerMatch = normalizePlayerMatch(cleanInput.player_match, arrayOr(existing.player_match), resultTrackingEnabled);
   const playerRanking = normalizePlayerRanking(cleanInput.player_ranking, arrayOr(existing.player_ranking), playerMatch);
   return {
     ...existing,
@@ -127,6 +141,8 @@ function normalizeSession(input = {}, existing = {}) {
     awardImage: String(cleanInput.awardImage ?? existing.awardImage ?? '').trim(),
     awards: normalizeAwards(cleanInput.awards, objectOr(existing.awards), playerMatch),
     player_match: playerMatch,
+    defensive_stats_version: Object.keys(existing).length ? existing.defensive_stats_version : DEFENSIVE_STATS_VERSION,
+    ...(hasCapability || !Object.keys(existing).length ? { result_tracking_enabled: resultTrackingEnabled } : {}),
     player_ranking: playerRanking,
     awards_published: boolOr(cleanInput.awards_published, existing.awards_published ?? true),
     player_ranking_published: boolOr(cleanInput.player_ranking_published, existing.player_ranking_published ?? true),

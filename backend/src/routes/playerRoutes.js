@@ -10,9 +10,14 @@ const {
   resolvePlayer,
   getPlayerCardById,
   getPlayerCards,
-  createPlayerCard
+  createPlayerCard,
+  updatePlayerCard,
+  getCurrentPlayerCard,
+  getProgramById,
+  normalizeCardPrograms
 } = require('../services/playerCardService');
-const { recalculateAllPlayerStats } = require('../services/playerStatsService');
+const { normalizeOvrAppearance, normalizeOvrPrograms, normalizeOvrPositions } = require('../services/ovrService');
+const { careerStatsFor, recalculateAllPlayerStats, SESSIONS_FILE } = require('../services/playerStatsService');
 const { normalizeHthEntries } = require('../services/honorService');
 
 const PLAYERS_FILE = 'players.json';
@@ -61,6 +66,19 @@ function normalizePlayer(input, existing = {}) {
   const incomingMetadata = playerInput.metadata || {};
   const currentMetadata = existing.metadata || {};
   const nation = nationReference(playerInput.nation !== undefined ? playerInput.nation : existing.nation) || existing.nation || null;
+  const appearance = normalizeOvrAppearance(playerInput, { ovr: 75, ...existing });
+  const programSelection = normalizeOvrPrograms(
+    playerInput.program !== undefined && playerInput.program_id === undefined && !playerInput.ovr_programs
+      ? { ...playerInput, program_id: getProgramById(arrayOr(playerInput.program)[0])?.program_id }
+      : playerInput,
+    { ...existing, program_id: existing.program_id || getProgramById(arrayOr(existing.program)[0])?.program_id },
+    appearance
+  );
+  if (Object.values(programSelection.ovr_programs).some((id) => !getProgramById(id))) {
+    const error = new Error('Choose an existing Program for each assigned OVR.');
+    error.statusCode = 400;
+    throw error;
+  }
 
   const stats = {
     ...currentStats,
@@ -75,11 +93,16 @@ function normalizePlayer(input, existing = {}) {
   return {
     ...existing,
     ...playerInput,
+    is_active: (playerInput.is_active ?? existing.is_active ?? true) !== false
+      && String(playerInput.is_active ?? existing.is_active ?? true).toLowerCase() !== 'false',
     objectId: playerInput.objectId || existing.objectId || newObjectId(),
     current_card_id: playerInput.current_card_id !== undefined ? playerInput.current_card_id : (existing.current_card_id ?? null),
     program: arrayOr(playerInput.program, existing.program || []),
-    ovr: numberOr(playerInput.ovr ?? playerInput.rating ?? existing.ovr, 75),
-    position: arrayOr(playerInput.position, existing.position || []).map((item) => String(item).toLowerCase()),
+    ovr: appearance.ovr,
+    ovr_options: appearance.ovr_options,
+    ovr_images: appearance.ovr_images,
+    ...programSelection,
+    ...normalizeOvrPositions(playerInput, { ovr: 75, ...existing }, appearance),
     nation,
     Status_I_H_M: playerInput.Status_I_H_M ?? playerInput.cardType ?? existing.Status_I_H_M ?? 'Gold',
     number: numberOr(playerInput.number ?? existing.number),
@@ -221,10 +244,18 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields: name, position, nation' });
     }
 
+    if (body.card) {
+      normalizeCardPrograms(body.card);
+      normalizeOvrPositions(body.card);
+    }
     const player = addRecord(PLAYERS_FILE, normalizePlayer(body), PLAYER_ID_KEY);
     const cardInput = body.card || (body.program || body.ovr || body.position || body.imageCard ? {
       program: Array.isArray(body.program) ? body.program[0] : body.program,
       ovr: body.ovr,
+      ovr_options: body.ovr_options,
+      ovr_images: body.ovr_images,
+      ovr_programs: body.ovr_programs,
+      ovr_positions: body.ovr_positions,
       position: body.position,
       Status_I_H_M: body.Status_I_H_M,
       imageCard: Array.isArray(body.imageCard) ? body.imageCard[0] : body.imageCard
@@ -238,7 +269,7 @@ router.post('/', async (req, res) => {
     res.status(201).json(resolvePlayer(readCollection(PLAYERS_FILE).find((item) => playerId(item) === playerId(player))));
   } catch (error) {
     console.error('Error creating player:', error);
-    res.status(500).json({ error: 'Failed to create player' });
+    res.status(error.statusCode || 500).json({ error: error.statusCode ? error.message : 'Failed to create player' });
   }
 });
 
@@ -249,18 +280,28 @@ router.put('/:id', async (req, res) => {
     const records = readCollection(PLAYERS_FILE);
     const existing = records.find((item) => playerId(item) === id);
     if (!existing) return res.status(404).json({ error: 'Player not found' });
-    const body = req.body || {};
+    const { careerStatEdits, stats_career_adjustments: _adjustments, stats_career_baseline: _baseline, ...body } = req.body || {};
     if (body.current_card_id !== undefined) {
       const card = getPlayerCardById(body.current_card_id);
       if (body.current_card_id !== null && (!card || Number(card.player_id) !== id)) return res.status(400).json({ error: 'current_card_id must reference a card owned by this player.' });
     }
-    const player = updateRecord(PLAYERS_FILE, id, normalizePlayer(body, existing), PLAYER_ID_KEY);
-    recalculateAllPlayerStats();
-
-    res.json(resolvePlayer(player));
+    const normalizedPlayer = normalizePlayer(body, existing);
+    if (careerStatEdits !== undefined) {
+      const career = careerStatsFor(existing, readCollection(SESSIONS_FILE), careerStatEdits);
+      Object.assign(normalizedPlayer, career, { stats: { ...normalizedPlayer.stats, ...career.stats } });
+    }
+    if (body.card) {
+      const currentCard = getCurrentPlayerCard(existing);
+      if (!currentCard) return res.status(400).json({ error: 'Player has no current card to update.' });
+      const ovrUpdate = normalizeOvrAppearance(body.card, currentCard);
+      updatePlayerCard(currentCard.player_card_id, { ...ovrUpdate, ovr_programs: body.card.ovr_programs, ovr_positions: body.card.ovr_positions, ...(body.card.position !== undefined ? { position: body.card.position } : {}), ...(body.card.program_id !== undefined ? { program_id: body.card.program_id } : {}) });
+    }
+    updateRecord(PLAYERS_FILE, id, normalizedPlayer, PLAYER_ID_KEY);
+    const players = recalculateAllPlayerStats();
+    res.json(resolvePlayer(players.find((item) => playerId(item) === id)));
   } catch (error) {
     console.error('Error updating player:', error);
-    res.status(500).json({ error: 'Failed to update player' });
+    res.status(error.statusCode || 500).json({ error: error.statusCode ? error.message : 'Failed to update player' });
   }
 });
 

@@ -56,3 +56,29 @@ test('adds stats from a newly registered season to the player ID totals', () => 
     sessionAmount: 3
   });
 });
+
+test('adds W/D/L only for a season with result tracking enabled', () => {
+  const sessions = [{
+    session_id: 3,
+    result_tracking_enabled: true,
+    player_match: [{
+      player_id: 20,
+      stats: { matches: 3, goals: 1, assists: 0, bestPlayer: 0, wins: 1, draws: 1, losses: 1 }
+    }]
+  }];
+  const migratedPlayer = {
+    ...player,
+    stats_career_baseline: { goalAmounts: 6, assistAmounts: 5, match: 9, bestPlayerAmount: 3, sessionAmount: 2 }
+  };
+
+  assert.deepEqual(calculatePlayerGlobalStats(20, sessions, [migratedPlayer]), {
+    goalAmounts: 7,
+    assistAmounts: 5,
+    match: 12,
+    bestPlayerAmount: 3,
+    sessionAmount: 3,
+    wins: 1,
+    draws: 1,
+    losses: 1
+  });
+});

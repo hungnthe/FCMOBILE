@@ -21,6 +21,21 @@ const sendError = (res, error, fallback) => res.status(error.statusCode || 500).
   details: error.details
 });
 
+const MATCH_MILESTONE_STEP = 50;
+
+function matchMilestonesReached(previousPlayers, updatedPlayers) {
+  const previousMatchesByPlayerId = new Map(previousPlayers.map((player) => [String(player.player_id), Number(player.stats?.match) || 0]));
+  return updatedPlayers.flatMap((player) => {
+    if (player.is_active === false) return [];
+    const previous = previousMatchesByPlayerId.get(String(player.player_id)) || 0;
+    const current = Number(player.stats?.match) || 0;
+    const previousMilestone = Math.floor(previous / MATCH_MILESTONE_STEP);
+    const currentMilestone = Math.floor(current / MATCH_MILESTONE_STEP);
+    if (current <= 0 || currentMilestone <= previousMilestone) return [];
+    return [{ player_id: Number(player.player_id), player_name: player.name, stat: 'match', value: current, milestone: currentMilestone * MATCH_MILESTONE_STEP }];
+  });
+}
+
 function withTransaction(work) {
   const sessionsBefore = readCollection(SESSIONS_FILE);
   const matchesBefore = readCollection(MATCHES_FILE);
@@ -96,10 +111,11 @@ router.post('/:id/finalize', (req, res) => {
     const session = getSessionById(existing.session_id);
     const normalized = normalizeMatch({ ...existing, ...(req.body || {}), status: 'finalized' }, session, existing, { allowFinalized: true });
     const result = withTransaction(() => {
+      const playersBefore = readCollection(PLAYERS_FILE);
       const match = updateMatch(existing.match_id, { ...normalized, finalizedAt: new Date().toISOString() });
       const updatedSession = recalculateSeasonPlayerStats(existing.session_id);
-      recalculateAllPlayerStats();
-      return { match, session: updatedSession };
+      const updatedPlayers = recalculateAllPlayerStats();
+      return { match, session: updatedSession, milestones: matchMilestonesReached(playersBefore, updatedPlayers) };
     });
     res.json(result);
   } catch (error) { sendError(res, error, 'Failed to finalize match'); }
@@ -112,7 +128,11 @@ router.delete('/:id', (req, res) => {
     const result = existing.status === 'finalized'
       ? withTransaction(() => {
         removeMatch(existing.match_id);
-        const session = preserveSeasonStatsAfterMatchRemoval(existing.session_id, readCollection(MATCHES_FILE));
+        const session = preserveSeasonStatsAfterMatchRemoval(
+          existing.session_id,
+          readCollection(MATCHES_FILE),
+          { removedMatches: [existing] }
+        );
         recalculateAllPlayerStats();
         return { message: 'Match deleted successfully; recorded statistics were kept.', session };
       })

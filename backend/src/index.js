@@ -12,7 +12,7 @@ const matchRoutes = require('./routes/matchRoutes');
 const legendRoutes = require('./routes/legendRoutes');
 const honorRoutes = require('./routes/honorRoutes');
 const { recalculateAllPlayerStats } = require('./services/playerStatsService');
-const { cleanupExpiredMatches, MATCH_RETENTION_DAYS } = require('./services/matchService');
+const { cleanupExpiredMatches, initializeDefensiveStats, MATCH_RETENTION_DAYS } = require('./services/matchService');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -37,6 +37,7 @@ app.use('/api/legends', legendRoutes);
 app.use('/api/honors', honorRoutes);
 
 try {
+  initializeDefensiveStats();
   recalculateAllPlayerStats();
 } catch (error) {
   console.error('Unable to recalculate player global stats at startup:', error);

@@ -187,9 +187,14 @@ export default function App() {
     }
   };
 
-  const handleMatchChanged = async (updatedSession) => {
+  const handleMatchChanged = async (result) => {
+    const updatedSession = result?.session || result;
     if (updatedSession) setSessions((current) => current.map((session) => session.session_id === updatedSession.session_id ? updatedSession : session));
     await Promise.all([loadPlayers(), loadMasterPlayers(), loadSessions(), loadDashboard()]);
+    const milestones = result?.milestones || [];
+    if (milestones.length) {
+      showToast(milestones.map((milestone) => `🎉 ${milestone.player_name} đã đạt ${milestone.milestone} trận!`).join(' '), 'milestone');
+    }
   };
 
   const handleHonorChanged = async (result) => {
@@ -339,7 +344,9 @@ export default function App() {
             <div className={`fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl border shadow-lg font-bold text-sm flex items-center gap-3 animate-bounce ${
               toast.type === 'error'
                 ? 'bg-red-50 border-red-300 text-red-700'
-                : 'bg-emerald-50 border-emerald-300 text-emerald-800'
+                : toast.type === 'milestone'
+                  ? 'bg-amber-50 border-amber-300 text-amber-900'
+                  : 'bg-emerald-50 border-emerald-300 text-emerald-800'
             }`}>
               <span>{toast.message}</span>
             </div>
@@ -349,6 +356,7 @@ export default function App() {
           {activeTab === 'dashboard' && (
             <Dashboard
               stats={dashboardStats}
+              players={masterPlayers}
               loading={loadingStats}
               onSwitchTab={setActiveTab}
             />
