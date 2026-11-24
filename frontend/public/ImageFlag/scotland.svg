@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" role="img" aria-labelledby="title">
+  <title id="title">Flag of Scotland</title>
+  <rect width="1000" height="600" fill="#005EB8"/>
+  <path d="M0 0 1000 600M1000 0 0 600" stroke="#fff" stroke-width="120"/>
+</svg>

@@ -26,8 +26,26 @@ function readCollection(fileName) {
 
 function writeCollection(fileName, records) {
   const filePath = collectionPath(fileName);
+  if (fileName === 'players.json') {
+    const old = new Map(readCollection(fileName).map((player) => [String(player.player_id), player]));
+    const nextIds = new Set(records.map((player) => String(player.player_id)));
+    for (const player of old.values()) {
+      if (!nextIds.has(String(player.player_id)) && player.rank && player.rank !== 'young_talent') {
+        throw Object.assign(new Error('Không thể xóa cầu thủ đã được trao bậc.'), { statusCode: 409 });
+      }
+    }
+    records = records.map((player) => ({ ...player, rank: old.get(String(player.player_id))?.rank || 'young_talent' }));
+  }
   const tempPath = `${filePath}.tmp`;
   fs.writeFileSync(tempPath, `${JSON.stringify(records, null, 2)}\n`, 'utf8');
+  fs.renameSync(tempPath, filePath);
+}
+
+// Only rank promotion code uses this writer; all ordinary writes preserve the current rank.
+function writePromotedPlayers(records) {
+  const filePath = collectionPath('players.json');
+  const tempPath = filePath + '.tmp';
+  fs.writeFileSync(tempPath, JSON.stringify(records, null, 2) + '\n', 'utf8');
   fs.renameSync(tempPath, filePath);
 }
 
@@ -42,7 +60,15 @@ function timestamp() {
 function addRecord(fileName, data, idKey = 'id') {
   const records = readCollection(fileName);
   const now = timestamp();
-  const record = { ...data, [idKey]: nextId(records, idKey) };
+  let id = nextId(records, idKey);
+  if (fileName === 'players.json') {
+    const journeyPath = collectionPath('player-rank-data.json');
+    if (fs.existsSync(journeyPath)) {
+      const journey = JSON.parse(fs.readFileSync(journeyPath, 'utf8').replace(/^\uFEFF/, ''));
+      id = Math.max(id, ...Object.keys(journey.players || {}).map((key) => (Number(key) || 0) + 1));
+    }
+  }
+  const record = { ...data, [idKey]: id };
   if (record.metadata) {
     record.metadata = { ...record.metadata, createdAt: record.metadata.createdAt || now, updatedAt: now };
   } else {
@@ -51,6 +77,7 @@ function addRecord(fileName, data, idKey = 'id') {
   }
   records.push(record);
   writeCollection(fileName, records);
+  if (fileName === 'players.json' && fs.existsSync(collectionPath('player-rank-data.json'))) require('./services/rankService').startPlayer(record[idKey]);
   return record;
 }
 
@@ -92,6 +119,7 @@ function replaceCollection(fileName, records, idKey = 'id') {
 
 module.exports = {
   DATA_DIR,
+  writePromotedPlayers,
   readCollection,
   writeCollection,
   addRecord,

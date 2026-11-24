@@ -1,0 +1,764 @@
+{
+  "ranks": [
+    {
+      "code": "young_talent",
+      "name": "Tài năng trẻ"
+    },
+    {
+      "code": "professional",
+      "name": "Chuyên nghiệp"
+    },
+    {
+      "code": "world_class",
+      "name": "World Class"
+    },
+    {
+      "code": "legend",
+      "name": "Huyền thoại"
+    }
+  ],
+  "players": {
+    "1": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 654,
+            "goalAmounts": 321,
+            "assistAmounts": 218,
+            "bestPlayerAmount": 118,
+            "sessionAmount": 5,
+            "wins": 261,
+            "draws": 83,
+            "losses": 91,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 654,
+            "goalAmounts": 321,
+            "assistAmounts": 218,
+            "bestPlayerAmount": 118,
+            "sessionAmount": 5,
+            "wins": 261,
+            "draws": 83,
+            "losses": 91,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:47:45.558Z"
+        },
+        "legend": {
+          "missions": [],
+          "baseline": {
+            "match": 654,
+            "goalAmounts": 321,
+            "assistAmounts": 218,
+            "bestPlayerAmount": 118,
+            "sessionAmount": 5,
+            "wins": 261,
+            "draws": 83,
+            "losses": 91,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:48:10.715Z"
+        }
+      }
+    },
+    "2": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 647,
+            "goalAmounts": 342,
+            "assistAmounts": 208,
+            "bestPlayerAmount": 106,
+            "sessionAmount": 5,
+            "wins": 260,
+            "draws": 83,
+            "losses": 88,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 647,
+            "goalAmounts": 342,
+            "assistAmounts": 208,
+            "bestPlayerAmount": 106,
+            "sessionAmount": 5,
+            "wins": 260,
+            "draws": 83,
+            "losses": 88,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:48:25.987Z"
+        },
+        "legend": {
+          "missions": [],
+          "baseline": {
+            "match": 647,
+            "goalAmounts": 342,
+            "assistAmounts": 208,
+            "bestPlayerAmount": 106,
+            "sessionAmount": 5,
+            "wins": 260,
+            "draws": 83,
+            "losses": 88,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:48:27.649Z"
+        }
+      }
+    },
+    "3": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 553,
+            "goalAmounts": 65,
+            "assistAmounts": 157,
+            "bestPlayerAmount": 21,
+            "sessionAmount": 4,
+            "wins": 200,
+            "draws": 64,
+            "losses": 80,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "4": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 83,
+            "goalAmounts": 22,
+            "assistAmounts": 19,
+            "bestPlayerAmount": 7,
+            "sessionAmount": 2,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "5": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 620,
+            "goalAmounts": 329,
+            "assistAmounts": 194,
+            "bestPlayerAmount": 115,
+            "sessionAmount": 5,
+            "wins": 260,
+            "draws": 83,
+            "losses": 91,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "6": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 638,
+            "goalAmounts": 43,
+            "assistAmounts": 89,
+            "bestPlayerAmount": 13,
+            "sessionAmount": 5,
+            "wins": 258,
+            "draws": 83,
+            "losses": 90,
+            "goalsAgainst": 376,
+            "cleanSheets": 179
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "7": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 489,
+            "goalAmounts": 6,
+            "assistAmounts": 9,
+            "bestPlayerAmount": 2,
+            "sessionAmount": 4,
+            "wins": 158,
+            "draws": 50,
+            "losses": 62,
+            "goalsAgainst": 339,
+            "cleanSheets": 162
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "8": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 39,
+            "goalAmounts": 0,
+            "assistAmounts": 0,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 2,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "9": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 135,
+            "goalAmounts": 2,
+            "assistAmounts": 2,
+            "bestPlayerAmount": 2,
+            "sessionAmount": 2,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "10": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 139,
+            "goalAmounts": 1,
+            "assistAmounts": 9,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 2,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "11": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 654,
+            "goalAmounts": 0,
+            "assistAmounts": 0,
+            "bestPlayerAmount": 1,
+            "sessionAmount": 5,
+            "wins": 261,
+            "draws": 82,
+            "losses": 91,
+            "goalsAgainst": 376,
+            "cleanSheets": 179
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "12": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 11,
+            "goalAmounts": 2,
+            "assistAmounts": 3,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 1,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "13": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 473,
+            "goalAmounts": 70,
+            "assistAmounts": 90,
+            "bestPlayerAmount": 28,
+            "sessionAmount": 4,
+            "wins": 187,
+            "draws": 57,
+            "losses": 70,
+            "goalsAgainst": 339,
+            "cleanSheets": 162
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "14": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 36,
+            "goalAmounts": 13,
+            "assistAmounts": 5,
+            "bestPlayerAmount": 3,
+            "sessionAmount": 1,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "15": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 36,
+            "goalAmounts": 0,
+            "assistAmounts": 1,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 1,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "16": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 7,
+            "goalAmounts": 0,
+            "assistAmounts": 2,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 1,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "17": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 18,
+            "goalAmounts": 4,
+            "assistAmounts": 3,
+            "bestPlayerAmount": 1,
+            "sessionAmount": 1,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "18": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 296,
+            "goalAmounts": 4,
+            "assistAmounts": 17,
+            "bestPlayerAmount": 1,
+            "sessionAmount": 2,
+            "wins": 85,
+            "draws": 28,
+            "losses": 45,
+            "goalsAgainst": 156,
+            "cleanSheets": 80
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "19": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 11,
+            "goalAmounts": 1,
+            "assistAmounts": 0,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 1,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "20": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 41,
+            "goalAmounts": 4,
+            "assistAmounts": 7,
+            "bestPlayerAmount": 4,
+            "sessionAmount": 1,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "21": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 64,
+            "goalAmounts": 0,
+            "assistAmounts": 0,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 1,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "22": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 3,
+            "goalAmounts": 2,
+            "assistAmounts": 1,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 1,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "23": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 514,
+            "goalAmounts": 16,
+            "assistAmounts": 42,
+            "bestPlayerAmount": 8,
+            "sessionAmount": 4,
+            "wins": 261,
+            "draws": 83,
+            "losses": 91,
+            "goalsAgainst": 376,
+            "cleanSheets": 179
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "24": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 441,
+            "goalAmounts": 3,
+            "assistAmounts": 13,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 4,
+            "wins": 247,
+            "draws": 79,
+            "losses": 89,
+            "goalsAgainst": 376,
+            "cleanSheets": 179
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "25": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 78,
+            "goalAmounts": 11,
+            "assistAmounts": 3,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 1,
+            "wins": 45,
+            "draws": 11,
+            "losses": 22,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "26": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 78,
+            "goalAmounts": 4,
+            "assistAmounts": 5,
+            "bestPlayerAmount": 2,
+            "sessionAmount": 1,
+            "wins": 36,
+            "draws": 18,
+            "losses": 24,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "27": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 303,
+            "goalAmounts": 7,
+            "assistAmounts": 4,
+            "bestPlayerAmount": 1,
+            "sessionAmount": 3,
+            "wins": 184,
+            "draws": 60,
+            "losses": 59,
+            "goalsAgainst": 376,
+            "cleanSheets": 179
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "28": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 237,
+            "goalAmounts": 1,
+            "assistAmounts": 29,
+            "bestPlayerAmount": 1,
+            "sessionAmount": 2,
+            "wins": 146,
+            "draws": 49,
+            "losses": 42,
+            "goalsAgainst": 220,
+            "cleanSheets": 99
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "29": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 237,
+            "goalAmounts": 0,
+            "assistAmounts": 2,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 2,
+            "wins": 146,
+            "draws": 49,
+            "losses": 42,
+            "goalsAgainst": 220,
+            "cleanSheets": 99
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "30": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 41,
+            "goalAmounts": 0,
+            "assistAmounts": 1,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 1,
+            "wins": 24,
+            "draws": 11,
+            "losses": 6,
+            "goalsAgainst": 20,
+            "cleanSheets": 23
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "31": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 90,
+            "goalAmounts": 37,
+            "assistAmounts": 34,
+            "bestPlayerAmount": 19,
+            "sessionAmount": 2,
+            "wins": 61,
+            "draws": 19,
+            "losses": 10,
+            "goalsAgainst": 54,
+            "cleanSheets": 47
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    },
+    "32": {
+      "stages": {
+        "professional": {
+          "missions": [],
+          "baseline": {
+            "match": 6,
+            "goalAmounts": 0,
+            "assistAmounts": 1,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 1,
+            "wins": 4,
+            "draws": 1,
+            "losses": 1,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T14:18:30.971Z"
+        }
+      }
+    }
+  },
+  "history": [
+    {
+      "id": "902b1edd-36bc-435a-96d7-e7fa76d9c7b9",
+      "player_id": 1,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T14:47:45.558Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "dda0a6c6-de06-43ea-afc6-9b39cd55eb15",
+      "player_id": 1,
+      "from": "professional",
+      "to": "world_class",
+      "awarded_at": "2026-11-24T14:48:10.715Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "e95efc75-3d40-4638-924c-9423db9f5cef",
+      "player_id": 2,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T14:48:25.987Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "0e44a0d3-bd63-4586-bdac-da9721a8f428",
+      "player_id": 2,
+      "from": "professional",
+      "to": "world_class",
+      "awarded_at": "2026-11-24T14:48:27.649Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    }
+  ]
+}

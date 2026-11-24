@@ -314,7 +314,7 @@ router.delete('/:id', async (req, res) => {
     if (!removeRecord(PLAYERS_FILE, id, PLAYER_ID_KEY)) return res.status(404).json({ error: 'Player not found' });
     res.json({ message: 'Player deleted successfully' });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete player' });
+    res.status(error.statusCode || 500).json({ error: error.statusCode ? error.message : 'Failed to delete player' });
   }
 });
 

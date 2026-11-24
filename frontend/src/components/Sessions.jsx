@@ -21,7 +21,11 @@ const DEFAULT_SESSION_IMAGES = [
   'public/SessionImages/numero-season.png',
   'public/SessionImages/season-archive-banner.png'
 ];
-const DEFAULT_SESSION_VIDEOS = ['public/Video/63636956821940360 (1).mp4'];
+const DEFAULT_SESSION_VIDEOS = [
+  'public/Video/63636956821940360 (1).mp4',
+  'public/Video/ballandor.m4v',
+  'public/Video/numero-best-goal.mp4'
+];
 const AWARD_ICONS = {
   golden_ball: '🥇',
   silver_ball: '🥈',
@@ -324,7 +328,9 @@ function SeasonAwards({ session, seasonPlayers, onSave, onPublish, saving }) {
   useEffect(() => {
     let cancelled = false;
     getSessionVideos().then((videos) => {
-      if (!cancelled && Array.isArray(videos) && videos.length) setSessionVideos(videos);
+      if (!cancelled && Array.isArray(videos)) {
+        setSessionVideos([...new Set([...DEFAULT_SESSION_VIDEOS, ...videos])]);
+      }
     }).catch(() => {
       // The frontend fallback also works when the backend runs in a separate container.
     });

@@ -117,5 +117,40 @@
   "code": "NO",
   "flag_url": "https://flagcdn.com/w320/no.png",
   "player_ids": []
+},
+{
+  "nation_id": 18,
+  "name": "Scotland",
+  "code": "GB-SCT",
+  "flag_url": "/ImageFlag/scotland.svg",
+  "player_ids": []
+},
+{
+  "nation_id": 19,
+  "name": "Bồ Đào Nha",
+  "code": "PT",
+  "flag_url": "https://flagcdn.com/w320/pt.png",
+  "player_ids": []
+},
+{
+  "nation_id": 20,
+  "name": "Mỹ",
+  "code": "US",
+  "flag_url": "https://flagcdn.com/w320/us.png",
+  "player_ids": []
+},
+{
+  "nation_id": 21,
+  "name": "Hà Lan",
+  "code": "NL",
+  "flag_url": "https://flagcdn.com/w320/nl.png",
+  "player_ids": []
+},
+{
+  "nation_id": 22,
+  "name": "Gruzia",
+  "code": "GE",
+  "flag_url": "https://flagcdn.com/w320/ge.png",
+  "player_ids": []
 }
 ]

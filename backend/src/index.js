@@ -11,6 +11,10 @@ const playerCardRoutes = require('./routes/playerCardRoutes');
 const matchRoutes = require('./routes/matchRoutes');
 const legendRoutes = require('./routes/legendRoutes');
 const honorRoutes = require('./routes/honorRoutes');
+const recordRoutes = require('./routes/recordRoutes');
+const rankRoutes = require('./routes/rankRoutes');
+const rankService = require('./services/rankService');
+rankService.recover();
 const { recalculateAllPlayerStats } = require('./services/playerStatsService');
 const { cleanupExpiredMatches, initializeDefensiveStats, MATCH_RETENTION_DAYS } = require('./services/matchService');
 
@@ -35,6 +39,8 @@ app.use('/api/player-cards', playerCardRoutes);
 app.use('/api/matches', matchRoutes);
 app.use('/api/legends', legendRoutes);
 app.use('/api/honors', honorRoutes);
+app.use('/api/records', recordRoutes);
+app.use('/api/rank-journey', rankRoutes);
 
 try {
   initializeDefensiveStats();
@@ -59,6 +65,8 @@ function cleanupMatches() {
 cleanupMatches();
 const matchCleanupTimer = setInterval(cleanupMatches, 60 * 60 * 1000);
 matchCleanupTimer.unref?.();
+
+rankService.initialize();
 
 app.listen(PORT, () => {
   console.log(`⚽ Football Card Manager Backend API running on port ${PORT}`);

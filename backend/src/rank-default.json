@@ -1,0 +1,10 @@
+{
+  "ranks": [
+    { "code": "young_talent", "name": "Tài năng trẻ" },
+    { "code": "professional", "name": "Chuyên nghiệp" },
+    { "code": "world_class", "name": "World Class" },
+    { "code": "legend", "name": "Huyền thoại" }
+  ],
+  "players": {},
+  "history": []
+}

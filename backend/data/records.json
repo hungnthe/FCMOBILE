@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Nhiều danh hiệu nhất mọi thời đại",
+    "player": "Bastian Schweinsteiger",
+    "player_id": 3,
+    "image": "",
+    "record_id": 1,
+    "createdAt": "2026-11-24T14:00:07.039Z",
+    "updatedAt": "2026-11-24T14:11:30.304Z",
+    "award_name": "Ông vua danh hiệu",
+    "note": "",
+    "player_history": [
+      {
+        "player": "Son Heung-Min",
+        "player_id": 2,
+        "changed_at": "2026-11-24T14:11:30.304Z"
+      }
+    ]
+  }
+]

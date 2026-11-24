@@ -9,6 +9,7 @@ import PlayerDetail from './components/PlayerDetail';
 import Sessions from './components/Sessions';
 import Programs from './components/Programs';
 import Legends from './components/Legends';
+import RankJourney from './components/RankJourney';
 
 import {
   getPlayers,
@@ -422,6 +423,7 @@ export default function App() {
           )}
 
           {activeTab === 'legends' && <Legends />}
+          {activeTab === 'rank-journey' && <RankJourney profiles={masterPlayers} />}
 
         </main>
       </div>

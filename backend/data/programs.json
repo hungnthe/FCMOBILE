@@ -65,5 +65,32 @@
     "program_id": 9,
     "createdAt": "2026-09-03T10:39:20.103Z",
     "updatedAt": "2026-09-03T10:39:20.103Z"
+  },
+  {
+    "name": "Anniversary",
+    "code": "anniversary_3",
+    "display_name": "Anniversary",
+    "active": true,
+    "program_id": 10,
+    "createdAt": "2026-09-28T19:25:26.817Z",
+    "updatedAt": "2026-09-28T19:25:26.817Z"
+  },
+  {
+    "name": "Ballond'or",
+    "code": "qbv",
+    "display_name": "Ballond'or",
+    "active": true,
+    "program_id": 11,
+    "createdAt": "2026-10-22T04:06:07.465Z",
+    "updatedAt": "2026-10-22T04:06:07.465Z"
+  },
+  {
+    "name": "Cung Hoàng Đạo",
+    "code": "stellar",
+    "display_name": "Cung Hoàng Đạo",
+    "active": true,
+    "program_id": 12,
+    "createdAt": "2026-11-08T07:32:18.224Z",
+    "updatedAt": "2026-11-08T07:32:18.224Z"
   }
 ]

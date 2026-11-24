@@ -13,9 +13,9 @@ const SESSION_ID_KEY = 'session_id';
 const MAX_SEASON_RANKING_PLAYERS = 14;
 const PLAYERS_FILE = 'players.json';
 const SESSION_IMAGE_DIR = path.resolve(__dirname, '../../../frontend/public/SessionImages');
-const SESSION_VIDEO_DIR = path.resolve(__dirname, '../../../frontend/public/Video');
+const SESSION_VIDEO_DIR = process.env.SESSION_VIDEO_DIR || path.resolve(__dirname, '../../../frontend/public/Video');
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.webp', '.gif']);
-const VIDEO_EXTENSIONS = new Set(['.mp4', '.webm', '.ogg', '.mov']);
+const VIDEO_EXTENSIONS = new Set(['.mp4', '.m4v', '.webm', '.ogg', '.mov']);
 
 const numberOr = (value, fallback = 0) => {
   const parsed = Number(value);

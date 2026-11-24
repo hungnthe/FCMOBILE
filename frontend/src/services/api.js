@@ -33,6 +33,11 @@ export const getSessions = async () => {
 };
 
 export const getLegends = async () => (await api.get('/legends')).data;
+export const getRecords = async () => (await api.get('/records')).data;
+export const createRecord = async (data) => (await api.post('/records', data, { headers: { 'Content-Type': 'multipart/form-data' } })).data;
+export const updateRecord = async (id, data) => (await api.put(`/records/${id}`, data, { headers: { 'Content-Type': 'multipart/form-data' } })).data;
+export const deleteRecord = async (id) => (await api.delete(`/records/${id}`)).data;
+export const recordImageUrl = (filename) => filename ? `${API_BASE_URL.replace(/\/$/, '')}/records/images/${encodeURIComponent(filename)}` : '';
 
 export const createSession = async (sessionData) => {
   const response = await api.post('/sessions', sessionData);

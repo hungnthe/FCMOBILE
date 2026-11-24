@@ -18,11 +18,14 @@
     "number": 10,
     "name": "Kylian Mbappe",
     "stats": {
-      "goalAmounts": 96,
-      "assistAmounts": 66,
-      "match": 195,
-      "bestPlayerAmount": 32,
-      "sessionAmount": 2
+      "goalAmounts": 321,
+      "assistAmounts": 218,
+      "match": 654,
+      "bestPlayerAmount": 118,
+      "sessionAmount": 5,
+      "wins": 261,
+      "draws": 83,
+      "losses": 91
     },
     "active": {
       "HTH": [
@@ -37,9 +40,17 @@
         {
           "session_id": 2,
           "value": "30*"
+        },
+        {
+          "session_id": 3,
+          "value": "20*"
+        },
+        {
+          "session_id": 4,
+          "value": "20*"
         }
       ],
-      "lastWeekCup": 4
+      "lastWeekCup": 13
     },
     "imageCard": [
       "public/ImageCard/mbappe-card.png"
@@ -50,15 +61,20 @@
         "",
         ""
       ],
-      "createdAt": "2026-08-21"
+      "createdAt": "2026-08-21",
+      "updatedAt": "2026-09-18T10:03:28.501Z"
     },
     "stats_career_baseline": {
       "goalAmounts": 0,
       "assistAmounts": 0,
       "match": 0,
       "bestPlayerAmount": 0,
-      "sessionAmount": 0
-    }
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "rank": "world_class"
   },
   {
     "player_id": 2,
@@ -80,11 +96,14 @@
     "number": 7,
     "name": "Son Heung-Min",
     "stats": {
-      "goalAmounts": 115,
-      "assistAmounts": 73,
-      "match": 192,
-      "bestPlayerAmount": 42,
-      "sessionAmount": 2
+      "goalAmounts": 342,
+      "assistAmounts": 208,
+      "match": 647,
+      "bestPlayerAmount": 106,
+      "sessionAmount": 5,
+      "wins": 260,
+      "draws": 83,
+      "losses": 88
     },
     "active": {
       "HTH": [
@@ -99,9 +118,17 @@
         {
           "session_id": 2,
           "value": "30*"
+        },
+        {
+          "session_id": 3,
+          "value": "20*"
+        },
+        {
+          "session_id": 4,
+          "value": "20*"
         }
       ],
-      "lastWeekCup": 4
+      "lastWeekCup": 13
     },
     "imageCard": [
       "public/ImageCard/Son_256_fc_25_download.png"
@@ -116,8 +143,12 @@
       "assistAmounts": 0,
       "match": 0,
       "bestPlayerAmount": 0,
-      "sessionAmount": 0
-    }
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "rank": "world_class"
   },
   {
     "player_id": 3,
@@ -136,11 +167,14 @@
     "number": 31,
     "name": "Bastian Schweinsteiger",
     "stats": {
-      "goalAmounts": 28,
-      "assistAmounts": 55,
-      "match": 185,
-      "bestPlayerAmount": 8,
-      "sessionAmount": 2
+      "goalAmounts": 65,
+      "assistAmounts": 157,
+      "match": 553,
+      "bestPlayerAmount": 21,
+      "sessionAmount": 4,
+      "wins": 200,
+      "draws": 64,
+      "losses": 80
     },
     "active": {
       "HTH": [
@@ -151,9 +185,17 @@
         {
           "session_id": 2,
           "value": "30*"
+        },
+        {
+          "session_id": 3,
+          "value": "20*"
+        },
+        {
+          "session_id": 4,
+          "value": "20*"
         }
       ],
-      "lastWeekCup": 3
+      "lastWeekCup": 11
     },
     "imageCard": [
       "public/ImageCard/Schweinsteiger_256_fc_25_download (3).png"
@@ -161,15 +203,38 @@
     "metadata": {
       "note": "",
       "image": "",
-      "createdAt": "2026-08-21"
+      "createdAt": "2026-08-21",
+      "imageCard": [],
+      "updatedAt": "2026-11-08T09:40:22.776Z"
     },
     "stats_career_baseline": {
       "goalAmounts": 0,
       "assistAmounts": 0,
       "match": 0,
       "bestPlayerAmount": 0,
-      "sessionAmount": 0
-    }
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "is_active": false,
+    "ovr_options": [
+      121
+    ],
+    "ovr_images": {
+      "121": "public/ImageCard/Schweinsteiger_256_fc_25_download (3).png"
+    },
+    "ovr_programs": {
+      "121": 4
+    },
+    "program_id": 4,
+    "ovr_positions": {
+      "121": [
+        "cm",
+        "lm"
+      ]
+    },
+    "rank": "young_talent"
   },
   {
     "player_id": 4,
@@ -225,7 +290,9 @@
     "metadata": {
       "note": "",
       "image": "",
-      "createdAt": "2026-08-21"
+      "createdAt": "2026-08-21",
+      "imageCard": [],
+      "updatedAt": "2026-10-24T16:22:25.688Z"
     },
     "stats_career_baseline": {
       "goalAmounts": 0,
@@ -233,7 +300,9 @@
       "match": 0,
       "bestPlayerAmount": 0,
       "sessionAmount": 0
-    }
+    },
+    "is_active": false,
+    "rank": "young_talent"
   },
   {
     "player_id": 5,
@@ -255,11 +324,14 @@
     "number": 11,
     "name": "Gareth Bale",
     "stats": {
-      "goalAmounts": 71,
-      "assistAmounts": 55,
-      "match": 162,
-      "bestPlayerAmount": 25,
-      "sessionAmount": 2
+      "goalAmounts": 329,
+      "assistAmounts": 194,
+      "match": 620,
+      "bestPlayerAmount": 115,
+      "sessionAmount": 5,
+      "wins": 260,
+      "draws": 83,
+      "losses": 91
     },
     "active": {
       "HTH": [
@@ -270,9 +342,17 @@
         {
           "session_id": 2,
           "value": "30*"
+        },
+        {
+          "session_id": 3,
+          "value": "20*"
+        },
+        {
+          "session_id": 4,
+          "value": "20*"
         }
       ],
-      "lastWeekCup": 3
+      "lastWeekCup": 12
     },
     "imageCard": [
       "public/ImageCard/Bale_256_fc_25_download.png"
@@ -288,8 +368,12 @@
       "assistAmounts": 0,
       "match": 0,
       "bestPlayerAmount": 0,
-      "sessionAmount": 0
-    }
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "rank": "young_talent"
   },
   {
     "player_id": 6,
@@ -310,11 +394,16 @@
     "number": 41,
     "name": "Declan Rice",
     "stats": {
-      "goalAmounts": 15,
-      "assistAmounts": 22,
-      "match": 183,
-      "bestPlayerAmount": 4,
-      "sessionAmount": 2
+      "goalAmounts": 43,
+      "assistAmounts": 89,
+      "match": 638,
+      "bestPlayerAmount": 13,
+      "sessionAmount": 5,
+      "wins": 258,
+      "draws": 83,
+      "losses": 90,
+      "goalsAgainst": 376,
+      "cleanSheets": 179
     },
     "active": {
       "HTH": [
@@ -337,9 +426,17 @@
         {
           "session_id": 2,
           "value": "30*"
+        },
+        {
+          "session_id": 3,
+          "value": "20*"
+        },
+        {
+          "session_id": 4,
+          "value": "20*"
         }
       ],
-      "lastWeekCup": 4
+      "lastWeekCup": 13
     },
     "imageCard": [
       "public/ImageCard/Rice_256_fc_25_download.png"
@@ -348,15 +445,36 @@
       "note": "",
       "imageCard": [],
       "createdAt": "2026-08-21",
-      "updatedAt": "2026-08-21T15:04:34.324Z"
+      "updatedAt": "2026-10-25T07:20:00.501Z"
     },
     "stats_career_baseline": {
       "goalAmounts": 0,
       "assistAmounts": 0,
       "match": 0,
       "bestPlayerAmount": 0,
-      "sessionAmount": 0
-    }
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "is_active": true,
+    "ovr_options": [
+      119
+    ],
+    "ovr_images": {
+      "119": "public/ImageCard/Rice_256_fc_25_download.png"
+    },
+    "ovr_programs": {
+      "119": 3
+    },
+    "program_id": 3,
+    "ovr_positions": {
+      "119": [
+        "cdm",
+        "cm"
+      ]
+    },
+    "rank": "young_talent"
   },
   {
     "player_id": 7,
@@ -377,11 +495,16 @@
     "number": 5,
     "name": "Piero Hincapié",
     "stats": {
-      "goalAmounts": 1,
-      "assistAmounts": 4,
-      "match": 195,
-      "bestPlayerAmount": 1,
-      "sessionAmount": 2
+      "goalAmounts": 6,
+      "assistAmounts": 9,
+      "match": 489,
+      "bestPlayerAmount": 2,
+      "sessionAmount": 4,
+      "wins": 158,
+      "draws": 50,
+      "losses": 62,
+      "goalsAgainst": 339,
+      "cleanSheets": 162
     },
     "active": {
       "HTH": [
@@ -396,9 +519,17 @@
         {
           "session_id": 2,
           "value": "30*"
+        },
+        {
+          "session_id": 3,
+          "value": "20*"
+        },
+        {
+          "session_id": 4,
+          "value": "20*"
         }
       ],
-      "lastWeekCup": 4
+      "lastWeekCup": 12
     },
     "imageCard": [
       "public/ImageCard/Hincapi_256_fc_25_download.png"
@@ -407,15 +538,36 @@
       "note": "",
       "imageCard": [],
       "createdAt": "2026-08-21",
-      "updatedAt": "2026-08-21T15:05:52.869Z"
+      "updatedAt": "2026-11-08T09:40:32.273Z"
     },
     "stats_career_baseline": {
       "goalAmounts": 0,
       "assistAmounts": 0,
       "match": 0,
       "bestPlayerAmount": 0,
-      "sessionAmount": 0
-    }
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "is_active": false,
+    "ovr_options": [
+      119
+    ],
+    "ovr_images": {
+      "119": "public/ImageCard/Hincapi_256_fc_25_download.png"
+    },
+    "ovr_programs": {
+      "119": 2
+    },
+    "program_id": 2,
+    "ovr_positions": {
+      "119": [
+        "lb",
+        "cb"
+      ]
+    },
+    "rank": "young_talent"
   },
   {
     "player_id": 8,
@@ -461,7 +613,7 @@
       "note": "",
       "imageCard": [],
       "createdAt": "2026-08-21",
-      "updatedAt": "2026-08-21T15:09:07.060Z"
+      "updatedAt": "2026-10-24T15:55:43.298Z"
     },
     "stats_career_baseline": {
       "goalAmounts": 0,
@@ -469,7 +621,9 @@
       "match": 0,
       "bestPlayerAmount": 0,
       "sessionAmount": 0
-    }
+    },
+    "is_active": false,
+    "rank": "young_talent"
   },
   {
     "player_id": 9,
@@ -528,7 +682,7 @@
       "note": "",
       "imageCard": [],
       "createdAt": "2026-08-21",
-      "updatedAt": "2026-08-21T15:07:35.595Z"
+      "updatedAt": "2026-10-24T16:22:48.389Z"
     },
     "stats_career_baseline": {
       "goalAmounts": 0,
@@ -536,7 +690,9 @@
       "match": 0,
       "bestPlayerAmount": 0,
       "sessionAmount": 0
-    }
+    },
+    "is_active": false,
+    "rank": "young_talent"
   },
   {
     "player_id": 10,
@@ -587,7 +743,7 @@
       "note": "",
       "imageCard": [],
       "createdAt": "2026-08-21",
-      "updatedAt": "2026-08-21T15:03:23.437Z"
+      "updatedAt": "2026-10-24T16:22:06.979Z"
     },
     "stats_career_baseline": {
       "goalAmounts": 0,
@@ -595,7 +751,9 @@
       "match": 0,
       "bestPlayerAmount": 0,
       "sessionAmount": 0
-    }
+    },
+    "is_active": false,
+    "rank": "young_talent"
   },
   {
     "player_id": 11,
@@ -617,9 +775,14 @@
     "stats": {
       "goalAmounts": 0,
       "assistAmounts": 0,
-      "match": 195,
+      "match": 654,
       "bestPlayerAmount": 1,
-      "sessionAmount": 2
+      "sessionAmount": 5,
+      "wins": 261,
+      "draws": 82,
+      "losses": 91,
+      "goalsAgainst": 376,
+      "cleanSheets": 179
     },
     "active": {
       "HTH": [
@@ -634,9 +797,17 @@
         {
           "session_id": 2,
           "value": "30*"
+        },
+        {
+          "session_id": 3,
+          "value": "20*"
+        },
+        {
+          "session_id": 4,
+          "value": "20*"
         }
       ],
-      "lastWeekCup": 4
+      "lastWeekCup": 13
     },
     "imageCard": [
       "public/ImageCard/Schmeichel_256_fc_25_download.png"
@@ -652,8 +823,12 @@
       "assistAmounts": 0,
       "match": 0,
       "bestPlayerAmount": 0,
-      "sessionAmount": 0
-    }
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "rank": "young_talent"
   },
   {
     "name": "Francesco Totti",
@@ -688,7 +863,7 @@
       "note": "",
       "imageCard": [],
       "createdAt": "2026-08-21",
-      "updatedAt": "2026-08-21T14:52:23.997Z"
+      "updatedAt": "2026-10-24T15:54:59.524Z"
     },
     "player_id": 12,
     "current_card_id": 1012,
@@ -699,7 +874,9 @@
       "match": 0,
       "bestPlayerAmount": 0,
       "sessionAmount": 0
-    }
+    },
+    "is_active": false,
+    "rank": "young_talent"
   },
   {
     "name": "Federico Valverde",
@@ -718,11 +895,16 @@
     ],
     "Status_I_H_M": "Matching",
     "stats": {
-      "goalAmounts": 28,
-      "assistAmounts": 35,
-      "match": 135,
-      "bestPlayerAmount": 12,
-      "sessionAmount": 2
+      "goalAmounts": 70,
+      "assistAmounts": 90,
+      "match": 473,
+      "bestPlayerAmount": 28,
+      "sessionAmount": 4,
+      "wins": 187,
+      "draws": 57,
+      "losses": 70,
+      "goalsAgainst": 339,
+      "cleanSheets": 162
     },
     "active": {
       "HTH": [
@@ -733,9 +915,17 @@
         {
           "session_id": 2,
           "value": "30*"
+        },
+        {
+          "session_id": 3,
+          "value": "20*"
+        },
+        {
+          "session_id": 4,
+          "value": "20*"
         }
       ],
-      "lastWeekCup": 2
+      "lastWeekCup": 10
     },
     "imageCard": [
       "public/ImageCard/Valverde_256_fc_25_download.png"
@@ -744,7 +934,7 @@
       "note": "",
       "imageCard": [],
       "createdAt": "2026-08-21",
-      "updatedAt": "2026-08-21T14:56:34.899Z"
+      "updatedAt": "2026-11-08T09:40:41.565Z"
     },
     "player_id": 13,
     "current_card_id": 1013,
@@ -754,8 +944,30 @@
       "assistAmounts": 0,
       "match": 0,
       "bestPlayerAmount": 0,
-      "sessionAmount": 0
-    }
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "is_active": false,
+    "ovr_options": [
+      120
+    ],
+    "ovr_images": {
+      "120": "public/ImageCard/Valverde_256_fc_25_download.png"
+    },
+    "ovr_programs": {
+      "120": 4
+    },
+    "program_id": 4,
+    "ovr_positions": {
+      "120": [
+        "cm",
+        "cdm",
+        "rb"
+      ]
+    },
+    "rank": "young_talent"
   },
   {
     "name": "Lionel Messi",
@@ -783,10 +995,22 @@
     },
     "active": {
       "HTH": [
-        "10*",
-        "10*",
-        "20*",
-        "20*"
+        {
+          "session_id": null,
+          "value": "10*"
+        },
+        {
+          "session_id": null,
+          "value": "10*"
+        },
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": null,
+          "value": "20*"
+        }
       ],
       "lastWeekCup": 1
     },
@@ -797,7 +1021,7 @@
       "note": "",
       "imageCard": [],
       "createdAt": "2026-08-21",
-      "updatedAt": "2026-08-21T14:58:27.700Z"
+      "updatedAt": "2026-10-24T16:22:59.497Z"
     },
     "player_id": 14,
     "current_card_id": 1014,
@@ -808,7 +1032,9 @@
       "match": 0,
       "bestPlayerAmount": 0,
       "sessionAmount": 0
-    }
+    },
+    "is_active": false,
+    "rank": "young_talent"
   },
   {
     "name": "Gabriel Magalhaes",
@@ -833,10 +1059,22 @@
     },
     "active": {
       "HTH": [
-        "10*",
-        "10*",
-        "20*",
-        "20*"
+        {
+          "session_id": null,
+          "value": "10*"
+        },
+        {
+          "session_id": null,
+          "value": "10*"
+        },
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": null,
+          "value": "20*"
+        }
       ],
       "lastWeekCup": 1
     },
@@ -847,7 +1085,7 @@
       "note": "",
       "imageCard": [],
       "createdAt": "2026-08-21",
-      "updatedAt": "2026-08-21T15:00:10.524Z"
+      "updatedAt": "2026-10-24T15:57:02.197Z"
     },
     "player_id": 15,
     "current_card_id": 1015,
@@ -858,7 +1096,9 @@
       "match": 0,
       "bestPlayerAmount": 0,
       "sessionAmount": 0
-    }
+    },
+    "is_active": false,
+    "rank": "young_talent"
   },
   {
     "name": "Dani Olmo",
@@ -884,8 +1124,14 @@
     },
     "active": {
       "HTH": [
-        "20*",
-        "20*"
+        {
+          "session_id": null,
+          "value": "20*"
+        },
+        {
+          "session_id": null,
+          "value": "20*"
+        }
       ],
       "lastWeekCup": 1
     },
@@ -896,7 +1142,7 @@
       "note": "",
       "imageCard": [],
       "createdAt": "2026-08-21",
-      "updatedAt": "2026-08-21T15:01:18.259Z"
+      "updatedAt": "2026-10-24T15:57:11.697Z"
     },
     "player_id": 16,
     "current_card_id": 1016,
@@ -907,7 +1153,9 @@
       "match": 0,
       "bestPlayerAmount": 0,
       "sessionAmount": 0
-    }
+    },
+    "is_active": false,
+    "rank": "young_talent"
   },
   {
     "name": "Moisés Caicedo",
@@ -932,7 +1180,10 @@
     },
     "active": {
       "HTH": [
-        "20*"
+        {
+          "session_id": null,
+          "value": "20*"
+        }
       ],
       "lastWeekCup": 1
     },
@@ -943,7 +1194,7 @@
       "note": "",
       "imageCard": [],
       "createdAt": "2026-08-21",
-      "updatedAt": "2026-08-21T15:02:28.843Z"
+      "updatedAt": "2026-10-24T16:21:50.875Z"
     },
     "player_id": 17,
     "current_card_id": 1017,
@@ -954,7 +1205,9 @@
       "match": 0,
       "bestPlayerAmount": 0,
       "sessionAmount": 0
-    }
+    },
+    "is_active": false,
+    "rank": "young_talent"
   },
   {
     "name": "Joško Gvardiol",
@@ -967,26 +1220,35 @@
     ],
     "number": 24,
     "stats": {
-      "goalAmounts": 1,
-      "assistAmounts": 7,
-      "match": 114,
+      "goalAmounts": 4,
+      "assistAmounts": 17,
+      "match": 296,
       "bestPlayerAmount": 1,
-      "sessionAmount": 1
+      "sessionAmount": 2,
+      "wins": 85,
+      "draws": 28,
+      "losses": 45,
+      "goalsAgainst": 156,
+      "cleanSheets": 80
     },
     "active": {
       "HTH": [
         {
           "session_id": 2,
           "value": "30*"
+        },
+        {
+          "session_id": 3,
+          "value": "20*"
         }
       ],
-      "lastWeekCup": 2
+      "lastWeekCup": 8
     },
     "metadata": {
       "note": "",
       "imageCard": [],
       "createdAt": "2026-09-03",
-      "updatedAt": "2026-09-03T10:38:21.776Z"
+      "updatedAt": "2026-10-25T02:58:56.150Z"
     },
     "objectId": "2011972ebfd4ee14523b7496",
     "current_card_id": 1018,
@@ -1000,8 +1262,13 @@
       "assistAmounts": 0,
       "match": 0,
       "bestPlayerAmount": 0,
-      "sessionAmount": 0
-    }
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "is_active": false,
+    "rank": "young_talent"
   },
   {
     "name": "Ole Gunnar Solskjær",
@@ -1032,7 +1299,7 @@
       "note": "",
       "imageCard": [],
       "createdAt": "2026-09-03",
-      "updatedAt": "2026-09-03T10:40:41.552Z"
+      "updatedAt": "2026-10-24T15:56:51.098Z"
     },
     "objectId": "1a2f4d7741e736503b79a533",
     "current_card_id": 1019,
@@ -1047,7 +1314,9 @@
       "match": 0,
       "bestPlayerAmount": 0,
       "sessionAmount": 0
-    }
+    },
+    "is_active": false,
+    "rank": "young_talent"
   },
   {
     "name": "Cesc Fàbregas",
@@ -1080,7 +1349,7 @@
       "note": "",
       "imageCard": [],
       "createdAt": "2026-09-03",
-      "updatedAt": "2026-09-03T10:41:27.710Z"
+      "updatedAt": "2026-10-24T16:21:58.782Z"
     },
     "objectId": "77d5b242b29f27ad50ca9b0f",
     "current_card_id": 1020,
@@ -1095,7 +1364,9 @@
       "match": 0,
       "bestPlayerAmount": 0,
       "sessionAmount": 0
-    }
+    },
+    "is_active": false,
+    "rank": "young_talent"
   },
   {
     "name": "Nico Schlotterbeck",
@@ -1126,7 +1397,7 @@
       "note": "",
       "imageCard": [],
       "createdAt": "2026-09-03",
-      "updatedAt": "2026-09-03T10:42:22.506Z"
+      "updatedAt": "2026-10-24T16:22:37.048Z"
     },
     "objectId": "d46a457ef265d13ff7db2520",
     "current_card_id": 1021,
@@ -1141,7 +1412,9 @@
       "match": 0,
       "bestPlayerAmount": 0,
       "sessionAmount": 0
-    }
+    },
+    "is_active": false,
+    "rank": "young_talent"
   },
   {
     "name": "Garrincha",
@@ -1172,7 +1445,7 @@
       "note": "",
       "imageCard": [],
       "createdAt": "2026-09-04",
-      "updatedAt": "2026-09-08T11:33:00.567Z"
+      "updatedAt": "2026-10-24T15:55:53.960Z"
     },
     "objectId": "c51445499914887210b7f1ca",
     "current_card_id": 1022,
@@ -1187,7 +1460,9 @@
       "match": 0,
       "bestPlayerAmount": 0,
       "sessionAmount": 0
-    }
+    },
+    "is_active": false,
+    "rank": "young_talent"
   },
   {
     "name": "Philipp Lahm",
@@ -1201,20 +1476,33 @@
     ],
     "number": 21,
     "stats": {
-      "goalAmounts": 1,
-      "assistAmounts": 3,
-      "match": 55,
-      "bestPlayerAmount": 0,
-      "sessionAmount": 1
+      "goalAmounts": 16,
+      "assistAmounts": 42,
+      "match": 514,
+      "bestPlayerAmount": 8,
+      "sessionAmount": 4,
+      "wins": 261,
+      "draws": 83,
+      "losses": 91,
+      "goalsAgainst": 376,
+      "cleanSheets": 179
     },
     "active": {
       "HTH": [
         {
           "session_id": 2,
           "value": "30*"
+        },
+        {
+          "session_id": 3,
+          "value": "20*"
+        },
+        {
+          "session_id": 4,
+          "value": "20*"
         }
       ],
-      "lastWeekCup": 0
+      "lastWeekCup": 9
     },
     "metadata": {
       "note": "",
@@ -1234,8 +1522,12 @@
       "assistAmounts": 0,
       "match": 0,
       "bestPlayerAmount": 0,
-      "sessionAmount": 0
-    }
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "rank": "young_talent"
   },
   {
     "name": "Andrea Barzagli",
@@ -1247,15 +1539,29 @@
     ],
     "number": 15,
     "stats": {
-      "goalAmounts": 0,
-      "assistAmounts": 0,
-      "match": 2,
+      "goalAmounts": 3,
+      "assistAmounts": 13,
+      "match": 441,
       "bestPlayerAmount": 0,
-      "sessionAmount": 1
+      "sessionAmount": 4,
+      "wins": 247,
+      "draws": 79,
+      "losses": 89,
+      "goalsAgainst": 376,
+      "cleanSheets": 179
     },
     "active": {
-      "HTH": [],
-      "lastWeekCup": 0
+      "HTH": [
+        {
+          "session_id": 3,
+          "value": "20*"
+        },
+        {
+          "session_id": 4,
+          "value": "20*"
+        }
+      ],
+      "lastWeekCup": 9
     },
     "metadata": {
       "note": "",
@@ -1275,7 +1581,531 @@
       "assistAmounts": 0,
       "match": 0,
       "bestPlayerAmount": 0,
-      "sessionAmount": 0
-    }
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "rank": "young_talent"
+  },
+  {
+    "name": "Kenny Dalglish",
+    "nation": {
+      "nation_id": 18
+    },
+    "position": [
+      "st"
+    ],
+    "number": 9,
+    "stats": {
+      "goalAmounts": 11,
+      "assistAmounts": 3,
+      "match": 78,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 1,
+      "wins": 45,
+      "draws": 11,
+      "losses": 22
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": 3,
+          "value": "20*"
+        }
+      ],
+      "lastWeekCup": 4
+    },
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-09-24",
+      "updatedAt": "2026-11-21T08:30:42.784Z"
+    },
+    "objectId": "c7727a1098599b1e41af7ab4",
+    "current_card_id": 1025,
+    "program": [],
+    "ovr": 75,
+    "Status_I_H_M": "Gold",
+    "imageCard": [
+      "public/ImageCard/Dalglish_256_fc_25_download.png"
+    ],
+    "player_id": 25,
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "is_active": false,
+    "ovr_options": [
+      75
+    ],
+    "ovr_images": {
+      "75": "public/ImageCard/Dalglish_256_fc_25_download.png"
+    },
+    "ovr_programs": {},
+    "program_id": null,
+    "ovr_positions": {
+      "75": [
+        "st"
+      ]
+    },
+    "rank": "young_talent"
+  },
+  {
+    "name": "Steve McManaman",
+    "nation": {
+      "nation_id": 6
+    },
+    "position": [
+      "rm",
+      "cm",
+      "cam"
+    ],
+    "number": 17,
+    "stats": {
+      "goalAmounts": 4,
+      "assistAmounts": 5,
+      "match": 78,
+      "bestPlayerAmount": 2,
+      "sessionAmount": 1,
+      "wins": 36,
+      "draws": 18,
+      "losses": 24
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": 3,
+          "value": "20*"
+        }
+      ],
+      "lastWeekCup": 3
+    },
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-09-28",
+      "updatedAt": "2026-10-24T15:57:21.774Z"
+    },
+    "objectId": "c1c3eb10249cd9b7c8469ca5",
+    "current_card_id": 1026,
+    "program": [],
+    "ovr": 75,
+    "Status_I_H_M": "Gold",
+    "imageCard": [],
+    "player_id": 26,
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "is_active": false,
+    "rank": "young_talent"
+  },
+  {
+    "name": "Pepe",
+    "nation": {
+      "nation_id": 19
+    },
+    "position": [
+      "cb"
+    ],
+    "number": 3,
+    "stats": {
+      "goalAmounts": 7,
+      "assistAmounts": 4,
+      "match": 303,
+      "bestPlayerAmount": 1,
+      "sessionAmount": 3,
+      "wins": 184,
+      "draws": 60,
+      "losses": 59,
+      "goalsAgainst": 376,
+      "cleanSheets": 179
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": 3,
+          "value": "20*"
+        },
+        {
+          "session_id": 4,
+          "value": "20*"
+        }
+      ],
+      "lastWeekCup": 6
+    },
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-10-09",
+      "updatedAt": "2026-10-09T03:12:38.510Z"
+    },
+    "objectId": "c593226ec5e4687c7ba82ede",
+    "current_card_id": 1027,
+    "program": [],
+    "ovr": 75,
+    "Status_I_H_M": "Gold",
+    "imageCard": [],
+    "player_id": 27,
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "rank": "young_talent"
+  },
+  {
+    "name": "Claude Makélélé",
+    "nation": {
+      "nation_id": 1
+    },
+    "position": [
+      "cdm",
+      "cm",
+      "cb"
+    ],
+    "number": 6,
+    "stats": {
+      "goalAmounts": 1,
+      "assistAmounts": 29,
+      "match": 237,
+      "bestPlayerAmount": 1,
+      "sessionAmount": 2,
+      "wins": 146,
+      "draws": 49,
+      "losses": 42,
+      "goalsAgainst": 220,
+      "cleanSheets": 99
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": 4,
+          "value": "20*"
+        }
+      ],
+      "lastWeekCup": 4
+    },
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-10-16",
+      "updatedAt": "2026-10-16T12:26:45.650Z"
+    },
+    "objectId": "3de915149e05beb910b858a2",
+    "current_card_id": 1028,
+    "program": [],
+    "ovr": 75,
+    "Status_I_H_M": "Gold",
+    "imageCard": [],
+    "player_id": 28,
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "rank": "young_talent"
+  },
+  {
+    "name": "Franco Baresi",
+    "nation": {
+      "nation_id": 9
+    },
+    "position": [
+      "cb"
+    ],
+    "number": 4,
+    "stats": {
+      "goalAmounts": 0,
+      "assistAmounts": 2,
+      "match": 237,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 2,
+      "wins": 146,
+      "draws": 49,
+      "losses": 42,
+      "goalsAgainst": 220,
+      "cleanSheets": 99
+    },
+    "active": {
+      "HTH": [
+        {
+          "session_id": 4,
+          "value": "20*"
+        }
+      ],
+      "lastWeekCup": 4
+    },
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-10-22",
+      "updatedAt": "2026-10-22T04:06:38.532Z"
+    },
+    "objectId": "1724128c9e5e4292fab613f8",
+    "current_card_id": 1029,
+    "program": [],
+    "ovr": 75,
+    "Status_I_H_M": "Gold",
+    "imageCard": [],
+    "player_id": 29,
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "rank": "young_talent"
+  },
+  {
+    "name": "Sergiño Dest ",
+    "nation": {
+      "nation_id": 20
+    },
+    "position": [
+      "rb",
+      "lb"
+    ],
+    "number": 4,
+    "stats": {
+      "goalAmounts": 0,
+      "assistAmounts": 1,
+      "match": 41,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 1,
+      "wins": 24,
+      "draws": 11,
+      "losses": 6,
+      "goalsAgainst": 20,
+      "cleanSheets": 23
+    },
+    "is_active": false,
+    "active": {
+      "HTH": [
+        {
+          "session_id": 4,
+          "value": "20*"
+        }
+      ],
+      "lastWeekCup": 1
+    },
+    "imageCard": [
+      "public/ImageCard/Dest_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-11-08",
+      "updatedAt": "2026-11-21T08:30:57.760Z"
+    },
+    "objectId": "9a64f832138fc0f494d370e8",
+    "current_card_id": 1031,
+    "program": [],
+    "ovr": 75,
+    "ovr_options": [
+      75
+    ],
+    "ovr_images": {
+      "75": "public/ImageCard/Dest_256_fc_25_download.png"
+    },
+    "ovr_programs": {},
+    "program_id": null,
+    "ovr_positions": {
+      "75": [
+        "rb",
+        "lb"
+      ]
+    },
+    "Status_I_H_M": "Gold",
+    "player_id": 30,
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "stats_career_adjustments": {
+      "goalsAgainst": -166,
+      "cleanSheets": -62
+    },
+    "rank": "young_talent"
+  },
+  {
+    "name": "Ruud Gullit",
+    "nation": {
+      "nation_id": 21
+    },
+    "position": [
+      "cm",
+      "cdm",
+      "cam",
+      "st"
+    ],
+    "number": 4,
+    "stats": {
+      "goalAmounts": 37,
+      "assistAmounts": 34,
+      "match": 90,
+      "bestPlayerAmount": 19,
+      "sessionAmount": 2,
+      "wins": 61,
+      "draws": 19,
+      "losses": 10,
+      "goalsAgainst": 54,
+      "cleanSheets": 47
+    },
+    "is_active": true,
+    "active": {
+      "HTH": [
+        {
+          "session_id": 4,
+          "value": "20*"
+        }
+      ],
+      "lastWeekCup": 2
+    },
+    "imageCard": [
+      "public/ImageCard/Gullit_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-11-08",
+      "updatedAt": "2026-11-12T13:49:33.922Z"
+    },
+    "objectId": "a318bf421eb38ff137b93a7b",
+    "current_card_id": 1032,
+    "program": [],
+    "ovr": 75,
+    "ovr_options": [
+      75
+    ],
+    "ovr_images": {
+      "75": "public/ImageCard/Gullit_256_fc_25_download.png"
+    },
+    "ovr_programs": {},
+    "program_id": null,
+    "ovr_positions": {
+      "75": [
+        "cm",
+        "cdm",
+        "cam",
+        "st"
+      ]
+    },
+    "Status_I_H_M": "Gold",
+    "player_id": 31,
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "stats_career_adjustments": {
+      "goalsAgainst": -166,
+      "cleanSheets": -52
+    },
+    "rank": "young_talent"
+  },
+  {
+    "name": "Khvicha Kvaratskhelia",
+    "nation": {
+      "nation_id": 22
+    },
+    "position": [
+      "lw",
+      "rw"
+    ],
+    "number": 14,
+    "is_active": true,
+    "active": {
+      "HTH": [],
+      "lastWeekCup": 1
+    },
+    "imageCard": [
+      "public/ImageCard/Kvaratskhelia_256_fc_25_download.png"
+    ],
+    "metadata": {
+      "note": "",
+      "imageCard": [],
+      "createdAt": "2026-11-21",
+      "updatedAt": "2026-11-21T08:29:21.162Z"
+    },
+    "stats": {
+      "goalAmounts": 0,
+      "assistAmounts": 1,
+      "match": 6,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 1,
+      "wins": 4,
+      "draws": 1,
+      "losses": 1
+    },
+    "objectId": "12f83691611d96e54d5f3711",
+    "current_card_id": 1033,
+    "program": [],
+    "ovr": 75,
+    "ovr_options": [
+      75
+    ],
+    "ovr_images": {
+      "75": "public/ImageCard/Kvaratskhelia_256_fc_25_download.png"
+    },
+    "ovr_programs": {},
+    "program_id": null,
+    "ovr_positions": {
+      "75": [
+        "lw",
+        "rw"
+      ]
+    },
+    "Status_I_H_M": "Gold",
+    "player_id": 32,
+    "stats_career_baseline": {
+      "goalAmounts": 0,
+      "assistAmounts": 0,
+      "match": 0,
+      "bestPlayerAmount": 0,
+      "sessionAmount": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0
+    },
+    "rank": "young_talent"
   }
 ]

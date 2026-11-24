@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Users, CalendarDays, Monitor, Layers, Landmark } from 'lucide-react';
+import { Home, Users, CalendarDays, Monitor, Layers, Landmark, TrendingUp } from 'lucide-react';
 import AjaxLogo from './AjaxLogo';
 
 export default function Sidebar({ activeTab, setActiveTab }) {
@@ -9,6 +9,7 @@ export default function Sidebar({ activeTab, setActiveTab }) {
     { id: 'programs', label: 'Programs', icon: Layers },
     { id: 'sessions', label: 'Mùa giải', icon: CalendarDays },
     { id: 'legends', label: 'Ngôi đền huyền thoại', icon: Landmark },
+    { id: 'rank-journey', label: 'Hành trình thăng hạng', icon: TrendingUp },
   ];
 
   return (
