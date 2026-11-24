@@ -66,6 +66,26 @@ export default function App() {
   // Toast notification
   const [toast, setToast] = useState(null);
 
+  // Cross-tab navigation to Records
+  const [legendsInitialView, setLegendsInitialView] = useState('legends');
+  const [targetRecordId, setTargetRecordId] = useState(null);
+
+  const handleNavigateToRecord = (recordId) => {
+    setLegendsInitialView('records');
+    setTargetRecordId(recordId);
+    setActiveTab('legends');
+  };
+
+  useEffect(() => {
+    const handleEvent = (e) => {
+      if (e.detail?.recordId) {
+        handleNavigateToRecord(e.detail.recordId);
+      }
+    };
+    window.addEventListener('navigate-to-record', handleEvent);
+    return () => window.removeEventListener('navigate-to-record', handleEvent);
+  }, []);
+
   const showToast = (message, type = 'success') => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 4000);
@@ -374,6 +394,7 @@ export default function App() {
                 saving={savingDetail}
                 onBack={() => { setSelectedPlayer(null); setIsCreatingPlayer(false); }}
                 onSave={handleSaveDetail}
+                onNavigateToRecord={handleNavigateToRecord}
                 onCardsChanged={async () => { await loadPlayers(); await loadMasterPlayers(); await loadPrograms(); if (selectedPlayer?.player_id) setSelectedPlayer(await getPlayerById(selectedPlayer.player_id)); }}
               />
             ) : (
@@ -422,8 +443,19 @@ export default function App() {
             <Awards players={players} />
           )}
 
-          {activeTab === 'legends' && <Legends />}
-          {activeTab === 'rank-journey' && <RankJourney profiles={masterPlayers} />}
+          {activeTab === 'legends' && (
+            <Legends
+              initialView={legendsInitialView}
+              targetRecordId={targetRecordId}
+              onClearTargetRecord={() => setTargetRecordId(null)}
+            />
+          )}
+          {activeTab === 'rank-journey' && (
+            <RankJourney
+              profiles={masterPlayers}
+              onNavigateToRecord={handleNavigateToRecord}
+            />
+          )}
 
         </main>
       </div>

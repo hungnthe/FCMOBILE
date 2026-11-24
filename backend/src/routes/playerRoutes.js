@@ -105,6 +105,7 @@ function normalizePlayer(input, existing = {}) {
     ...normalizeOvrPositions(playerInput, { ovr: 75, ...existing }, appearance),
     nation,
     Status_I_H_M: playerInput.Status_I_H_M ?? playerInput.cardType ?? existing.Status_I_H_M ?? 'Gold',
+    rank: playerInput.rank || existing.rank || 'young_talent',
     number: numberOr(playerInput.number ?? existing.number),
     name: playerInput.name ?? existing.name ?? 'Unknown Player',
     stats,
@@ -238,10 +239,14 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const body = req.body || {};
-    const { name, position, nation } = body;
+    const { name, position, nation, rank } = body;
 
     if (!name || !position || !nation || !nationReference(nation)) {
       return res.status(400).json({ error: 'Missing required fields: name, position, nation' });
+    }
+
+    if (!rank || !['young_talent', 'professional'].includes(rank)) {
+      return res.status(400).json({ error: 'Bắt buộc chọn bậc cho cầu thủ mới: chỉ được phép chọn Chuyên nghiệp hoặc Tài năng trẻ.' });
     }
 
     if (body.card) {

@@ -44,7 +44,7 @@ export default function OvrEditor({ value, options, images = {}, ovrPrograms = {
   };
 
   return <fieldset className="ovr-editor">
-    <legend>OVR</legend>
+    <legend>Chỉ số OVR</legend>
     <div className="ovr-options">
       {values.map((item, index) => <div className={`ovr-option ${index === selectedIndex ? 'is-selected' : ''}`} key={index}>
         <button type="button" className="ovr-select" aria-label={`Dùng OVR ${item}`} aria-pressed={index === selectedIndex} onClick={() => onChange({ ovr: item, ovr_options: values })}>{index === selectedIndex && <Check />}</button>

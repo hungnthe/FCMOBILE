@@ -57,6 +57,7 @@ function aggregatePlayerAwards(sessions = [], players = []) {
           session_id: Number(session.session_id),
           season: session.season || '',
           session_title: session.Title || session.title || '',
+          session_image: session.image || session.awardImage || '',
           key,
           title: award.title || definition.title,
           video: key === 'best_goal' ? (award.video || '') : ''

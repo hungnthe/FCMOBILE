@@ -46,7 +46,25 @@ function view(player, d) {
   const index = rankIndex(d, player.rank); const stages = d.ranks.map((r, i) => { const snapshot = i <= index ? [...d.history].reverse().find((h) => String(h.player_id) === String(player.player_id) && h.to === r.code) : null; const progress = snapshot ? { missions: snapshot.missions, complete: snapshot.missions.length > 0 && snapshot.missions.every((m) => m.complete), completed: snapshot.missions.filter((m) => m.complete).length } : evaluate(player, d.players[String(player.player_id)]?.stages?.[r.code]); return { ...r, state: i < index ? 'achieved' : i === index ? 'current' : i === index + 1 ? 'next' : 'locked', ...progress }; });
   return { player, current: d.ranks[index], next: d.ranks[index + 1] || null, stages, history: d.history.filter((h) => String(h.player_id) === String(player.player_id)).reverse() };
 }
-function startPlayer(id) { const d = data(), p = readPlayer(id); startNext(d, p); writeJSON(DATA, d); }
+function startPlayer(id) {
+  const d = data(), p = readPlayer(id);
+  if (p.rank === 'professional') {
+    const existing = (d.history || []).find((h) => String(h.player_id) === String(p.player_id) && h.to === 'professional');
+    if (!existing) {
+      d.history.push({
+        id: crypto.randomUUID(),
+        player_id: p.player_id,
+        from: 'young_talent',
+        to: 'professional',
+        awarded_at: new Date().toISOString(),
+        awarded_by: 'Khởi tạo cầu thủ',
+        missions: []
+      });
+    }
+  }
+  startNext(d, p);
+  writeJSON(DATA, d);
+}
 function getAll() { const d = data(); return { ranks: d.ranks, stats: FIELDS, players: store.readCollection('players.json').map((p) => view(p,d)) }; }
 function setMissions(id, code, input) {
   const d=data(), p=readPlayer(id), i=rankIndex(d,p.rank), target=targetIndex(d,code);

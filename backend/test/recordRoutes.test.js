@@ -57,6 +57,18 @@ test('record CRUD persists names and covers, rejects invalid uploads, and remove
     assert.equal(fs.existsSync(path.join(directory, updated.image)), false);
     response = await fetch(base); assert.deepEqual(await response.json(), []);
     response = await fetch(`${base}/1`, { method: 'DELETE' }); assert.equal(response.status, 404);
+
+    // Test co-owners support
+    const withCo = form('Vua phá lưới', 'Cầu thủ chính');
+    withCo.append('player_id', '9');
+    withCo.append('co_players', JSON.stringify([{ player_id: 8, player: 'Cầu thủ dự bị' }]));
+    const coRes = await fetch(base, { method: 'POST', body: withCo });
+    assert.equal(coRes.status, 201);
+    const coCreated = await coRes.json();
+    assert.equal(coCreated.player, 'Cầu thủ chính');
+    assert.equal(coCreated.co_players.length, 1);
+    assert.equal(coCreated.co_players[0].player, 'Cầu thủ dự bị');
+    assert.equal(coCreated.co_players[0].player_id, 8);
   } finally {
     await new Promise((resolve) => server.close(resolve));
     fs.rmSync(directory, { recursive: true, force: true });

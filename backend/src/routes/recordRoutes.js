@@ -56,14 +56,71 @@ function createRecordRouter(store = defaultStore, imageDir = path.join(store.DAT
         fs.writeFileSync(path.join(imageDir, newImage), req.file.buffer);
       }
       const image = newImage || (req.body.removeImage === 'true' ? '' : existing?.image || '');
-      const history = Array.isArray(existing?.player_history) ? [...existing.player_history] : [];
-      if (existing?.player) {
-        const changed = existing.player_id && playerId
-          ? Number(existing.player_id) !== playerId
-          : String(existing.player).trim().toLocaleLowerCase('vi') !== player.toLocaleLowerCase('vi');
-        if (changed) history.push({ player: existing.player, player_id: existing.player_id || null, changed_at: new Date().toISOString() });
+      let coPlayers = [];
+      if (req.body.co_players !== undefined) {
+        try {
+          const parsed = typeof req.body.co_players === 'string'
+            ? JSON.parse(req.body.co_players)
+            : req.body.co_players;
+          if (Array.isArray(parsed)) {
+            const playersList = store.readCollection('players.json');
+            const seen = new Set();
+            const primaryKey = playerId ? `id:${playerId}` : `name:${player.toLocaleLowerCase('vi')}`;
+            seen.add(primaryKey);
+
+            coPlayers = parsed
+              .map((item) => {
+                if (!item) return null;
+                let cId = item.player_id ? Number(item.player_id) : null;
+                let cName = String(item.player || item.name || '').trim();
+                if (cId) {
+                  const found = playersList.find((p) => Number(p.player_id) === cId);
+                  if (found) cName = String(found.name || '').trim();
+                }
+                if (!cName || cName.length > 200) return null;
+                const key = cId ? `id:${cId}` : `name:${cName.toLocaleLowerCase('vi')}`;
+                if (seen.has(key)) return null;
+                seen.add(key);
+                return { player: cName, player_id: cId };
+              })
+              .filter(Boolean);
+          }
+        } catch {
+          // ignore parsing error
+        }
+      } else if (existing?.co_players) {
+        coPlayers = Array.isArray(existing.co_players) ? [...existing.co_players] : [];
       }
-      const data = { name, award_name: awardName, note, player, player_id: playerId, player_history: history, image };
+
+      const history = Array.isArray(existing?.player_history) ? [...existing.player_history] : [];
+      if (existing) {
+        const isSame = (aId, aName, bId, bName) => {
+          if (aId && bId && Number(aId) === Number(bId)) return true;
+          return String(aName || '').trim().toLocaleLowerCase('vi') === String(bName || '').trim().toLocaleLowerCase('vi');
+        };
+
+        const oldHolders = [
+          existing.player ? { player: existing.player, player_id: existing.player_id || null } : null,
+          ...(Array.isArray(existing.co_players) ? existing.co_players : [])
+        ].filter(Boolean);
+
+        const newHolders = [
+          player ? { player, player_id: playerId } : null,
+          ...coPlayers
+        ].filter(Boolean);
+
+        oldHolders.forEach((oldH) => {
+          const stillThere = newHolders.some((newH) => isSame(oldH.player_id, oldH.player, newH.player_id, newH.player));
+          if (!stillThere) {
+            history.push({
+              player: oldH.player,
+              player_id: oldH.player_id || null,
+              changed_at: new Date().toISOString()
+            });
+          }
+        });
+      }
+      const data = { name, award_name: awardName, note, player, player_id: playerId, co_players: coPlayers, player_history: history, image };
       const record = editing ? store.updateRecord(FILE, req.params.id, data, ID) : store.addRecord(FILE, data, ID);
       if (existing?.image && existing.image !== image) removeImage(existing.image);
       res.status(editing ? 200 : 201).json(record);

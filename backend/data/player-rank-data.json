@@ -139,6 +139,38 @@
             "cleanSheets": 0
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 553,
+            "goalAmounts": 65,
+            "assistAmounts": 157,
+            "bestPlayerAmount": 21,
+            "sessionAmount": 4,
+            "wins": 200,
+            "draws": 64,
+            "losses": 80,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T15:15:09.990Z"
+        },
+        "legend": {
+          "missions": [],
+          "baseline": {
+            "match": 553,
+            "goalAmounts": 65,
+            "assistAmounts": 157,
+            "bestPlayerAmount": 21,
+            "sessionAmount": 4,
+            "wins": 200,
+            "draws": 64,
+            "losses": 80,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T15:15:14.815Z"
         }
       }
     },
@@ -159,6 +191,22 @@
             "cleanSheets": 0
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 83,
+            "goalAmounts": 22,
+            "assistAmounts": 19,
+            "bestPlayerAmount": 7,
+            "sessionAmount": 2,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T15:15:19.154Z"
         }
       }
     },
@@ -179,6 +227,38 @@
             "cleanSheets": 0
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 620,
+            "goalAmounts": 329,
+            "assistAmounts": 194,
+            "bestPlayerAmount": 115,
+            "sessionAmount": 5,
+            "wins": 260,
+            "draws": 83,
+            "losses": 91,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T15:15:23.257Z"
+        },
+        "legend": {
+          "missions": [],
+          "baseline": {
+            "match": 620,
+            "goalAmounts": 329,
+            "assistAmounts": 194,
+            "bestPlayerAmount": 115,
+            "sessionAmount": 5,
+            "wins": 260,
+            "draws": 83,
+            "losses": 91,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T15:15:24.735Z"
         }
       }
     },
@@ -199,6 +279,38 @@
             "cleanSheets": 179
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 638,
+            "goalAmounts": 43,
+            "assistAmounts": 89,
+            "bestPlayerAmount": 13,
+            "sessionAmount": 5,
+            "wins": 258,
+            "draws": 83,
+            "losses": 90,
+            "goalsAgainst": 376,
+            "cleanSheets": 179
+          },
+          "started_at": "2026-11-24T15:15:31.228Z"
+        },
+        "legend": {
+          "missions": [],
+          "baseline": {
+            "match": 638,
+            "goalAmounts": 43,
+            "assistAmounts": 89,
+            "bestPlayerAmount": 13,
+            "sessionAmount": 5,
+            "wins": 258,
+            "draws": 83,
+            "losses": 90,
+            "goalsAgainst": 376,
+            "cleanSheets": 179
+          },
+          "started_at": "2026-11-24T15:15:32.760Z"
         }
       }
     },
@@ -219,6 +331,38 @@
             "cleanSheets": 162
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 489,
+            "goalAmounts": 6,
+            "assistAmounts": 9,
+            "bestPlayerAmount": 2,
+            "sessionAmount": 4,
+            "wins": 158,
+            "draws": 50,
+            "losses": 62,
+            "goalsAgainst": 339,
+            "cleanSheets": 162
+          },
+          "started_at": "2026-11-24T15:15:38.239Z"
+        },
+        "legend": {
+          "missions": [],
+          "baseline": {
+            "match": 489,
+            "goalAmounts": 6,
+            "assistAmounts": 9,
+            "bestPlayerAmount": 2,
+            "sessionAmount": 4,
+            "wins": 158,
+            "draws": 50,
+            "losses": 62,
+            "goalsAgainst": 339,
+            "cleanSheets": 162
+          },
+          "started_at": "2026-11-24T15:15:39.817Z"
         }
       }
     },
@@ -259,6 +403,22 @@
             "cleanSheets": 0
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 135,
+            "goalAmounts": 2,
+            "assistAmounts": 2,
+            "bestPlayerAmount": 2,
+            "sessionAmount": 2,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T15:16:08.010Z"
         }
       }
     },
@@ -279,6 +439,22 @@
             "cleanSheets": 0
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 139,
+            "goalAmounts": 1,
+            "assistAmounts": 9,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 2,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T15:15:55.486Z"
         }
       }
     },
@@ -299,6 +475,38 @@
             "cleanSheets": 179
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 654,
+            "goalAmounts": 0,
+            "assistAmounts": 0,
+            "bestPlayerAmount": 1,
+            "sessionAmount": 5,
+            "wins": 261,
+            "draws": 82,
+            "losses": 91,
+            "goalsAgainst": 376,
+            "cleanSheets": 179
+          },
+          "started_at": "2026-11-24T15:16:01.211Z"
+        },
+        "legend": {
+          "missions": [],
+          "baseline": {
+            "match": 654,
+            "goalAmounts": 0,
+            "assistAmounts": 0,
+            "bestPlayerAmount": 1,
+            "sessionAmount": 5,
+            "wins": 261,
+            "draws": 82,
+            "losses": 91,
+            "goalsAgainst": 376,
+            "cleanSheets": 179
+          },
+          "started_at": "2026-11-24T15:16:02.752Z"
         }
       }
     },
@@ -319,6 +527,22 @@
             "cleanSheets": 0
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 11,
+            "goalAmounts": 2,
+            "assistAmounts": 3,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 1,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T15:16:16.643Z"
         }
       }
     },
@@ -339,6 +563,38 @@
             "cleanSheets": 162
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 473,
+            "goalAmounts": 70,
+            "assistAmounts": 90,
+            "bestPlayerAmount": 28,
+            "sessionAmount": 4,
+            "wins": 187,
+            "draws": 57,
+            "losses": 70,
+            "goalsAgainst": 339,
+            "cleanSheets": 162
+          },
+          "started_at": "2026-11-24T15:16:21.307Z"
+        },
+        "legend": {
+          "missions": [],
+          "baseline": {
+            "match": 473,
+            "goalAmounts": 70,
+            "assistAmounts": 90,
+            "bestPlayerAmount": 28,
+            "sessionAmount": 4,
+            "wins": 187,
+            "draws": 57,
+            "losses": 70,
+            "goalsAgainst": 339,
+            "cleanSheets": 162
+          },
+          "started_at": "2026-11-24T15:16:22.640Z"
         }
       }
     },
@@ -359,6 +615,22 @@
             "cleanSheets": 0
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 36,
+            "goalAmounts": 13,
+            "assistAmounts": 5,
+            "bestPlayerAmount": 3,
+            "sessionAmount": 1,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T15:16:28.058Z"
         }
       }
     },
@@ -379,6 +651,22 @@
             "cleanSheets": 0
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 36,
+            "goalAmounts": 0,
+            "assistAmounts": 1,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 1,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T15:16:34.795Z"
         }
       }
     },
@@ -439,6 +727,22 @@
             "cleanSheets": 80
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 296,
+            "goalAmounts": 4,
+            "assistAmounts": 17,
+            "bestPlayerAmount": 1,
+            "sessionAmount": 2,
+            "wins": 85,
+            "draws": 28,
+            "losses": 45,
+            "goalsAgainst": 156,
+            "cleanSheets": 80
+          },
+          "started_at": "2026-11-24T15:35:58.198Z"
         }
       }
     },
@@ -479,6 +783,22 @@
             "cleanSheets": 0
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 41,
+            "goalAmounts": 4,
+            "assistAmounts": 7,
+            "bestPlayerAmount": 4,
+            "sessionAmount": 1,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goalsAgainst": 0,
+            "cleanSheets": 0
+          },
+          "started_at": "2026-11-24T15:36:21.579Z"
         }
       }
     },
@@ -539,6 +859,38 @@
             "cleanSheets": 179
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 514,
+            "goalAmounts": 16,
+            "assistAmounts": 42,
+            "bestPlayerAmount": 8,
+            "sessionAmount": 4,
+            "wins": 261,
+            "draws": 83,
+            "losses": 91,
+            "goalsAgainst": 376,
+            "cleanSheets": 179
+          },
+          "started_at": "2026-11-24T15:37:33.891Z"
+        },
+        "legend": {
+          "missions": [],
+          "baseline": {
+            "match": 514,
+            "goalAmounts": 16,
+            "assistAmounts": 42,
+            "bestPlayerAmount": 8,
+            "sessionAmount": 4,
+            "wins": 261,
+            "draws": 83,
+            "losses": 91,
+            "goalsAgainst": 376,
+            "cleanSheets": 179
+          },
+          "started_at": "2026-11-24T15:37:35.533Z"
         }
       }
     },
@@ -559,6 +911,38 @@
             "cleanSheets": 179
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 441,
+            "goalAmounts": 3,
+            "assistAmounts": 13,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 4,
+            "wins": 247,
+            "draws": 79,
+            "losses": 89,
+            "goalsAgainst": 376,
+            "cleanSheets": 179
+          },
+          "started_at": "2026-11-24T15:36:42.380Z"
+        },
+        "legend": {
+          "missions": [],
+          "baseline": {
+            "match": 441,
+            "goalAmounts": 3,
+            "assistAmounts": 13,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 4,
+            "wins": 247,
+            "draws": 79,
+            "losses": 89,
+            "goalsAgainst": 376,
+            "cleanSheets": 179
+          },
+          "started_at": "2026-11-24T15:36:44.095Z"
         }
       }
     },
@@ -619,6 +1003,38 @@
             "cleanSheets": 179
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [],
+          "baseline": {
+            "match": 303,
+            "goalAmounts": 7,
+            "assistAmounts": 4,
+            "bestPlayerAmount": 1,
+            "sessionAmount": 3,
+            "wins": 184,
+            "draws": 60,
+            "losses": 59,
+            "goalsAgainst": 376,
+            "cleanSheets": 179
+          },
+          "started_at": "2026-11-24T15:36:51.116Z"
+        },
+        "legend": {
+          "missions": [],
+          "baseline": {
+            "match": 303,
+            "goalAmounts": 7,
+            "assistAmounts": 4,
+            "bestPlayerAmount": 1,
+            "sessionAmount": 3,
+            "wins": 184,
+            "draws": 60,
+            "losses": 59,
+            "goalsAgainst": 376,
+            "cleanSheets": 179
+          },
+          "started_at": "2026-11-24T15:36:52.609Z"
         }
       }
     },
@@ -639,6 +1055,30 @@
             "cleanSheets": 99
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [
+            {
+              "id": "aa39c831-154a-4ad5-8d56-13bb4e23dc73",
+              "name": "Đạt số trận > 350 trận",
+              "description": "",
+              "type": "manual",
+              "confirmed": false
+            }
+          ],
+          "baseline": {
+            "match": 237,
+            "goalAmounts": 1,
+            "assistAmounts": 29,
+            "bestPlayerAmount": 1,
+            "sessionAmount": 2,
+            "wins": 146,
+            "draws": 49,
+            "losses": 42,
+            "goalsAgainst": 220,
+            "cleanSheets": 99
+          },
+          "started_at": "2026-11-24T15:37:11.280Z"
         }
       }
     },
@@ -659,6 +1099,30 @@
             "cleanSheets": 99
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [
+            {
+              "id": "25f01e07-f112-40ec-a306-dcc74cdf952f",
+              "name": "Ra sân hơn 350 trận",
+              "description": "",
+              "type": "manual",
+              "confirmed": false
+            }
+          ],
+          "baseline": {
+            "match": 237,
+            "goalAmounts": 0,
+            "assistAmounts": 2,
+            "bestPlayerAmount": 0,
+            "sessionAmount": 2,
+            "wins": 146,
+            "draws": 49,
+            "losses": 42,
+            "goalsAgainst": 220,
+            "cleanSheets": 99
+          },
+          "started_at": "2026-11-24T15:37:05.292Z"
         }
       }
     },
@@ -699,6 +1163,44 @@
             "cleanSheets": 47
           },
           "started_at": "2026-11-24T14:18:30.971Z"
+        },
+        "world_class": {
+          "missions": [
+            {
+              "id": "83d8dc03-a202-4c82-94f5-296950dd36fa",
+              "name": "Đạt số trận ra sân > 350 trận",
+              "description": "",
+              "type": "manual",
+              "confirmed": false
+            },
+            {
+              "id": "141faa93-585b-4fff-b88d-7235cfc186dc",
+              "name": "Đạt số kiến tạo > 100 kiến tạo",
+              "description": "",
+              "type": "manual",
+              "confirmed": false
+            },
+            {
+              "id": "89220352-e26e-4ed8-ab6f-9f4e8b36e024",
+              "name": "Đạt số bàn thắng > 50 bàn",
+              "description": "",
+              "type": "manual",
+              "confirmed": false
+            }
+          ],
+          "baseline": {
+            "match": 90,
+            "goalAmounts": 37,
+            "assistAmounts": 34,
+            "bestPlayerAmount": 19,
+            "sessionAmount": 2,
+            "wins": 61,
+            "draws": 19,
+            "losses": 10,
+            "goalsAgainst": 54,
+            "cleanSheets": 47
+          },
+          "started_at": "2026-11-24T15:37:24.845Z"
         }
       }
     },
@@ -757,6 +1259,285 @@
       "from": "professional",
       "to": "world_class",
       "awarded_at": "2026-11-24T14:48:27.649Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "25b2886e-ff5f-4b18-8386-b143e5ffd056",
+      "player_id": 3,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:15:09.990Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "4d402f11-627b-4933-aa05-fa4d19355ad3",
+      "player_id": 3,
+      "from": "professional",
+      "to": "world_class",
+      "awarded_at": "2026-11-24T15:15:14.815Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "19001bb8-3da5-43a7-b274-b3a497f0fc42",
+      "player_id": 4,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:15:19.154Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "a3ee0af7-b969-4202-a195-28ac2f1a31b5",
+      "player_id": 5,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:15:23.257Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "197de807-8c0e-464e-98aa-69e57bd7e74c",
+      "player_id": 5,
+      "from": "professional",
+      "to": "world_class",
+      "awarded_at": "2026-11-24T15:15:24.735Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "4afa90bb-3b4e-486e-9220-25c7e97c028e",
+      "player_id": 6,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:15:31.228Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "165a7105-8a08-44b9-b135-644bdc018be6",
+      "player_id": 6,
+      "from": "professional",
+      "to": "world_class",
+      "awarded_at": "2026-11-24T15:15:32.760Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "c1b5f50d-3a8d-423d-8366-3bae995c4eed",
+      "player_id": 7,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:15:38.239Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "55451b45-31e5-4f10-a2b3-67570e831f62",
+      "player_id": 7,
+      "from": "professional",
+      "to": "world_class",
+      "awarded_at": "2026-11-24T15:15:39.817Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "2a3c3e30-3e2d-4e60-9f70-5d9363195c28",
+      "player_id": 10,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:15:55.486Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "78b25c5e-c063-41c5-ad31-4caed655af85",
+      "player_id": 11,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:16:01.211Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "8d3e05a9-6cce-4c64-b8fa-359fd96193d1",
+      "player_id": 11,
+      "from": "professional",
+      "to": "world_class",
+      "awarded_at": "2026-11-24T15:16:02.752Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "0bfe147b-85aa-4588-bb6f-b409bbc3a8ae",
+      "player_id": 9,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:16:08.010Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "ecac6aea-ae66-4d03-9bc1-11fb49dd9c8f",
+      "player_id": 9,
+      "from": "professional",
+      "to": "world_class",
+      "awarded_at": "2026-11-24T15:16:09.288Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "0e8b786e-4324-47de-9ce4-d7c035007523",
+      "player_id": 12,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:16:16.643Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "3caa5699-7ef5-47e6-b84d-f5fc98ffb791",
+      "player_id": 13,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:16:21.307Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "d023c527-51c1-4298-9e73-cc0656fac3cf",
+      "player_id": 13,
+      "from": "professional",
+      "to": "world_class",
+      "awarded_at": "2026-11-24T15:16:22.640Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "195f0e3e-98f6-4b0d-9634-2f754b512886",
+      "player_id": 14,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:16:28.058Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "ffce22e6-69cc-446f-bbec-49233cf6b066",
+      "player_id": 15,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:16:34.795Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "02a95dce-aed0-40d5-a8b7-795a3136c1c2",
+      "player_id": 15,
+      "from": "professional",
+      "to": "world_class",
+      "awarded_at": "2026-11-24T15:16:36.183Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "0a72c4fb-7831-4afb-8172-3da429af2cf0",
+      "player_id": 18,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:35:58.197Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "ce370734-aba2-448b-9b70-5e850f7d55ed",
+      "player_id": 20,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:36:21.579Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "b485660e-7f57-4633-92a5-d07d0303d4f4",
+      "player_id": 24,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:36:42.380Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "86192417-8c7b-40ef-a43e-43d864b1e167",
+      "player_id": 24,
+      "from": "professional",
+      "to": "world_class",
+      "awarded_at": "2026-11-24T15:36:44.095Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "4d4435fb-b726-4c9b-803a-3599e11aca02",
+      "player_id": 27,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:36:51.116Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "7768c6d6-1dc3-455b-81b3-12a5a3860f29",
+      "player_id": 27,
+      "from": "professional",
+      "to": "world_class",
+      "awarded_at": "2026-11-24T15:36:52.609Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "0f166f16-87b8-44f7-bcf6-e2f5fa4cfa66",
+      "player_id": 29,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:37:05.292Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "c6ae3510-7af0-48b4-8c7e-3fa99c1dd215",
+      "player_id": 28,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:37:11.280Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "932f70fa-8dd3-4d50-a79d-70627654b218",
+      "player_id": 31,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:37:24.845Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "a31b5463-c3d8-47f4-b8ee-25801ccc0370",
+      "player_id": 23,
+      "from": "young_talent",
+      "to": "professional",
+      "awarded_at": "2026-11-24T15:37:33.891Z",
+      "awarded_by": "Quản trị viên",
+      "missions": []
+    },
+    {
+      "id": "e46c946a-d001-4ff7-919a-5035628f60f8",
+      "player_id": 23,
+      "from": "professional",
+      "to": "world_class",
+      "awarded_at": "2026-11-24T15:37:35.533Z",
       "awarded_by": "Quản trị viên",
       "missions": []
     }

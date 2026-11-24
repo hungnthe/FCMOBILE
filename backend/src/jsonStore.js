@@ -28,13 +28,7 @@ function writeCollection(fileName, records) {
   const filePath = collectionPath(fileName);
   if (fileName === 'players.json') {
     const old = new Map(readCollection(fileName).map((player) => [String(player.player_id), player]));
-    const nextIds = new Set(records.map((player) => String(player.player_id)));
-    for (const player of old.values()) {
-      if (!nextIds.has(String(player.player_id)) && player.rank && player.rank !== 'young_talent') {
-        throw Object.assign(new Error('Không thể xóa cầu thủ đã được trao bậc.'), { statusCode: 409 });
-      }
-    }
-    records = records.map((player) => ({ ...player, rank: old.get(String(player.player_id))?.rank || 'young_talent' }));
+    records = records.map((player) => ({ ...player, rank: old.get(String(player.player_id))?.rank || player.rank || 'young_talent' }));
   }
   const tempPath = `${filePath}.tmp`;
   fs.writeFileSync(tempPath, `${JSON.stringify(records, null, 2)}\n`, 'utf8');
@@ -99,6 +93,12 @@ function updateRecord(fileName, id, data, idKey = 'id') {
 
 function removeRecord(fileName, id, idKey = 'id') {
   const records = readCollection(fileName);
+  if (fileName === 'players.json') {
+    const player = records.find((record) => Number(record[idKey]) === Number(id));
+    if (player && player.rank && player.rank !== 'young_talent') {
+      throw Object.assign(new Error('Không thể xóa cầu thủ đã được trao bậc.'), { statusCode: 409 });
+    }
+  }
   const nextRecords = records.filter((record) => Number(record[idKey]) !== Number(id));
   if (nextRecords.length === records.length) return false;
   writeCollection(fileName, nextRecords);

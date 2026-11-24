@@ -72,12 +72,9 @@ function resolvePlayer(player) {
   const selection = currentCard || normalizeOvrPrograms({}, { ...player, program_id: player.program_id || getProgramById(fallbackProgram[0])?.program_id }, appearance);
   const selectedProgram = currentCard?.program || (selection.program_id ? getProgramById(selection.program_id) : null);
   const positions = currentCard || normalizeOvrPositions({}, player, appearance);
-  const imageCard = [...new Set([
-    appearance.imageCard,
-    ...arrayOr(player.imageCard),
-    ...arrayOr(player.metadata?.imageCard),
-    ...cards.flatMap((card) => [...Object.values(objectOr(card.ovr_images)), ...arrayOr(card.imageCard)])
-  ].filter((image) => typeof image === 'string').map((image) => image.trim()).filter(Boolean))];
+  const imageCard = appearance.imageCard
+    ? [appearance.imageCard]
+    : arrayOr(player.imageCard).filter(Boolean);
   return {
     ...player,
     cards,

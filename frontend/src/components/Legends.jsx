@@ -60,6 +60,11 @@ function DetailModal({ legend, onClose }) {
       <div className="legend-detail-history">
         <div className="legend-section-heading"><div><span className="session-eyebrow">HONOUR ROLL</span><h3>Lịch sử vinh danh</h3></div><strong>{legend.history.length}</strong></div>
         {legend.history.map((item, index) => <article className="legend-history-item" key={`${item.session_id}-${item.key}-${index}`}>
+          {item.session_image && (
+            <div className="legend-history-thumb-wrap">
+              <img src={publicAssetUrl(item.session_image)} alt="" className="legend-history-thumb" loading="lazy" />
+            </div>
+          )}
           <span className="legend-history-icon">{AWARDS.find((award) => award.key === item.key)?.icon}</span>
           <div><strong>{item.title}</strong><span>{item.session_title || `Mùa giải ${item.season}`} · {item.season || '—'}</span></div>
           {item.video && <a href={publicAssetUrl(item.video)} target="_blank" rel="noreferrer" className="legend-video-link"><Clapperboard /> Video</a>}
@@ -91,7 +96,7 @@ function CategoryView({ data, nations = [], onSelect }) {
   </section>;
 }
 
-export default function Legends() {
+export default function Legends({ initialView = 'legends', targetRecordId = null, onClearTargetRecord }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -99,8 +104,14 @@ export default function Legends() {
   const [query, setQuery] = useState('');
   const [nationFilter, setNationFilter] = useState('ALL');
   const [sort, setSort] = useState('total');
-  const [view, setView] = useState('legends');
+  const [view, setView] = useState(initialView);
   const [selected, setSelected] = useState(null);
+
+  useEffect(() => {
+    if (initialView) {
+      setView(initialView);
+    }
+  }, [initialView]);
 
   useEffect(() => {
     let active = true;
@@ -132,7 +143,7 @@ export default function Legends() {
     <section className="legends-hero"><img className="legends-hero-image" src="/SessionImages/THE_legancy.png" alt="Ngôi đền huyền thoại Ajax" /></section>
     <section className="legends-summary" aria-label="Tổng quan danh hiệu"><div><CalendarDays /><strong>{summary.seasons || 0}</strong><span>Mùa giải</span></div><div><Medal /><strong>{summary.categories || AWARDS.length}</strong><span>Hạng mục chính thức</span></div></section>
     <div className="legend-view-switcher"><button className={view === 'legends' ? 'is-active' : ''} onClick={() => setView('legends')}>Cầu thủ huyền thoại</button><button className={view === 'awards' ? 'is-active' : ''} onClick={() => setView('awards')}>Danh hiệu</button><button className={view === 'records' ? 'is-active' : ''} onClick={() => setView('records')}>Những kỷ lục</button></div>
-    {view === 'records' ? <Records /> : view === 'awards' ? <CategoryView data={data} nations={nations} onSelect={setSelected} /> : <>
+    {view === 'records' ? <Records targetRecordId={targetRecordId} onClearTargetRecord={onClearTargetRecord} /> : view === 'awards' ? <CategoryView data={data} nations={nations} onSelect={setSelected} /> : <>
       <section className="legend-top-section"><div className="legend-section-heading"><div><span className="session-eyebrow">THE IMMORTALS</span><h2>Những tượng đài</h2><p>Ba cầu thủ đang dẫn đầu bảng vàng của Ajax.</p></div><Medal /></div><div className="legend-podium">{topThree.map((legend, index) => <button key={legend.player_id} className={`legend-podium-card rank-${index + 1}`} onClick={() => setSelected(legend)}><span className="legend-rank">{['🥇', '🥈', '🥉'][index]}</span><LegendAvatar legend={legend} /><strong>{legend.player?.name}</strong><span>{legend.totalAwards} danh hiệu</span><AwardBreakdown legend={legend} compact /></button>)}</div></section>
       <section className="legend-directory"><div className="legend-directory-heading"><div><span className="session-eyebrow">THE ARCHIVE</span><h2>Danh sách huyền thoại</h2></div><span>{legends.length} kết quả</span></div><div className="legend-toolbar"><label className="legend-search"><Search /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Tìm theo tên cầu thủ..." aria-label="Tìm cầu thủ huyền thoại" /></label><label className="legend-filter"><select value={nationFilter} onChange={(event) => setNationFilter(event.target.value)} aria-label="Lọc theo quốc gia"><option value="ALL">Tất cả nation</option>{nations.map((nation) => <option key={nation.nation_id} value={nation.nation_id}>{nation.name}</option>)}</select></label><label className="legend-sort"><ArrowDownUp /><select value={sort} onChange={(event) => setSort(event.target.value)} aria-label="Sắp xếp danh sách">{SORTS.map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></label></div><div className="legend-grid">{legends.map((legend) => <button className="legend-card" key={legend.player_id} onClick={() => setSelected(legend)}><LegendAvatar legend={legend} /><div className="legend-card-copy"><strong>{legend.player?.name}</strong><span>{legend.player?.currentCard?.program?.name || legend.player?.program?.[0] || 'Ajax player'} · OVR {legend.player?.ovr || '—'}</span><AwardBreakdown legend={legend} /></div><div className="legend-card-total"><b>{legend.totalAwards}</b><small>Danh hiệu</small></div><ChevronRight /></button>)}</div>{!legends.length && <div className="legend-empty-state">Không có cầu thủ phù hợp với tìm kiếm.</div>}</section>
     </>}
