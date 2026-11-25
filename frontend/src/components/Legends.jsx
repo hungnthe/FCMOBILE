@@ -87,6 +87,10 @@ function LegendAvatar({ legend }) {
 }
 
 function DetailModal({ legend, onClose }) {
+  const allHistory = legend?.history || [];
+  const [filterKey, setFilterKey] = useState('ALL');
+  const [activeVideo, setActiveVideo] = useState(null);
+
   useEffect(() => {
     if (!legend) return;
     const prevOverflow = document.body.style.overflow;
@@ -97,41 +101,186 @@ function DetailModal({ legend, onClose }) {
     };
   }, [legend]);
 
+  // Reset filter and active video when switching players
+  useEffect(() => {
+    setFilterKey('ALL');
+    setActiveVideo(null);
+  }, [legend?.player_id]);
+
+  const availableFilters = useMemo(() => {
+    const keys = Array.from(new Set(allHistory.map((h) => h.key)));
+    return keys
+      .map((k) => AWARDS.find((d) => d.key === k))
+      .filter(Boolean)
+      .map((def) => ({
+        ...def,
+        count: allHistory.filter((h) => h.key === def.key).length
+      }));
+  }, [allHistory]);
+
+  const displayedHistory = useMemo(() => {
+    if (filterKey === 'ALL') return allHistory;
+    return allHistory.filter((h) => h.key === filterKey);
+  }, [allHistory, filterKey]);
+
   if (!legend) return null;
-  return <div className="session-modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
-    <section className="legend-detail-modal" role="dialog" aria-modal="true" aria-labelledby="legend-detail-title">
-      <button className="session-close-button" onClick={onClose} aria-label="Đóng"><X /></button>
-      <div className="legend-detail-hero">
-        <LegendAvatar legend={legend} />
-        <div>
-          <span className="session-eyebrow">HALL OF LEGENDS</span>
-          <h2 id="legend-detail-title">{legend.player?.name}</h2>
-          <p>{Array.isArray(legend.player?.position) ? legend.player.position.join(' · ').toUpperCase() : (legend.player?.position || 'Cầu thủ Ajax')} · {legend.totalAwards} danh hiệu</p>
+
+  return (
+    <div
+      className="session-modal-backdrop"
+      role="presentation"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      <section
+        className="legend-detail-modal rank-history-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="legend-award-modal-title"
+      >
+        <div className="rank-history-modal-header">
+          <div className="legend-section-heading">
+            <div>
+              <span className="session-eyebrow">HONOUR ROLL</span>
+              <h3 id="legend-award-modal-title">Lịch sử vinh danh</h3>
+              {legend?.player?.name && (
+                <p className="rank-history-player-subtitle">
+                  {legend.player.name} · {allHistory.length} danh hiệu cá nhân
+                </p>
+              )}
+            </div>
+            <strong>{displayedHistory.length}</strong>
+          </div>
+          <button
+            type="button"
+            className="session-close-button rank-modal-close"
+            onClick={onClose}
+            aria-label="Đóng"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
-      </div>
-      <AwardBreakdown legend={legend} />
-      <div className="legend-detail-history">
-        <div className="legend-section-heading"><div><span className="session-eyebrow">HONOUR ROLL</span><h3>Lịch sử vinh danh</h3></div><strong>{legend.history.length}</strong></div>
-        {legend.history.map((item, index) => <article className="legend-history-item" key={`${item.session_id}-${item.key}-${index}`}>
-          {item.session_image && (
-            <div className="legend-history-thumb-wrap">
-              <img
-                src={publicAssetUrl(item.session_image)}
-                alt=""
-                className="legend-history-thumb"
-                loading="lazy"
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+
+        <div className="legend-detail-history rank-history-detail-section">
+          {/* Quick Filter Tabs */}
+          {availableFilters.length > 1 && (
+            <div className="rank-award-filter-tabs" role="tablist" aria-label="Bộ lọc danh hiệu">
+              <button
+                type="button"
+                className={`rank-award-filter-btn ${filterKey === 'ALL' ? 'is-active' : ''}`}
+                onClick={() => setFilterKey('ALL')}
+              >
+                <span>Tất cả</span>
+                <span className="rank-award-filter-count">({allHistory.length})</span>
+              </button>
+              {availableFilters.map((def) => (
+                <button
+                  key={def.key}
+                  type="button"
+                  className={`rank-award-filter-btn ${filterKey === def.key ? 'is-active' : ''}`}
+                  onClick={() => setFilterKey(def.key)}
+                >
+                  <span>{def.icon}</span>
+                  <span>{def.title}</span>
+                  <span className="rank-award-filter-count">({def.count})</span>
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* List of honour items */}
+          <div className="rank-history-items-list">
+            {displayedHistory.length > 0 ? (
+              displayedHistory.map((item, idx) => {
+                const imgUrl = publicAssetUrl(item.session_image);
+                const sessionTitle = item.session_title || `Mùa giải ${item.session_id || item.season}`;
+                const awardDef = AWARDS.find((a) => a.key === item.key);
+                const videoUrl = publicAssetUrl(item.video);
+
+                return (
+                  <article
+                    className="legend-history-item rank-history-row"
+                    key={`${item.session_id}-${item.key}-${idx}`}
+                  >
+                    <div className="legend-history-thumb-wrap">
+                      {imgUrl ? (
+                        <img
+                          src={imgUrl}
+                          alt={sessionTitle}
+                          className="legend-history-thumb"
+                          loading="lazy"
+                          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                        />
+                      ) : (
+                        <div className="legend-history-thumb-fallback">
+                          <span>S{item.session_id}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <span className="legend-history-icon" title={item.title}>
+                      {awardDef?.icon || '🏆'}
+                    </span>
+
+                    <div className="legend-history-copy">
+                      <strong>{item.title}</strong>
+                      <span>
+                        {sessionTitle} · {item.season || '—'}
+                      </span>
+                    </div>
+
+                    {item.video && (
+                      <a
+                        href={videoUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="legend-video-link"
+                        onClick={(e) => {
+                          if (videoUrl.endsWith('.mp4') || videoUrl.endsWith('.webm')) {
+                            e.preventDefault();
+                            setActiveVideo(activeVideo === videoUrl ? null : videoUrl);
+                          }
+                        }}
+                      >
+                        <Clapperboard className="w-3.5 h-3.5" /> Video
+                      </a>
+                    )}
+                  </article>
+                );
+              })
+            ) : (
+              <div className="legend-empty-state">
+                Chưa có danh hiệu phù hợp trong mục này.
+              </div>
+            )}
+          </div>
+
+          {/* Video player preview if toggled */}
+          {activeVideo && (
+            <div className="legend-video-block">
+              <div className="legend-video-block-heading">
+                <span className="session-eyebrow">BEST GOAL · BÀN THẮNG ĐẸP NHẤT</span>
+                <button
+                  type="button"
+                  className="rank-video-close-btn"
+                  onClick={() => setActiveVideo(null)}
+                >
+                  Đóng video
+                </button>
+              </div>
+              <video
+                controls
+                autoPlay
+                preload="metadata"
+                src={activeVideo}
               />
             </div>
           )}
-          <span className="legend-history-icon">{AWARDS.find((award) => award.key === item.key)?.icon}</span>
-          <div><strong>{item.title}</strong><span>{item.session_title || `Mùa giải ${item.season}`} · {item.season || '—'}</span></div>
-          {item.video && <a href={publicAssetUrl(item.video)} target="_blank" rel="noreferrer" className="legend-video-link"><Clapperboard /> Video</a>}
-        </article>)}
-      </div>
-      {legend.history.some((item) => item.video) && <div className="legend-video-block"><span className="session-eyebrow">BEST GOAL</span><h3>Bàn thắng đẹp nhất</h3>{legend.history.filter((item) => item.video).map((item, index) => <video key={`${item.video}-${index}`} controls preload="metadata" src={publicAssetUrl(item.video)} />)}</div>}
-    </section>
-  </div>;
+        </div>
+      </section>
+    </div>
+  );
 }
 
 function CategoryView({ data, nations = [], onSelect }) {
