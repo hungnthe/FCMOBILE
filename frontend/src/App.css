@@ -1432,6 +1432,18 @@ html, body, #root, button, input, select, textarea { font-family: "Times New Rom
   margin-bottom: 12px;
 }
 
+.record-type-selection-group {
+  margin-bottom: 12px;
+}
+
+.record-type-selection-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
 @media (max-width: 520px) {
   .record-transfer-mode-selector {
     grid-template-columns: 1fr;
@@ -1457,6 +1469,24 @@ html, body, #root, button, input, select, textarea { font-family: "Times New Rom
 .record-mode-card.is-selected {
   border-color: #e11d48;
   background: #fff1f2;
+}
+
+.record-mode-card.is-selected.is-milestone {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+
+.record-mode-card.is-selected.is-milestone strong {
+  color: #b45309;
+}
+
+.record-mode-card.is-selected.is-breakable {
+  border-color: #10b981;
+  background: #ecfdf5;
+}
+
+.record-mode-card.is-selected.is-breakable strong {
+  color: #047857;
 }
 
 .record-mode-card strong {

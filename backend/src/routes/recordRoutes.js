@@ -121,6 +121,12 @@ function createRecordRouter(store = defaultStore, imageDir = path.join(store.DAT
         });
       }
       const data = { name, award_name: awardName, note, player, player_id: playerId, co_players: coPlayers, player_history: history, image };
+      if (req.body.record_type !== undefined || existing?.record_type !== undefined) {
+        data.record_type = String(req.body.record_type ?? existing?.record_type ?? '').trim();
+      }
+      if (req.body.group_id !== undefined || existing?.group_id !== undefined) {
+        data.group_id = String(req.body.group_id ?? existing?.group_id ?? '').trim();
+      }
       const record = editing ? store.updateRecord(FILE, req.params.id, data, ID) : store.addRecord(FILE, data, ID);
       if (existing?.image && existing.image !== image) removeImage(existing.image);
       res.status(editing ? 200 : 201).json(record);

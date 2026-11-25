@@ -68,6 +68,8 @@ const BREAKABLE_NAMES_NORM = new Set(BREAKABLE_RECORD_NAMES.map(normalizeRecordT
 
 export function isBreakableRecord(record) {
   if (!record) return false;
+  if (record.record_type === 'breakable') return true;
+  if (record.record_type === 'milestone') return false;
   const id = Number(record.record_id);
   if (id && BREAKABLE_RECORD_IDS.has(id)) return true;
   const norm = normalizeRecordText(record.name);

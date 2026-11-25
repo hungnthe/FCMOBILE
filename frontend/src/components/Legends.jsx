@@ -272,18 +272,6 @@ export default function Legends({ initialView = 'legends', targetRecordId = null
         Cầu thủ huyền thoại
       </button>
       <button
-        type="button"
-        onClick={() => {
-          setView('legends');
-          setTimeout(() => {
-            const el = document.getElementById('legend-category-section');
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-          }, 60);
-        }}
-      >
-        Danh hiệu theo mùa
-      </button>
-      <button
         className={view === 'records' ? 'is-active' : ''}
         onClick={() => setView('records')}
       >

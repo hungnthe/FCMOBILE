@@ -67,6 +67,24 @@ function RecordForm({ record, onClose, onSaved }) {
   const [preview, setPreview] = useState('');
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+
+  const [recordType, setRecordType] = useState(() => {
+    if (record?.record_type) return record.record_type;
+    if (record?.record_id || record?.name) {
+      return isBreakableRecord(record) ? 'breakable' : 'milestone';
+    }
+    return 'milestone';
+  });
+
+  const [groupId, setGroupId] = useState(() => {
+    if (record?.group_id) return record.group_id;
+    if (record?.record_id) {
+      const found = RECORD_GROUPS.find((g) => g.record_ids.includes(record.record_id));
+      if (found) return found.id;
+    }
+    return '';
+  });
+
   useEffect(() => {
     if (!image) { setPreview(''); return undefined; }
     const url = URL.createObjectURL(image);
@@ -116,6 +134,8 @@ function RecordForm({ record, onClose, onSaved }) {
     form.append('player', selectedPlayer?.name || legacyPlayer);
     if (selectedPlayer) form.append('player_id', String(selectedPlayer.player_id));
     form.append('co_players', JSON.stringify(coPlayers));
+    form.append('record_type', recordType);
+    if (groupId) form.append('group_id', groupId);
     if (image) form.append('image', image);
     if (removeImage) form.append('removeImage', 'true');
     setSaving(true); setError('');
@@ -125,28 +145,67 @@ function RecordForm({ record, onClose, onSaved }) {
     } catch (err) { setError(err.response?.data?.error || 'Không thể lưu kỷ lục. Vui lòng thử lại.'); }
     finally { setSaving(false); }
   };
-  const breakable = isBreakableRecord({ name: name || record?.name, record_id: record?.record_id });
+  const breakable = recordType === 'breakable';
 
   return <div className="session-modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget && !saving) onClose(); }}>
     <section className="record-modal" role="dialog" aria-modal="true" aria-labelledby="record-form-title">
       <button type="button" className="session-close-button record-close" onClick={onClose} disabled={saving} aria-label="Đóng"><X /></button>
       <span className="session-eyebrow">THE RECORDS</span><h2 id="record-form-title">{record ? 'Chỉnh sửa kỷ lục' : 'Thêm kỷ lục'}</h2>
-      <div className={`record-form-type-banner ${breakable ? 'is-breakable' : 'is-milestone'}`}>
-        {breakable ? (
-          <>
-            <Crown className="w-3.5 h-3.5 text-amber-600" />
-            <span>Kỷ lục có thể bị xô đổ (Theo dõi cầu thủ đang nắm giữ và lưu lịch sử người từng giữ)</span>
-          </>
-        ) : (
-          <>
-            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-            <span>Danh hiệu đạt được (Sở hữu vĩnh viễn, có thể thuộc về nhiều cầu thủ cùng lúc)</span>
-          </>
-        )}
+
+      {/* Chọn loại kỷ lục */}
+      <div className="record-type-selection-group">
+        <span className="record-field-label">Loại kỷ lục</span>
+        <div className="record-transfer-mode-selector">
+          <label className={`record-mode-card ${recordType === 'milestone' ? 'is-selected is-milestone' : ''}`}>
+            <input
+              type="radio"
+              name="recordType"
+              value="milestone"
+              checked={recordType === 'milestone'}
+              onChange={() => setRecordType('milestone')}
+            />
+            <div>
+              <strong>
+                <Sparkles size={14} className="text-amber-600 inline mr-1" />
+                Danh hiệu đạt được
+              </strong>
+              <small>Sở hữu vĩnh viễn, có thể thuộc về nhiều cầu thủ cùng lúc.</small>
+            </div>
+          </label>
+
+          <label className={`record-mode-card ${recordType === 'breakable' ? 'is-selected is-breakable' : ''}`}>
+            <input
+              type="radio"
+              name="recordType"
+              value="breakable"
+              checked={recordType === 'breakable'}
+              onChange={() => setRecordType('breakable')}
+            />
+            <div>
+              <strong>
+                <Crown size={14} className="text-amber-600 inline mr-1" />
+                Kỷ lục có thể bị xô đổ
+              </strong>
+              <small>Theo dõi cầu thủ nắm giữ hiện tại và lưu lịch sử người từng giữ.</small>
+            </div>
+          </label>
+        </div>
       </div>
+
       <form onSubmit={submit}>
         <label>Tên kỷ lục<input autoFocus required maxLength={200} value={name} onChange={(event) => setName(event.target.value)} placeholder="Ví dụ: Cầu thủ ghi nhiều bàn thắng nhất" /></label>
         <label>Tên danh hiệu <input maxLength={200} value={awardName} onChange={(event) => setAwardName(event.target.value)} placeholder="Nhập tên danh hiệu" /></label>
+        <label>
+          Nhóm kỷ lục (Danh mục)
+          <select value={groupId} onChange={(event) => setGroupId(event.target.value)}>
+            <option value="">-- Chọn nhóm kỷ lục (Tùy chọn) --</option>
+            {RECORD_GROUPS.map((group) => (
+              <option key={group.id} value={group.id}>
+                {group.title} ({group.shortName})
+              </option>
+            ))}
+          </select>
+        </label>
         <div className="record-player-field" onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setPlayerOpen(false); }} onKeyDown={(event) => { if (event.key === 'Escape') { setPlayerOpen(false); event.currentTarget.querySelector('button')?.focus(); } }}>
           <span id="record-player-label">{breakable ? 'Cầu thủ đang giữ kỷ lục' : 'Cầu thủ đạt danh hiệu'}</span>
           <button type="button" className="record-player-toggle" aria-labelledby="record-player-label record-player-value" aria-expanded={playerOpen} aria-controls="record-player-options" disabled={playerLoading || !!playerError} onClick={() => { setPlayerOpen((open) => !open); setPlayerSearch(''); }}><span id="record-player-value">{playerLoading ? 'Đang tải cầu thủ...' : selectedPlayer?.name || legacyPlayer || 'Chọn cầu thủ'}</span><ChevronDown /></button>
@@ -311,6 +370,8 @@ function BreakRecordModal({ record, onClose, onSaved }) {
       formData.append('name', record.name);
       formData.append('award_name', record.award_name || '');
       formData.append('note', note.trim());
+      if (record.record_type) formData.append('record_type', record.record_type);
+      if (record.group_id) formData.append('group_id', record.group_id);
 
       if (mode === 'break') {
         formData.append('player', selectedPlayer.name);
@@ -516,6 +577,8 @@ function AddAchieverModal({ record, onClose, onSaved }) {
       formData.append('name', record.name);
       formData.append('award_name', record.award_name || '');
       formData.append('note', note.trim());
+      if (record.record_type) formData.append('record_type', record.record_type);
+      if (record.group_id) formData.append('group_id', record.group_id);
       formData.append('player', record.player);
       if (record.player_id) formData.append('player_id', String(record.player_id));
 
@@ -832,7 +895,7 @@ export default function Records({ targetRecordId, onClearTargetRecord }) {
             <span>Tất cả · {records.length}</span>
           </button>
           {RECORD_GROUPS.map((group) => {
-            const count = group.record_ids.length;
+            const count = records.filter((r) => r.group_id === group.id || (!r.group_id && group.record_ids.includes(r.record_id))).length;
             return (
               <button
                 key={group.id}
@@ -891,7 +954,7 @@ export default function Records({ targetRecordId, onClearTargetRecord }) {
     ) : (
       <div className="records-groups-container">
         {RECORD_GROUPS.filter((g) => activeCategory === 'all' || g.id === activeCategory).map((group) => {
-          const groupRecords = filteredRecords.filter((r) => group.record_ids.includes(r.record_id));
+          const groupRecords = filteredRecords.filter((r) => r.group_id === group.id || (!r.group_id && group.record_ids.includes(r.record_id)));
           if (!groupRecords.length) return null;
 
           return (
@@ -908,9 +971,7 @@ export default function Records({ targetRecordId, onClearTargetRecord }) {
                     </div>
                   </div>
                   <span className="record-category-badge">
-                    {searchQuery || selectedPlayer !== 'all'
-                      ? `${groupRecords.length} / ${group.record_ids.length} kỷ lục`
-                      : `${group.record_ids.length} kỷ lục`}
+                    {groupRecords.length} kỷ lục
                   </span>
                 </div>
               </div>
@@ -925,7 +986,7 @@ export default function Records({ targetRecordId, onClearTargetRecord }) {
         {/* Other / Uncategorized records if any */}
         {activeCategory === 'all' && (() => {
           const categorizedIds = new Set(RECORD_GROUPS.flatMap((g) => g.record_ids));
-          const otherRecords = filteredRecords.filter((r) => !categorizedIds.has(r.record_id));
+          const otherRecords = filteredRecords.filter((r) => !r.group_id && !categorizedIds.has(r.record_id));
           if (!otherRecords.length) return null;
           return (
             <section className="record-group-section" id="group-other">
