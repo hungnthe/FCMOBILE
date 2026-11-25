@@ -725,82 +725,109 @@ export default function Records({ targetRecordId, onClearTargetRecord }) {
         {record.award_name && <div className="record-card-tab">{record.award_name}</div>}
         <div className="record-card-cover">{record.image ? <img src={recordImageUrl(record.image)} alt="" /> : <Trophy />}</div>
         <div className="record-card-content">
-          <div className="record-card-details">
-            {breakable ? (
-              <>
-                {coCount > 0 && (
-                  <span className="record-co-owner-badge">
-                    Đồng nắm giữ ({totalAchievers})
+          <div className="record-card-main-grid">
+            <div className="record-card-details">
+              {breakable ? (
+                <>
+                  {coCount > 0 && (
+                    <span className="record-co-owner-badge">
+                      Đồng nắm giữ ({totalAchievers})
+                    </span>
+                  )}
+                  <strong className="record-player-name">{record.player}</strong>
+                </>
+              ) : (
+                <>
+                  <span className="record-type-chip is-milestone">
+                    <Sparkles className="w-3 h-3 text-amber-600 inline mr-1" />
+                    {totalAchievers} cầu thủ đã nhận
                   </span>
-                )}
-                <strong className="record-player-name">{record.player}</strong>
-                {record.co_players?.map((co, index) => (
-                  <strong key={co.player_id || index} className="record-player-name is-co-holder">
-                    {co.player}
-                  </strong>
-                ))}
-                {record.player_history?.length > 0 && (
-                  <details className="record-history">
-                    <summary>Cầu thủ từng giữ kỷ lục <ChevronDown /></summary>
-                    <ol>
-                      {[...record.player_history].reverse().map((entry, index) => (
-                        <li key={entry.changed_at + "-" + index}>{entry.player}</li>
-                      ))}
-                    </ol>
-                  </details>
-                )}
-              </>
-            ) : (
-              <>
-                <span className="record-type-chip is-milestone">
-                  <Sparkles className="w-3 h-3 text-amber-600 inline mr-1" />
-                  Danh hiệu đạt được ({totalAchievers} cầu thủ)
-                </span>
-                <div className="record-milestone-achievers">
                   <strong className="record-player-name is-achiever">
-                    🏆 {record.player}
+                    {record.player}
                   </strong>
-                  {record.co_players?.map((co, index) => (
-                    <strong key={co.player_id || index} className="record-player-name is-achiever">
-                      🏆 {co.player}
-                    </strong>
-                  ))}
-                </div>
-              </>
-            )}
+                </>
+              )}
+            </div>
+            <div className="record-card-note">
+              <h3 className="record-name-uppercase">{record.name}</h3>
+              {record.note && (
+                <>
+                  <span className="record-player-label">GHI CHÚ</span>
+                  <p>{record.note}</p>
+                </>
+              )}
+            </div>
+            <div className="record-card-actions">
+              {breakable ? (
+                <button
+                  type="button"
+                  className="record-quick-action-btn is-break"
+                  onClick={() => setBreakModalRecord(record)}
+                  title="Ghi nhận cầu thủ xô đổ kỷ lục hoặc đồng sở hữu kỷ lục"
+                >
+                  <Flame size={13} /> Cầu thủ xô đổ
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="record-quick-action-btn is-achieve"
+                  onClick={() => setAchieverModalRecord(record)}
+                  title="Thêm người tiếp theo giành được danh hiệu này"
+                >
+                  <Sparkles size={13} /> Người tiếp theo giành được
+                </button>
+              )}
+              <button type="button" onClick={() => setForm(record)}><Pencil /> Chỉnh sửa</button>
+              <button type="button" disabled={deleting === record.record_id} onClick={() => remove(record)}><Trash2 /> Xóa</button>
+            </div>
           </div>
-          <div className="record-card-note">
-            <h3 className="record-name-uppercase">{record.name}</h3>
-            {record.note && (
-              <>
-                <span className="record-player-label">GHI CHÚ</span>
-                <p>{record.note}</p>
-              </>
-            )}
-          </div>
-          <div className="record-card-actions">
-            {breakable ? (
-              <button
-                type="button"
-                className="record-quick-action-btn is-break"
-                onClick={() => setBreakModalRecord(record)}
-                title="Ghi nhận cầu thủ xô đổ kỷ lục hoặc đồng sở hữu kỷ lục"
-              >
-                <Flame size={13} /> Cầu thủ xô đổ
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="record-quick-action-btn is-achieve"
-                onClick={() => setAchieverModalRecord(record)}
-                title="Thêm người tiếp theo giành được danh hiệu này"
-              >
-                <Sparkles size={13} /> Người tiếp theo giành được
-              </button>
-            )}
-            <button type="button" onClick={() => setForm(record)}><Pencil /> Chỉnh sửa</button>
-            <button type="button" disabled={deleting === record.record_id} onClick={() => remove(record)}><Trash2 /> Xóa</button>
-          </div>
+
+          {/* Danh sách lịch sử các cầu thủ nhận được - ĐỂ XUỐNG DƯỚI */}
+          {breakable ? (
+            <div className="record-card-history-footer is-breakable">
+              <div className="record-history-footer-header">
+                <Flame className="w-3.5 h-3.5 text-rose-600 inline mr-1" />
+                <span className="record-history-footer-label">
+                  Lịch sử các cầu thủ nắm giữ kỷ lục:
+                </span>
+              </div>
+              <div className="record-history-chips">
+                <span className="record-achiever-chip is-current" title="Đang nắm giữ hiện tại">
+                  👑 {record.player} <span className="record-chip-tag is-current">Hiện tại</span>
+                </span>
+                {record.co_players?.map((co, index) => (
+                  <span key={co.player_id || index} className="record-achiever-chip is-co-holder" title="Đồng nắm giữ kỷ lục">
+                    👑 {co.player} <span className="record-chip-tag is-co">Đồng nắm giữ</span>
+                  </span>
+                ))}
+                {record.player_history && record.player_history.length > 0 && [...record.player_history].reverse().map((entry, index) => (
+                  <span key={(entry.changed_at || '') + '-' + index} className="record-achiever-chip is-past" title={entry.changed_at ? `Từng nắm giữ đến ${new Date(entry.changed_at).toLocaleDateString('vi-VN')}` : 'Đã từng nắm giữ'}>
+                    ⏳ {entry.player}
+                    {entry.changed_at && <span className="record-chip-tag is-date">{new Date(entry.changed_at).toLocaleDateString('vi-VN')}</span>}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="record-card-history-footer is-milestone">
+              <div className="record-history-footer-header">
+                <Sparkles className="w-3.5 h-3.5 text-amber-600 inline mr-1" />
+                <span className="record-history-footer-label">
+                  Danh sách các cầu thủ đã nhận được ({totalAchievers}):
+                </span>
+              </div>
+              <div className="record-history-chips">
+                <span className="record-achiever-chip is-milestone">
+                  🏆 {record.player}
+                </span>
+                {record.co_players?.map((co, index) => (
+                  <span key={co.player_id || index} className="record-achiever-chip is-milestone">
+                    🏆 {co.player}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </article>
     );

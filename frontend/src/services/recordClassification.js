@@ -38,9 +38,7 @@ export const BREAKABLE_RECORD_NAMES = [
   'Ông vua của các khoảng khắc bùng nổ',
   'Cầu thủ đá phạt thành bàn nhiều nhất mọi thời đại',
   'Ông vua của các trận cầu lớn',
-  'Cầu thủ có nhiều bàn thắng đẹp nhất mùa nhất',
-  'Cầu thủ phòng thủ tốt nhất mọi thời đại',
-  'Tiền vệ xuất sắc nhất mọi thời đại'
+  'Cầu thủ có nhiều bàn thắng đẹp nhất mùa nhất'
 ];
 
 export const BREAKABLE_RECORD_IDS = new Set([
@@ -53,8 +51,6 @@ export const BREAKABLE_RECORD_IDS = new Set([
   12, // Cầu thủ đá phạt thành bàn nhiều nhất mọi thời đại
   13, // Ông vua của các trận cầu lớn
   15, // Cầu thủ có nhiều bàn thắng đẹp nhất mùa nhất
-  16, // Cầu thủ phòng thủ tốt nhất mọi thời đại
-  17, // Tiền vệ xuất sắc nhất mọi thời đại
   18, // Chân sút vĩ đại nhất mọi thời đại
   19  // Cầu thủ kiến tạo nhất mọi thời đại
 ]);
