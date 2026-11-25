@@ -34,10 +34,6 @@
           "value": "20*"
         },
         {
-          "session_id": null,
-          "value": "20*"
-        },
-        {
           "session_id": 2,
           "value": "30*"
         },
@@ -107,10 +103,6 @@
     },
     "active": {
       "HTH": [
-        {
-          "session_id": null,
-          "value": "20*"
-        },
         {
           "session_id": null,
           "value": "20*"
@@ -263,18 +255,6 @@
       "HTH": [
         {
           "session_id": null,
-          "value": "10*"
-        },
-        {
-          "session_id": null,
-          "value": "10*"
-        },
-        {
-          "session_id": null,
-          "value": "20*"
-        },
-        {
-          "session_id": null,
           "value": "20*"
         },
         {
@@ -409,18 +389,6 @@
       "HTH": [
         {
           "session_id": null,
-          "value": "10*"
-        },
-        {
-          "session_id": null,
-          "value": "10*"
-        },
-        {
-          "session_id": null,
-          "value": "20*"
-        },
-        {
-          "session_id": null,
           "value": "20*"
         },
         {
@@ -508,10 +476,6 @@
     },
     "active": {
       "HTH": [
-        {
-          "session_id": null,
-          "value": "20*"
-        },
         {
           "session_id": null,
           "value": "20*"
@@ -654,18 +618,6 @@
       "HTH": [
         {
           "session_id": null,
-          "value": "10*"
-        },
-        {
-          "session_id": null,
-          "value": "10*"
-        },
-        {
-          "session_id": null,
-          "value": "20*"
-        },
-        {
-          "session_id": null,
           "value": "20*"
         },
         {
@@ -721,10 +673,6 @@
     },
     "active": {
       "HTH": [
-        {
-          "session_id": null,
-          "value": "20*"
-        },
         {
           "session_id": null,
           "value": "20*"
@@ -997,18 +945,6 @@
       "HTH": [
         {
           "session_id": null,
-          "value": "10*"
-        },
-        {
-          "session_id": null,
-          "value": "10*"
-        },
-        {
-          "session_id": null,
-          "value": "20*"
-        },
-        {
-          "session_id": null,
           "value": "20*"
         }
       ],
@@ -1059,18 +995,6 @@
     },
     "active": {
       "HTH": [
-        {
-          "session_id": null,
-          "value": "10*"
-        },
-        {
-          "session_id": null,
-          "value": "10*"
-        },
-        {
-          "session_id": null,
-          "value": "20*"
-        },
         {
           "session_id": null,
           "value": "20*"
@@ -1124,10 +1048,6 @@
     },
     "active": {
       "HTH": [
-        {
-          "session_id": null,
-          "value": "20*"
-        },
         {
           "session_id": null,
           "value": "20*"
