@@ -720,6 +720,15 @@ html, body, #root, button, input, select, textarea { font-family: "Times New Rom
   outline: 2px solid var(--red, #d71932);
   outline-offset: 2px;
 }
+.player-record-tile.is-achieved {
+  border-color: #ebd9b8;
+  background: linear-gradient(145deg, #fffdf8 0%, #fbf3e4 100%);
+  box-shadow: 0 4px 14px rgba(189, 154, 82, 0.14), 0 2px 5px rgba(0, 0, 0, 0.04);
+}
+.player-record-tile.is-achieved:hover {
+  border-color: #d97706;
+  box-shadow: 0 12px 26px rgba(217, 119, 6, 0.2);
+}
 .player-record-tile.is-past {
   border-color: #e2ddd3;
   background: linear-gradient(145deg, #faf7f2 0%, #ede8de 100%);
@@ -743,6 +752,12 @@ html, body, #root, button, input, select, textarea { font-family: "Times New Rom
   line-height: 1.2;
   margin-top: 4px;
   z-index: 1;
+}
+.player-record-status-badge.is-achieved {
+  background: #fff8e6;
+  color: #925c0e;
+  border: 1px solid #fed7aa;
+  box-shadow: 0 1px 4px rgba(214, 158, 46, 0.14);
 }
 .player-record-status-badge.is-current {
   background: #eaf7ed;
@@ -1007,6 +1022,57 @@ html, body, #root, button, input, select, textarea { font-family: "Times New Rom
   border: 1px solid #bfdbfe;
   margin-bottom: 6px;
   width: fit-content;
+}
+.record-type-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  width: fit-content;
+  line-height: 1.4;
+}
+.record-type-chip.is-milestone {
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+.record-type-chip.is-breakable {
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+.record-milestone-achievers {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.record-player-name.is-achiever {
+  color: #1e293b;
+}
+.record-form-type-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+.record-form-type-banner.is-breakable {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+}
+.record-form-type-banner.is-milestone {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
 }
 .record-player-name.is-co-holder {
   margin-top: 4px;
@@ -2765,6 +2831,20 @@ html, body, #root, button, input, select, textarea { font-family: "Times New Rom
   font-weight: 800;
 }
 
+.rank-record-pill.is-achieved {
+  background: #fffbeb;
+  border-color: #fde68a;
+  color: #92400e;
+  box-shadow: 0 1px 3px rgba(245, 158, 11, 0.08);
+}
+.rank-record-pill.is-achieved .rank-record-pill-prefix {
+  font-weight: 500;
+  color: #b45309;
+}
+.rank-record-pill.is-achieved strong {
+  color: #78350f;
+  font-weight: 800;
+}
 .rank-record-pill.is-past {
   background: #f1f5f9; /* Phông xám */
   border-color: #cbd5e1;
@@ -2808,6 +2888,12 @@ html, body, #root, button, input, select, textarea { font-family: "Times New Rom
   background: #d1fae5;
   border-color: #34d399;
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.22);
+}
+
+.rank-record-pill.is-achieved.is-clickable:hover {
+  background: #fef3c7;
+  border-color: #f59e0b;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.22);
 }
 
 .rank-record-pill.is-past.is-clickable:hover {

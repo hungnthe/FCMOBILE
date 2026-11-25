@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, Check, ChevronRight, Crown, History, Pencil, Plus, Save, Trash2, Trophy, UserRound, X } from 'lucide-react';
+import { ArrowLeft, Check, ChevronRight, Crown, History, Pencil, Plus, Save, Sparkles, Trash2, Trophy, UserRound, X } from 'lucide-react';
 import { createPlayerCard, deletePlayerCard, getLegends, getRecords, recordImageUrl, setCurrentPlayerCard, updatePlayer, updatePlayerCard, uploadImageCard } from '../services/api';
 import { supportsMatchResult } from '../services/seasonCapabilities';
 import { AwardDetailModal } from './RankJourney';
+import { getPlayerRecordStatus } from '../services/recordClassification';
 import OvrEditor from './OvrEditor';
 import PositionEditor from './PositionEditor';
 
@@ -304,35 +305,14 @@ export default function PlayerDetail({ player, nations = [], imageCards: imageCa
 
   const playerRecords = useMemo(() => {
     if (!player || isNew || !Array.isArray(allRecords) || allRecords.length === 0) return [];
-    const targetId = Number(player.player_id);
-    const targetNameNorm = String(player.name || '').trim().toLowerCase();
-    const match = (pid, pname) => {
-      if (pid && targetId && Number(pid) === targetId) return true;
-      if (pname && targetNameNorm && String(pname).trim().toLowerCase() === targetNameNorm) return true;
-      return false;
-    };
-
     const list = [];
     allRecords.forEach((rec) => {
-      const isPrimary = match(rec.player_id, rec.player);
-      const isCo = Array.isArray(rec.co_players) && rec.co_players.some((co) => match(co.player_id, co.player));
-      const isCurrent = isPrimary || isCo;
-      if (isCurrent) {
+      const status = getPlayerRecordStatus(rec, player);
+      if (status) {
         list.push({
           ...rec,
-          type: 'current',
-          is_co_holder: isCo && !isPrimary,
-          has_co_holders: (rec.co_players?.length || 0) > 0
+          ...status
         });
-      } else {
-        const history = Array.isArray(rec.player_history) ? rec.player_history : [];
-        const wasPast = history.some((h) => match(h.player_id, h.player));
-        if (wasPast) {
-          list.push({
-            ...rec,
-            type: 'past'
-          });
-        }
       }
     });
     return list;
@@ -529,7 +509,7 @@ export default function PlayerDetail({ player, nations = [], imageCards: imageCa
             <div className="player-records-grid">
               {playerRecords.map((record) => (
                 <article
-                  className={`player-record-tile is-clickable ${record.type === 'current' ? 'is-current' : 'is-past'}`}
+                  className={`player-record-tile is-clickable is-${record.type}`}
                   key={record.record_id}
                   title={`Nhấn để chuyển sang chi tiết kỷ lục: ${record.name}`}
                   onClick={() => handleRecordNavigate(record.record_id)}
@@ -548,16 +528,21 @@ export default function PlayerDetail({ player, nations = [], imageCards: imageCa
                     </div>
                   )}
 
-                  <div className={`player-record-status-badge ${record.type === 'current' ? 'is-current' : 'is-past'}`}>
-                    {record.type === 'current' ? (
+                  <div className={`player-record-status-badge is-${record.type}`}>
+                    {record.type === 'achieved' ? (
+                      <>
+                        <Sparkles className="player-record-status-icon text-amber-500 fill-amber-400" />
+                        <span>{record.label || 'Đã giành được'}</span>
+                      </>
+                    ) : record.type === 'current' ? (
                       <>
                         <Crown className="player-record-status-icon text-amber-500 fill-amber-400" />
-                        <span>{record.is_co_holder ? 'Đồng nắm giữ' : 'Đang nắm giữ'}</span>
+                        <span>{record.label || 'Đang nắm giữ'}</span>
                       </>
                     ) : (
                       <>
                         <History className="player-record-status-icon text-amber-700" />
-                        <span>Đã từng nắm giữ</span>
+                        <span>{record.label || 'Đã từng nắm giữ'}</span>
                       </>
                     )}
                   </div>

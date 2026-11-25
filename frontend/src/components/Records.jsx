@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ArrowUp, ChevronDown, Filter, Flame, ImagePlus, Landmark, Pencil, Plus, RotateCcw, Search, Shield, Sparkles, Target, Trash2, Trophy, X } from 'lucide-react';
+import { ArrowUp, ChevronDown, Crown, Filter, Flame, ImagePlus, Landmark, Pencil, Plus, RotateCcw, Search, Shield, Sparkles, Target, Trash2, Trophy, X } from 'lucide-react';
 import { createRecord, deleteRecord, getPlayers, getRecords, recordImageUrl, updateRecord } from '../services/api';
+import { isBreakableRecord } from '../services/recordClassification';
 
 const normalizeSearch = (value) => String(value || '').toLocaleLowerCase('vi').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd');
 
@@ -124,32 +125,51 @@ function RecordForm({ record, onClose, onSaved }) {
     } catch (err) { setError(err.response?.data?.error || 'Không thể lưu kỷ lục. Vui lòng thử lại.'); }
     finally { setSaving(false); }
   };
+  const breakable = isBreakableRecord({ name: name || record?.name, record_id: record?.record_id });
+
   return <div className="session-modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget && !saving) onClose(); }}>
     <section className="record-modal" role="dialog" aria-modal="true" aria-labelledby="record-form-title">
       <button type="button" className="session-close-button record-close" onClick={onClose} disabled={saving} aria-label="Đóng"><X /></button>
       <span className="session-eyebrow">THE RECORDS</span><h2 id="record-form-title">{record ? 'Chỉnh sửa kỷ lục' : 'Thêm kỷ lục'}</h2>
+      <div className={`record-form-type-banner ${breakable ? 'is-breakable' : 'is-milestone'}`}>
+        {breakable ? (
+          <>
+            <Crown className="w-3.5 h-3.5 text-amber-600" />
+            <span>Kỷ lục có thể bị xô đổ (Theo dõi cầu thủ đang nắm giữ và lưu lịch sử người từng giữ)</span>
+          </>
+        ) : (
+          <>
+            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+            <span>Danh hiệu đạt được (Sở hữu vĩnh viễn, có thể thuộc về nhiều cầu thủ cùng lúc)</span>
+          </>
+        )}
+      </div>
       <form onSubmit={submit}>
         <label>Tên kỷ lục<input autoFocus required maxLength={200} value={name} onChange={(event) => setName(event.target.value)} placeholder="Ví dụ: Cầu thủ ghi nhiều bàn thắng nhất" /></label>
         <label>Tên danh hiệu <input maxLength={200} value={awardName} onChange={(event) => setAwardName(event.target.value)} placeholder="Nhập tên danh hiệu" /></label>
         <div className="record-player-field" onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setPlayerOpen(false); }} onKeyDown={(event) => { if (event.key === 'Escape') { setPlayerOpen(false); event.currentTarget.querySelector('button')?.focus(); } }}>
-          <span id="record-player-label">Cầu thủ sở hữu</span>
+          <span id="record-player-label">{breakable ? 'Cầu thủ đang giữ kỷ lục' : 'Cầu thủ đạt danh hiệu'}</span>
           <button type="button" className="record-player-toggle" aria-labelledby="record-player-label record-player-value" aria-expanded={playerOpen} aria-controls="record-player-options" disabled={playerLoading || !!playerError} onClick={() => { setPlayerOpen((open) => !open); setPlayerSearch(''); }}><span id="record-player-value">{playerLoading ? 'Đang tải cầu thủ...' : selectedPlayer?.name || legacyPlayer || 'Chọn cầu thủ'}</span><ChevronDown /></button>
           {playerOpen && <div className="record-player-dropdown" id="record-player-options"><label className="record-player-search"><Search /><input autoFocus value={playerSearch} onChange={(event) => setPlayerSearch(event.target.value)} placeholder="Tìm cầu thủ..." aria-label="Tìm cầu thủ" /></label><div className="record-player-options">{visiblePlayers.length ? visiblePlayers.map((item) => <button type="button" key={item.player_id} className={String(item.player_id) === playerId ? 'is-selected' : ''} onClick={() => { setPlayerId(String(item.player_id)); setLegacyPlayer(''); setPlayerOpen(false); }}><span>{item.name}</span><small className={item.is_active === false ? 'is-inactive' : ''}>{item.is_active === false ? 'DeActive' : 'Active'}</small></button>) : <p>Không tìm thấy cầu thủ.</p>}</div></div>}
           {playerError && <span className="record-error" role="alert">{playerError}</span>}
           {!playerLoading && !selectedPlayer && legacyPlayer && <small>Tên đã lưu trước đây; chọn cầu thủ trong kho nếu muốn liên kết.</small>}
         </div>
 
-        {/* Đồng sở hữu kỷ lục */}
+        {/* Đồng sở hữu kỷ lục / Các cầu thủ cùng đạt danh hiệu */}
         <div className="record-co-players-group">
           <div className="record-co-players-header">
-            <span id="record-co-players-label">Cầu thủ đồng sở hữu {coPlayers.length > 0 ? `(${coPlayers.length})` : ''}</span>
+            <span id="record-co-players-label">
+              {breakable
+                ? `Cầu thủ đồng nắm giữ ${coPlayers.length > 0 ? `(${coPlayers.length})` : ''}`
+                : `Các cầu thủ khác cùng đạt danh hiệu ${coPlayers.length > 0 ? `(${coPlayers.length})` : ''}`}
+            </span>
             <button
               type="button"
               className="record-add-co-btn"
               disabled={playerLoading || !!playerError}
               onClick={() => { setCoOpen((open) => !open); setCoSearch(''); }}
             >
-              <Plus size={14} /> Thêm đồng sở hữu
+              <Plus size={14} /> {breakable ? 'Thêm đồng sở hữu' : 'Thêm cầu thủ đạt danh hiệu'}
             </button>
           </div>
 
@@ -183,8 +203,8 @@ function RecordForm({ record, onClose, onSaved }) {
                   autoFocus
                   value={coSearch}
                   onChange={(event) => setCoSearch(event.target.value)}
-                  placeholder="Tìm cầu thủ đồng sở hữu..."
-                  aria-label="Tìm cầu thủ đồng sở hữu"
+                  placeholder={breakable ? 'Tìm cầu thủ đồng sở hữu...' : 'Tìm cầu thủ cùng đạt danh hiệu...'}
+                  aria-label={breakable ? 'Tìm cầu thủ đồng sở hữu' : 'Tìm cầu thủ cùng đạt danh hiệu'}
                 />
               </label>
               <div className="record-player-options">
@@ -313,50 +333,77 @@ export default function Records({ targetRecordId, onClearTargetRecord }) {
     });
   }, [records, searchQuery, selectedPlayer]);
 
-  const renderRecordCard = (record) => (
-    <article className="record-card" key={record.record_id} id={`record-${record.record_id}`}>
-      {record.award_name && <div className="record-card-tab">{record.award_name}</div>}
-      <div className="record-card-cover">{record.image ? <img src={recordImageUrl(record.image)} alt="" /> : <Trophy />}</div>
-      <div className="record-card-content">
-        <div className="record-card-details">
-          {record.co_players?.length > 0 && (
-            <span className="record-co-owner-badge">
-              Đồng sở hữu ({1 + record.co_players.length})
-            </span>
-          )}
-          <strong className="record-player-name">{record.player}</strong>
-          {record.co_players?.map((co, index) => (
-            <strong key={co.player_id || index} className="record-player-name is-co-holder">
-              {co.player}
-            </strong>
-          ))}
-          {record.player_history?.length > 0 && (
-            <details className="record-history">
-              <summary>Cầu thủ từng giữ kỷ lục <ChevronDown /></summary>
-              <ol>
-                {[...record.player_history].reverse().map((entry, index) => (
-                  <li key={entry.changed_at + "-" + index}>{entry.player}</li>
+  const renderRecordCard = (record) => {
+    const breakable = isBreakableRecord(record);
+    const coCount = record.co_players?.length || 0;
+    const totalAchievers = 1 + coCount;
+
+    return (
+      <article className={`record-card ${breakable ? 'is-breakable-record' : 'is-milestone-record'}`} key={record.record_id} id={`record-${record.record_id}`}>
+        {record.award_name && <div className="record-card-tab">{record.award_name}</div>}
+        <div className="record-card-cover">{record.image ? <img src={recordImageUrl(record.image)} alt="" /> : <Trophy />}</div>
+        <div className="record-card-content">
+          <div className="record-card-details">
+            {breakable ? (
+              <>
+                {coCount > 0 && (
+                  <span className="record-co-owner-badge">
+                    Đồng nắm giữ ({totalAchievers})
+                  </span>
+                )}
+                <strong className="record-player-name">{record.player}</strong>
+                {record.co_players?.map((co, index) => (
+                  <strong key={co.player_id || index} className="record-player-name is-co-holder">
+                    {co.player}
+                  </strong>
                 ))}
-              </ol>
-            </details>
-          )}
+                {record.player_history?.length > 0 && (
+                  <details className="record-history">
+                    <summary>Cầu thủ từng giữ kỷ lục <ChevronDown /></summary>
+                    <ol>
+                      {[...record.player_history].reverse().map((entry, index) => (
+                        <li key={entry.changed_at + "-" + index}>{entry.player}</li>
+                      ))}
+                    </ol>
+                  </details>
+                )}
+              </>
+            ) : (
+              <>
+                <span className="record-type-chip is-milestone">
+                  <Sparkles className="w-3 h-3 text-amber-600 inline mr-1" />
+                  Danh hiệu đạt được ({totalAchievers} cầu thủ)
+                </span>
+                <div className="record-milestone-achievers">
+                  <strong className="record-player-name is-achiever">
+                    🏆 {record.player}
+                  </strong>
+                  {record.co_players?.map((co, index) => (
+                    <strong key={co.player_id || index} className="record-player-name is-achiever">
+                      🏆 {co.player}
+                    </strong>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+          <div className="record-card-note">
+            <h3 className="record-name-uppercase">{record.name}</h3>
+            {record.note && (
+              <>
+                <span className="record-player-label">GHI CHÚ</span>
+                <p>{record.note}</p>
+              </>
+            )}
+          </div>
+          <div className="record-card-actions">
+            <button type="button" onClick={() => setForm(record)}><Pencil /> Chỉnh sửa</button>
+            <button type="button" disabled={deleting === record.record_id} onClick={() => remove(record)}><Trash2 /> Xóa</button>
+          </div>
         </div>
-        <div className="record-card-note">
-          <h3 className="record-name-uppercase">{record.name}</h3>
-          {record.note && (
-            <>
-              <span className="record-player-label">GHI CHÚ</span>
-              <p>{record.note}</p>
-            </>
-          )}
-        </div>
-        <div className="record-card-actions">
-          <button type="button" onClick={() => setForm(record)}><Pencil /> Chỉnh sửa</button>
-          <button type="button" disabled={deleting === record.record_id} onClick={() => remove(record)}><Trash2 /> Xóa</button>
-        </div>
-      </div>
-    </article>
-  );
+      </article>
+    );
+  };
 
   return <section className="records-section">
     <div className="records-heading">

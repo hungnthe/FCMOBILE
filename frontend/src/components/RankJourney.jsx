@@ -28,6 +28,7 @@ import {
   X
 } from 'lucide-react';
 import api, { getPlayers, getLegends, getSessions, getRecords } from '../services/api';
+import { getPlayerRecordStatus } from '../services/recordClassification';
 import PlayerCardArtwork from './PlayerCardArtwork';
 
 // Rank metadata definition
@@ -985,40 +986,17 @@ function PlayerJourneyDetail({
 
   const totalHofCount = legendInfo?.totalAwards || 0;
   const playerRecords = useMemo(() => {
-    if (!Array.isArray(recordsData) || recordsData.length === 0) return [];
-    const playerId = Number(item.player?.player_id);
-    const playerNameNorm = normalize(item.player?.name || '');
-    const match = (pid, pname) => {
-      if (pid && playerId && Number(pid) === playerId) return true;
-      if (pname && playerNameNorm && normalize(pname) === playerNameNorm) return true;
-      return false;
-    };
-
+    if (!Array.isArray(recordsData) || recordsData.length === 0 || !item?.player) return [];
     const list = [];
     recordsData.forEach((rec) => {
-      const isPrimary = match(rec.player_id, rec.player);
-      const isCo = Array.isArray(rec.co_players) && rec.co_players.some((co) => match(co.player_id, co.player));
-      const isCurrent = isPrimary || isCo;
-      if (isCurrent) {
+      const status = getPlayerRecordStatus(rec, item.player);
+      if (status) {
         list.push({
           record_id: rec.record_id,
           title: rec.award_name || rec.name,
           name: rec.name,
-          type: 'current',
-          is_co_holder: isCo && !isPrimary,
-          has_co_holders: (rec.co_players?.length || 0) > 0
+          ...status
         });
-      } else {
-        const history = Array.isArray(rec.player_history) ? rec.player_history : [];
-        const wasPast = history.some((h) => match(h.player_id, h.player));
-        if (wasPast) {
-          list.push({
-            record_id: rec.record_id,
-            title: rec.award_name || rec.name,
-            name: rec.name,
-            type: 'past'
-          });
-        }
       }
     });
     return list;
@@ -1240,7 +1218,7 @@ function PlayerJourneyDetail({
               <button
                 key={rec.record_id}
                 type="button"
-                className={`rank-record-pill ${rec.type === 'current' ? 'is-current' : 'is-past'} is-clickable`}
+                className={`rank-record-pill is-${rec.type} is-clickable`}
                 onClick={() => {
                   if (onNavigateToRecord) {
                     onNavigateToRecord(rec.record_id);
@@ -1255,7 +1233,9 @@ function PlayerJourneyDetail({
                 title={`Nhấn để chuyển đến kỷ lục: ${rec.name}`}
               >
                 <span className="rank-record-pill-icon">
-                  {rec.type === 'current' ? (
+                  {rec.type === 'achieved' ? (
+                    <Sparkles className="w-3.5 h-3.5 text-amber-500 fill-amber-400" aria-hidden="true" />
+                  ) : rec.type === 'current' ? (
                     <Crown className="w-3.5 h-3.5 fill-amber-400 text-amber-500" aria-hidden="true" />
                   ) : (
                     '⏳'
@@ -1263,11 +1243,13 @@ function PlayerJourneyDetail({
                 </span>
                 <span className="rank-record-pill-text">
                   <span className="rank-record-pill-prefix">
-                    {rec.type === 'current'
-                      ? rec.is_co_holder || rec.has_co_holders
-                        ? 'Đồng nắm giữ kỷ lục : '
-                        : 'Đang nắm giữ kỷ lục : '
-                      : 'Đã từng nắm giữ : '}
+                    {rec.type === 'achieved'
+                      ? 'Đã giành được danh hiệu : '
+                      : rec.type === 'current'
+                        ? rec.isCoHolder || rec.hasCoHolders
+                          ? 'Đồng nắm giữ kỷ lục : '
+                          : 'Đang nắm giữ kỷ lục : '
+                        : 'Đã từng nắm giữ : '}
                   </span>
                   <strong className="rank-record-pill-name">{rec.title}</strong>
                 </span>
