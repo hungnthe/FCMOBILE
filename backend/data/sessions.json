@@ -1913,13 +1913,13 @@
         "objectId": "000000000000000000000001",
         "player_card_id": 1001,
         "stats": {
-          "matches": 43,
+          "matches": 46,
           "goals": 25,
-          "assists": 22,
+          "assists": 23,
           "bestPlayer": 13,
-          "wins": 30,
+          "wins": 32,
           "draws": 6,
-          "losses": 7
+          "losses": 8
         }
       },
       {
@@ -1927,15 +1927,15 @@
         "objectId": "a318bf421eb38ff137b93a7b",
         "player_card_id": 1032,
         "stats": {
-          "matches": 43,
-          "goals": 12,
-          "assists": 14,
-          "bestPlayer": 7,
-          "goalsAgainst": 44,
-          "cleanSheets": 17,
-          "wins": 30,
+          "matches": 46,
+          "goals": 13,
+          "assists": 16,
+          "bestPlayer": 8,
+          "goalsAgainst": 46,
+          "cleanSheets": 18,
+          "wins": 32,
           "draws": 6,
-          "losses": 7
+          "losses": 8
         }
       },
       {
@@ -1943,13 +1943,13 @@
         "objectId": "000000000000000000000005",
         "player_card_id": 1005,
         "stats": {
-          "matches": 43,
-          "goals": 30,
-          "assists": 12,
+          "matches": 46,
+          "goals": 31,
+          "assists": 13,
           "bestPlayer": 7,
-          "wins": 30,
+          "wins": 32,
           "draws": 6,
-          "losses": 7
+          "losses": 8
         }
       },
       {
@@ -1957,15 +1957,15 @@
         "objectId": "000000000000000000000006",
         "player_card_id": 1006,
         "stats": {
-          "matches": 43,
+          "matches": 46,
           "goals": 6,
           "assists": 10,
           "bestPlayer": 2,
-          "goalsAgainst": 44,
-          "cleanSheets": 17,
-          "wins": 30,
+          "goalsAgainst": 46,
+          "cleanSheets": 18,
+          "wins": 32,
           "draws": 6,
-          "losses": 7
+          "losses": 8
         }
       },
       {
@@ -1973,15 +1973,15 @@
         "objectId": "16e2402494ec82a7d8015d39",
         "player_card_id": 1023,
         "stats": {
-          "matches": 43,
+          "matches": 46,
           "goals": 1,
           "assists": 5,
           "bestPlayer": 0,
-          "goalsAgainst": 44,
-          "cleanSheets": 17,
-          "wins": 30,
+          "goalsAgainst": 46,
+          "cleanSheets": 18,
+          "wins": 32,
           "draws": 6,
-          "losses": 7
+          "losses": 8
         }
       },
       {
@@ -1989,15 +1989,15 @@
         "objectId": "1724128c9e5e4292fab613f8",
         "player_card_id": 1029,
         "stats": {
-          "matches": 43,
+          "matches": 46,
           "goals": 0,
           "assists": 0,
           "bestPlayer": 0,
-          "goalsAgainst": 44,
-          "cleanSheets": 17,
-          "wins": 30,
+          "goalsAgainst": 46,
+          "cleanSheets": 18,
+          "wins": 32,
           "draws": 6,
-          "losses": 7
+          "losses": 8
         }
       },
       {
@@ -2005,15 +2005,15 @@
         "objectId": "3de915149e05beb910b858a2",
         "player_card_id": 1028,
         "stats": {
-          "matches": 43,
+          "matches": 46,
           "goals": 0,
           "assists": 3,
           "bestPlayer": 0,
-          "goalsAgainst": 44,
-          "cleanSheets": 17,
-          "wins": 30,
+          "goalsAgainst": 46,
+          "cleanSheets": 18,
+          "wins": 32,
           "draws": 6,
-          "losses": 7
+          "losses": 8
         }
       },
       {
@@ -2021,13 +2021,13 @@
         "objectId": "000000000000000000000002",
         "player_card_id": 1002,
         "stats": {
-          "matches": 43,
-          "goals": 23,
-          "assists": 16,
-          "bestPlayer": 6,
-          "wins": 30,
+          "matches": 46,
+          "goals": 26,
+          "assists": 17,
+          "bestPlayer": 7,
+          "wins": 32,
           "draws": 6,
-          "losses": 7
+          "losses": 8
         }
       },
       {
@@ -2035,15 +2035,15 @@
         "objectId": "19ae48db9118825163b9392d",
         "player_card_id": 1024,
         "stats": {
-          "matches": 43,
+          "matches": 46,
           "goals": 0,
           "assists": 2,
           "bestPlayer": 0,
-          "goalsAgainst": 44,
-          "cleanSheets": 17,
-          "wins": 30,
+          "goalsAgainst": 46,
+          "cleanSheets": 18,
+          "wins": 32,
           "draws": 6,
-          "losses": 7
+          "losses": 8
         }
       },
       {
@@ -2051,15 +2051,15 @@
         "objectId": "000000000000000000000011",
         "player_card_id": 1011,
         "stats": {
-          "matches": 43,
+          "matches": 46,
           "goals": 0,
           "assists": 0,
           "bestPlayer": 0,
-          "goalsAgainst": 44,
-          "cleanSheets": 17,
-          "wins": 30,
+          "goalsAgainst": 46,
+          "cleanSheets": 18,
+          "wins": 32,
           "draws": 6,
-          "losses": 7
+          "losses": 8
         }
       },
       {
@@ -2067,15 +2067,15 @@
         "objectId": "c593226ec5e4687c7ba82ede",
         "player_card_id": 1027,
         "stats": {
-          "matches": 43,
+          "matches": 46,
           "goals": 1,
           "assists": 0,
           "bestPlayer": 0,
-          "goalsAgainst": 44,
-          "cleanSheets": 17,
-          "wins": 30,
+          "goalsAgainst": 46,
+          "cleanSheets": 18,
+          "wins": 32,
           "draws": 6,
-          "losses": 7
+          "losses": 8
         }
       },
       {
@@ -2083,11 +2083,11 @@
         "objectId": "12f83691611d96e54d5f3711",
         "player_card_id": 1033,
         "stats": {
-          "matches": 10,
+          "matches": 11,
           "goals": 0,
           "assists": 1,
           "bestPlayer": 0,
-          "wins": 7,
+          "wins": 8,
           "draws": 1,
           "losses": 2
         }
@@ -2101,150 +2101,150 @@
     "result_tracking_enabled": true,
     "stats_baseline": {
       "1": {
-        "matches": 39,
-        "goals": 20,
-        "assists": 19,
-        "bestPlayer": 10,
-        "wins": 26,
+        "matches": 46,
+        "goals": 25,
+        "assists": 23,
+        "bestPlayer": 13,
+        "wins": 32,
         "draws": 6,
-        "losses": 7
+        "losses": 8
       },
       "2": {
-        "matches": 39,
-        "goals": 21,
-        "assists": 13,
-        "bestPlayer": 6,
-        "wins": 26,
+        "matches": 46,
+        "goals": 26,
+        "assists": 17,
+        "bestPlayer": 7,
+        "wins": 32,
         "draws": 6,
-        "losses": 7
+        "losses": 8
       },
       "5": {
-        "matches": 39,
-        "goals": 26,
-        "assists": 8,
-        "bestPlayer": 6,
-        "wins": 26,
+        "matches": 46,
+        "goals": 31,
+        "assists": 13,
+        "bestPlayer": 7,
+        "wins": 32,
         "draws": 6,
-        "losses": 7
+        "losses": 8
       },
       "6": {
-        "matches": 39,
-        "goals": 5,
-        "assists": 9,
+        "matches": 46,
+        "goals": 6,
+        "assists": 10,
         "bestPlayer": 2,
-        "goalsAgainst": 42,
-        "cleanSheets": 14,
-        "wins": 26,
+        "goalsAgainst": 46,
+        "cleanSheets": 18,
+        "wins": 32,
         "draws": 6,
-        "losses": 7
+        "losses": 8
       },
       "11": {
-        "matches": 39,
+        "matches": 46,
         "goals": 0,
         "assists": 0,
         "bestPlayer": 0,
-        "goalsAgainst": 42,
-        "cleanSheets": 14,
-        "wins": 26,
+        "goalsAgainst": 46,
+        "cleanSheets": 18,
+        "wins": 32,
         "draws": 6,
-        "losses": 7
+        "losses": 8
       },
       "23": {
-        "matches": 39,
+        "matches": 46,
         "goals": 1,
         "assists": 5,
         "bestPlayer": 0,
-        "goalsAgainst": 42,
-        "cleanSheets": 14,
-        "wins": 26,
+        "goalsAgainst": 46,
+        "cleanSheets": 18,
+        "wins": 32,
         "draws": 6,
-        "losses": 7
+        "losses": 8
       },
       "24": {
-        "matches": 39,
+        "matches": 46,
         "goals": 0,
         "assists": 2,
         "bestPlayer": 0,
-        "goalsAgainst": 42,
-        "cleanSheets": 14,
-        "wins": 26,
+        "goalsAgainst": 46,
+        "cleanSheets": 18,
+        "wins": 32,
         "draws": 6,
-        "losses": 7
+        "losses": 8
       },
       "27": {
-        "matches": 39,
+        "matches": 46,
         "goals": 1,
         "assists": 0,
         "bestPlayer": 0,
-        "goalsAgainst": 42,
-        "cleanSheets": 14,
-        "wins": 26,
+        "goalsAgainst": 46,
+        "cleanSheets": 18,
+        "wins": 32,
         "draws": 6,
-        "losses": 7
+        "losses": 8
       },
       "28": {
-        "matches": 39,
+        "matches": 46,
         "goals": 0,
         "assists": 3,
         "bestPlayer": 0,
-        "goalsAgainst": 42,
-        "cleanSheets": 14,
-        "wins": 26,
+        "goalsAgainst": 46,
+        "cleanSheets": 18,
+        "wins": 32,
         "draws": 6,
-        "losses": 7
+        "losses": 8
       },
       "29": {
-        "matches": 39,
+        "matches": 46,
         "goals": 0,
         "assists": 0,
         "bestPlayer": 0,
-        "goalsAgainst": 42,
-        "cleanSheets": 14,
-        "wins": 26,
+        "goalsAgainst": 46,
+        "cleanSheets": 18,
+        "wins": 32,
         "draws": 6,
-        "losses": 7
+        "losses": 8
       },
       "31": {
-        "matches": 39,
-        "goals": 12,
-        "assists": 14,
-        "bestPlayer": 7,
-        "goalsAgainst": 42,
-        "cleanSheets": 14,
-        "wins": 26,
+        "matches": 46,
+        "goals": 13,
+        "assists": 16,
+        "bestPlayer": 8,
+        "goalsAgainst": 46,
+        "cleanSheets": 18,
+        "wins": 32,
         "draws": 6,
-        "losses": 7
+        "losses": 8
       },
       "32": {
-        "matches": 7,
+        "matches": 11,
         "goals": 0,
         "assists": 1,
         "bestPlayer": 0,
-        "wins": 4,
+        "wins": 8,
         "draws": 1,
         "losses": 2
       }
     },
     "session_id": 5,
     "createdAt": "2026-11-21T08:25:54.704Z",
-    "updatedAt": "2026-11-25T08:23:55.913Z",
+    "updatedAt": "2026-11-25T09:02:06.368Z",
     "season_match_stats_baseline": {
-      "matches": 39,
-      "goalsFor": 86,
-      "goalsAgainst": 42,
-      "cleanSheets": 14,
-      "wins": 26,
+      "matches": 46,
+      "goalsFor": 103,
+      "goalsAgainst": 46,
+      "cleanSheets": 18,
+      "wins": 32,
       "draws": 6,
-      "losses": 7
+      "losses": 8
     },
     "season_match_stats": {
-      "matches": 43,
-      "goalsFor": 98,
-      "goalsAgainst": 44,
-      "cleanSheets": 17,
-      "wins": 30,
+      "matches": 46,
+      "goalsFor": 103,
+      "goalsAgainst": 46,
+      "cleanSheets": 18,
+      "wins": 32,
       "draws": 6,
-      "losses": 7
+      "losses": 8
     },
     "last_week_cup_batches": [
       {

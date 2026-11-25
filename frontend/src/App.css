@@ -1208,7 +1208,171 @@ html, body, #root, button, input, select, textarea { font-family: "Times New Rom
   .record-card-cover { width: 100%; min-height: 140px; border-top-right-radius: 11px; border-bottom-left-radius: 0; }
   .record-card-content { grid-template-columns: minmax(0, 1fr); gap: 14px; padding: 16px; }
   .record-card-note { border-left: 0; border-top: 1px solid #ece7df; padding: 12px 0 0; }
-  .record-card-actions { justify-self: start; }
+  .record-card-actions { justify-self: start; flex-wrap: wrap; }
+}
+
+/* Record Quick Action Buttons & Transfer Modals */
+.record-quick-action-btn {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px !important;
+  border-radius: 999px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid transparent !important;
+  text-decoration: none;
+}
+
+.record-quick-action-btn.is-break {
+  background: #fff1f2 !important;
+  color: #e11d48 !important;
+  border-color: #fecdd3 !important;
+}
+
+.record-quick-action-btn.is-break:hover {
+  background: #e11d48 !important;
+  color: #ffffff !important;
+  border-color: #e11d48 !important;
+  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.25);
+}
+
+.record-quick-action-btn.is-achieve {
+  background: #fefce8 !important;
+  color: #b45309 !important;
+  border-color: #fef08a !important;
+}
+
+.record-quick-action-btn.is-achieve:hover {
+  background: #d97706 !important;
+  color: #ffffff !important;
+  border-color: #d97706 !important;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.25);
+}
+
+.record-transfer-modal {
+  width: min(540px, calc(100vw - 28px));
+}
+
+.record-modal-subtitle {
+  margin: 4px 0 14px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.record-modal-subtitle strong {
+  color: #b45309;
+}
+
+.record-current-holders-box {
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.record-current-holders-box.is-milestone {
+  background: #fefce8;
+  border-color: #fef08a;
+}
+
+.record-holders-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #78350f;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.record-holders-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.record-holder-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  background: #ffffff;
+  border: 1px solid #fdba74;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9a3412;
+}
+
+.record-holder-chip.is-achiever {
+  border-color: #fde047;
+  color: #854d0e;
+}
+
+.record-transfer-mode-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 520px) {
+  .record-transfer-mode-selector {
+    grid-template-columns: 1fr;
+  }
+}
+
+.record-mode-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.record-mode-card input {
+  margin-right: 6px;
+}
+
+.record-mode-card.is-selected {
+  border-color: #e11d48;
+  background: #fff1f2;
+}
+
+.record-mode-card strong {
+  font-size: 12px;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+}
+
+.record-mode-card.is-selected strong {
+  color: #be123c;
+}
+
+.record-mode-card small {
+  font-size: 11px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+.session-primary-button.is-gold-btn {
+  background: linear-gradient(135deg, #d97706, #b45309);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(180, 83, 9, 0.3);
+}
+
+.session-primary-button.is-gold-btn:hover {
+  background: linear-gradient(135deg, #b45309, #92400e);
 }
 
 /* ==========================================================================

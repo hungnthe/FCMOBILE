@@ -245,6 +245,386 @@ function RecordForm({ record, onClose, onSaved }) {
   </div>;
 }
 
+function BreakRecordModal({ record, onClose, onSaved }) {
+  const [players, setPlayers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [playerOpen, setPlayerOpen] = useState(false);
+  const [playerSearch, setPlayerSearch] = useState('');
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [mode, setMode] = useState('break'); // 'break' | 'co'
+  const [note, setNote] = useState(record?.note || '');
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    let active = true;
+    getPlayers()
+      .then((items) => {
+        if (!active) return;
+        setPlayers(items);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (!active) return;
+        setError('Không thể tải danh sách cầu thủ.');
+        setLoading(false);
+      });
+    return () => { active = false; };
+  }, []);
+
+  const currentHolders = useMemo(() => {
+    const list = [record.player];
+    if (Array.isArray(record.co_players)) {
+      record.co_players.forEach((co) => {
+        if (co.player && !list.includes(co.player)) list.push(co.player);
+      });
+    }
+    return list;
+  }, [record]);
+
+  const availablePlayers = useMemo(() => {
+    const term = normalizeSearch(playerSearch);
+    return players.filter((p) => {
+      const pId = Number(p.player_id);
+      const isCurrentPrimary = (record.player_id && Number(record.player_id) === pId) || p.name === record.player;
+      if (isCurrentPrimary) return false;
+      if (mode === 'co') {
+        const isCo = Array.isArray(record.co_players) && record.co_players.some((co) => (co.player_id && Number(co.player_id) === pId) || co.player === p.name);
+        if (isCo) return false;
+      }
+      if (!term) return true;
+      return normalizeSearch(p.name).includes(term);
+    });
+  }, [players, playerSearch, record, mode]);
+
+  const submit = async (e) => {
+    e.preventDefault();
+    if (!selectedPlayer) {
+      setError('Vui lòng chọn cầu thủ.');
+      return;
+    }
+    setSaving(true);
+    setError('');
+
+    try {
+      const formData = new FormData();
+      formData.append('name', record.name);
+      formData.append('award_name', record.award_name || '');
+      formData.append('note', note.trim());
+
+      if (mode === 'break') {
+        formData.append('player', selectedPlayer.name);
+        formData.append('player_id', String(selectedPlayer.player_id));
+        formData.append('co_players', JSON.stringify([]));
+      } else {
+        formData.append('player', record.player);
+        if (record.player_id) formData.append('player_id', String(record.player_id));
+        const existingCo = Array.isArray(record.co_players) ? record.co_players : [];
+        const updatedCo = [...existingCo, { player: selectedPlayer.name, player_id: selectedPlayer.player_id }];
+        formData.append('co_players', JSON.stringify(updatedCo));
+      }
+
+      const saved = await updateRecord(record.record_id, formData);
+      onSaved(saved);
+      onClose();
+    } catch (err) {
+      setError(err.response?.data?.error || 'Không thể cập nhật kỷ lục.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="session-modal-backdrop" onMouseDown={(e) => { if (e.target === e.currentTarget && !saving) onClose(); }}>
+      <section className="record-modal record-transfer-modal" role="dialog" aria-modal="true" aria-labelledby="break-modal-title">
+        <button type="button" className="session-close-button record-close" onClick={onClose} disabled={saving} aria-label="Đóng"><X /></button>
+        <span className="session-eyebrow">KỶ LỤC CẠNH TRANH</span>
+        <h2 id="break-modal-title">{record.name}</h2>
+        {record.award_name && <p className="record-modal-subtitle">Danh hiệu: <strong>{record.award_name}</strong></p>}
+
+        <div className="record-current-holders-box">
+          <span className="record-holders-label">Đang nắm giữ hiện tại:</span>
+          <div className="record-holders-tags">
+            {currentHolders.map((name) => (
+              <span key={name} className="record-holder-chip">👑 {name}</span>
+            ))}
+          </div>
+        </div>
+
+        <form onSubmit={submit}>
+          <div className="record-transfer-mode-selector">
+            <label className={`record-mode-card ${mode === 'break' ? 'is-active' : ''}`}>
+              <input type="radio" name="breakMode" value="break" checked={mode === 'break'} onChange={() => { setMode('break'); setSelectedPlayer(null); }} />
+              <div>
+                <strong>Xô đổ kỷ lục (Thiết lập mốc mới)</strong>
+                <small>Cầu thủ mới thiết lập mốc cao hơn. Người đang giữ ({record.player}) sẽ chuyển vào lịch sử người từng giữ.</small>
+              </div>
+            </label>
+
+            <label className={`record-mode-card ${mode === 'co' ? 'is-active' : ''}`}>
+              <input type="radio" name="breakMode" value="co" checked={mode === 'co'} onChange={() => { setMode('co'); setSelectedPlayer(null); }} />
+              <div>
+                <strong>Đồng sở hữu kỷ lục (Cùng mốc thành tích)</strong>
+                <small>Cầu thủ mới đạt cùng thành tích. Cả hai sẽ cùng chia sẻ danh hiệu và kỷ lục này.</small>
+              </div>
+            </label>
+          </div>
+
+          <div className="record-player-field">
+            <span id="break-player-label">
+              {mode === 'break' ? 'Cầu thủ xô đổ kỷ lục' : 'Cầu thủ đồng sở hữu kỷ lục'}
+            </span>
+            <button
+              type="button"
+              className="record-player-toggle"
+              disabled={loading || !!error}
+              onClick={() => { setPlayerOpen((open) => !open); setPlayerSearch(''); }}
+            >
+              <span>{loading ? 'Đang tải cầu thủ...' : selectedPlayer?.name || 'Chọn cầu thủ'}</span>
+              <ChevronDown />
+            </button>
+            {playerOpen && (
+              <div className="record-player-dropdown">
+                <label className="record-player-search">
+                  <Search />
+                  <input
+                    autoFocus
+                    value={playerSearch}
+                    onChange={(e) => setPlayerSearch(e.target.value)}
+                    placeholder="Tìm cầu thủ..."
+                  />
+                </label>
+                <div className="record-player-options">
+                  {availablePlayers.length ? (
+                    availablePlayers.map((item) => (
+                      <button
+                        type="button"
+                        key={item.player_id}
+                        className={selectedPlayer?.player_id === item.player_id ? 'is-selected' : ''}
+                        onClick={() => {
+                          setSelectedPlayer(item);
+                          setPlayerOpen(false);
+                        }}
+                      >
+                        <span>{item.name}</span>
+                        <small className={item.is_active === false ? 'is-inactive' : ''}>
+                          {item.is_active === false ? 'DeActive' : 'Active'}
+                        </small>
+                      </button>
+                    ))
+                  ) : (
+                    <p>Không có cầu thủ phù hợp.</p>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <label>
+            Cập nhật ghi chú / chỉ số kỷ lục (Tùy chọn)
+            <textarea
+              rows={3}
+              maxLength={2000}
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              placeholder="Ví dụ: Cập nhật số bàn thắng / số trận mới..."
+            />
+          </label>
+
+          {error && <p className="record-error">{error}</p>}
+
+          <div className="record-form-actions">
+            <button type="button" className="session-secondary-button" onClick={onClose} disabled={saving}>Hủy</button>
+            <button type="submit" className="session-primary-button" disabled={saving || !selectedPlayer}>
+              <Flame size={14} />
+              {saving ? 'Đang lưu...' : mode === 'break' ? 'Xác nhận xô đổ' : 'Xác nhận đồng sở hữu'}
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  );
+}
+
+function AddAchieverModal({ record, onClose, onSaved }) {
+  const [players, setPlayers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [playerOpen, setPlayerOpen] = useState(false);
+  const [playerSearch, setPlayerSearch] = useState('');
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [note, setNote] = useState(record?.note || '');
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    let active = true;
+    getPlayers()
+      .then((items) => {
+        if (!active) return;
+        setPlayers(items);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (!active) return;
+        setError('Không thể tải danh sách cầu thủ.');
+        setLoading(false);
+      });
+    return () => { active = false; };
+  }, []);
+
+  const currentAchievers = useMemo(() => {
+    const list = [record.player];
+    if (Array.isArray(record.co_players)) {
+      record.co_players.forEach((co) => {
+        if (co.player && !list.includes(co.player)) list.push(co.player);
+      });
+    }
+    return list;
+  }, [record]);
+
+  const availablePlayers = useMemo(() => {
+    const term = normalizeSearch(playerSearch);
+    const existingIds = new Set([
+      Number(record.player_id),
+      ...(Array.isArray(record.co_players) ? record.co_players.map((c) => Number(c.player_id)) : [])
+    ].filter(Boolean));
+    const existingNames = new Set([
+      normalizeSearch(record.player),
+      ...(Array.isArray(record.co_players) ? record.co_players.map((c) => normalizeSearch(c.player)) : [])
+    ].filter(Boolean));
+
+    return players.filter((p) => {
+      const pId = Number(p.player_id);
+      if (pId && existingIds.has(pId)) return false;
+      if (existingNames.has(normalizeSearch(p.name))) return false;
+      if (!term) return true;
+      return normalizeSearch(p.name).includes(term);
+    });
+  }, [players, playerSearch, record]);
+
+  const submit = async (e) => {
+    e.preventDefault();
+    if (!selectedPlayer) {
+      setError('Vui lòng chọn cầu thủ.');
+      return;
+    }
+    setSaving(true);
+    setError('');
+
+    try {
+      const formData = new FormData();
+      formData.append('name', record.name);
+      formData.append('award_name', record.award_name || '');
+      formData.append('note', note.trim());
+      formData.append('player', record.player);
+      if (record.player_id) formData.append('player_id', String(record.player_id));
+
+      const existingCo = Array.isArray(record.co_players) ? record.co_players : [];
+      const updatedCo = [...existingCo, { player: selectedPlayer.name, player_id: selectedPlayer.player_id }];
+      formData.append('co_players', JSON.stringify(updatedCo));
+
+      const saved = await updateRecord(record.record_id, formData);
+      onSaved(saved);
+      onClose();
+    } catch (err) {
+      setError(err.response?.data?.error || 'Không thể thêm người đạt danh hiệu.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="session-modal-backdrop" onMouseDown={(e) => { if (e.target === e.currentTarget && !saving) onClose(); }}>
+      <section className="record-modal record-transfer-modal" role="dialog" aria-modal="true" aria-labelledby="achiever-modal-title">
+        <button type="button" className="session-close-button record-close" onClick={onClose} disabled={saving} aria-label="Đóng"><X /></button>
+        <span className="session-eyebrow">DANH HIỆU ĐẠT ĐƯỢC</span>
+        <h2 id="achiever-modal-title">{record.name}</h2>
+        {record.award_name && <p className="record-modal-subtitle">Danh hiệu: <strong>{record.award_name}</strong></p>}
+
+        <div className="record-current-holders-box is-milestone">
+          <span className="record-holders-label">Các cầu thủ đã đạt danh hiệu này ({currentAchievers.length}):</span>
+          <div className="record-holders-tags">
+            {currentAchievers.map((name) => (
+              <span key={name} className="record-holder-chip is-achiever">🏆 {name}</span>
+            ))}
+          </div>
+        </div>
+
+        <form onSubmit={submit}>
+          <div className="record-player-field">
+            <span id="achiever-player-label">Người tiếp theo giành được danh hiệu</span>
+            <button
+              type="button"
+              className="record-player-toggle"
+              disabled={loading || !!error}
+              onClick={() => { setPlayerOpen((open) => !open); setPlayerSearch(''); }}
+            >
+              <span>{loading ? 'Đang tải cầu thủ...' : selectedPlayer?.name || 'Chọn cầu thủ'}</span>
+              <ChevronDown />
+            </button>
+            {playerOpen && (
+              <div className="record-player-dropdown">
+                <label className="record-player-search">
+                  <Search />
+                  <input
+                    autoFocus
+                    value={playerSearch}
+                    onChange={(e) => setPlayerSearch(e.target.value)}
+                    placeholder="Tìm cầu thủ..."
+                  />
+                </label>
+                <div className="record-player-options">
+                  {availablePlayers.length ? (
+                    availablePlayers.map((item) => (
+                      <button
+                        type="button"
+                        key={item.player_id}
+                        className={selectedPlayer?.player_id === item.player_id ? 'is-selected' : ''}
+                        onClick={() => {
+                          setSelectedPlayer(item);
+                          setPlayerOpen(false);
+                        }}
+                      >
+                        <span>{item.name}</span>
+                        <small className={item.is_active === false ? 'is-inactive' : ''}>
+                          {item.is_active === false ? 'DeActive' : 'Active'}
+                        </small>
+                      </button>
+                    ))
+                  ) : (
+                    <p>Tất cả cầu thủ hiện tại đã sở hữu danh hiệu này.</p>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <label>
+            Cập nhật ghi chú (Tùy chọn)
+            <textarea
+              rows={3}
+              maxLength={2000}
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              placeholder="Thêm thông tin mùa giải hoặc ghi chú..."
+            />
+          </label>
+
+          {error && <p className="record-error">{error}</p>}
+
+          <div className="record-form-actions">
+            <button type="button" className="session-secondary-button" onClick={onClose} disabled={saving}>Hủy</button>
+            <button type="submit" className="session-primary-button is-gold-btn" disabled={saving || !selectedPlayer}>
+              <Sparkles size={14} />
+              {saving ? 'Đang lưu...' : 'Xác nhận thêm danh hiệu'}
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  );
+}
+
 export default function Records({ targetRecordId, onClearTargetRecord }) {
   const [records, setRecords] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -254,6 +634,8 @@ export default function Records({ targetRecordId, onClearTargetRecord }) {
   const [error, setError] = useState('');
   const [form, setForm] = useState(null);
   const [deleting, setDeleting] = useState(null);
+  const [breakModalRecord, setBreakModalRecord] = useState(null);
+  const [achieverModalRecord, setAchieverModalRecord] = useState(null);
 
   useEffect(() => {
     let active = true;
@@ -397,6 +779,25 @@ export default function Records({ targetRecordId, onClearTargetRecord }) {
             )}
           </div>
           <div className="record-card-actions">
+            {breakable ? (
+              <button
+                type="button"
+                className="record-quick-action-btn is-break"
+                onClick={() => setBreakModalRecord(record)}
+                title="Ghi nhận cầu thủ xô đổ kỷ lục hoặc đồng sở hữu kỷ lục"
+              >
+                <Flame size={13} /> Cầu thủ xô đổ
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="record-quick-action-btn is-achieve"
+                onClick={() => setAchieverModalRecord(record)}
+                title="Thêm người tiếp theo giành được danh hiệu này"
+              >
+                <Sparkles size={13} /> Người tiếp theo giành được
+              </button>
+            )}
             <button type="button" onClick={() => setForm(record)}><Pencil /> Chỉnh sửa</button>
             <button type="button" disabled={deleting === record.record_id} onClick={() => remove(record)}><Trash2 /> Xóa</button>
           </div>
@@ -610,5 +1011,25 @@ export default function Records({ targetRecordId, onClearTargetRecord }) {
     )}
 
     {form && <RecordForm record={form.record_id ? form : null} onClose={() => setForm(null)} onSaved={(saved) => { setRecords((items) => form.record_id ? items.map((item) => item.record_id === saved.record_id ? saved : item) : [...items, saved]); setForm(null); }} />}
+    {breakModalRecord && (
+      <BreakRecordModal
+        record={breakModalRecord}
+        onClose={() => setBreakModalRecord(null)}
+        onSaved={(saved) => {
+          setRecords((items) => items.map((item) => (item.record_id === saved.record_id ? saved : item)));
+          setBreakModalRecord(null);
+        }}
+      />
+    )}
+    {achieverModalRecord && (
+      <AddAchieverModal
+        record={achieverModalRecord}
+        onClose={() => setAchieverModalRecord(null)}
+        onSaved={(saved) => {
+          setRecords((items) => items.map((item) => (item.record_id === saved.record_id ? saved : item)));
+          setAchieverModalRecord(null);
+        }}
+      />
+    )}
   </section>;
 }
