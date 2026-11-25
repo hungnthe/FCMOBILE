@@ -46,6 +46,21 @@ export function getPositionGroup(positions) {
   return 'MF';
 }
 
+export const DEFENSIVE_POSITIONS = new Set(['gk', 'cb', 'rb', 'lb', 'cdm', 'rwb', 'lwb']);
+
+export function hasDefensivePosition(positions) {
+  const arr = Array.isArray(positions) ? positions : [positions];
+  return arr.some((p) => DEFENSIVE_POSITIONS.has(String(p || '').trim().toLowerCase()));
+}
+
+export function tracksDefense(player) {
+  if (!player) return false;
+  if (player.tracksDefensiveStats) return true;
+  if (player.stats?.goalsAgainst != null || player.stats?.cleanSheets != null) return true;
+  if (player.calculated?.goalsAgainst != null || player.calculated?.cleanSheets != null) return true;
+  return hasDefensivePosition(player.position);
+}
+
 export function resolveNationInfo(playerNation, nations = []) {
   if (!playerNation) return { name: 'Không rõ', flag: '' };
 
@@ -249,14 +264,22 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
       const groupPlayers = enrichedPlayers.filter((p) => p.calculated.group === group.id);
       const count = groupPlayers.length;
       if (count === 0) {
-        return { group, count: 0, avgOvr: 0, goals: 0, assists: 0, matches: 0, topPlayer: null, players: [] };
+        return { group, count: 0, avgOvr: 0, goals: 0, assists: 0, cleanSheets: 0, goalsAgainst: 0, matches: 0, topPlayer: null, players: [] };
       }
 
       const avgOvr = (groupPlayers.reduce((s, p) => s + Number(p.ovr || 0), 0) / count).toFixed(1);
       const goals = groupPlayers.reduce((s, p) => s + p.calculated.goals, 0);
       const assists = groupPlayers.reduce((s, p) => s + p.calculated.assists, 0);
       const matches = groupPlayers.reduce((s, p) => s + p.calculated.matches, 0);
-      const topPlayer = [...groupPlayers].sort((a, b) => (Number(b.ovr) || 0) - (Number(a.ovr) || 0) || b.calculated.goals - a.calculated.goals)[0];
+      const cleanSheets = groupPlayers.reduce((s, p) => s + (p.calculated.cleanSheets || 0), 0);
+      const goalsAgainst = groupPlayers.reduce((s, p) => s + (p.calculated.goalsAgainst || 0), 0);
+
+      const topPlayer = [...groupPlayers].sort((a, b) => {
+        if (group.id === 'DF' || group.id === 'GK') {
+          return (Number(b.ovr) || 0) - (Number(a.ovr) || 0) || (b.calculated.cleanSheets || 0) - (a.calculated.cleanSheets || 0);
+        }
+        return (Number(b.ovr) || 0) - (Number(a.ovr) || 0) || b.calculated.goals - a.calculated.goals;
+      })[0];
 
       return {
         group,
@@ -264,6 +287,8 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
         avgOvr,
         goals,
         assists,
+        cleanSheets,
+        goalsAgainst,
         matches,
         topPlayer,
         players: groupPlayers.sort((a, b) => (Number(b.ovr) || 0) - (Number(a.ovr) || 0))
@@ -399,6 +424,14 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
           valA = a.calculated.totalHonours;
           valB = b.calculated.totalHonours;
           break;
+        case 'cleansheets':
+          valA = a.calculated.cleanSheets != null ? a.calculated.cleanSheets : -1;
+          valB = b.calculated.cleanSheets != null ? b.calculated.cleanSheets : -1;
+          break;
+        case 'goalsagainst':
+          valA = a.calculated.goalsAgainst != null ? a.calculated.goalsAgainst : 999999;
+          valB = b.calculated.goalsAgainst != null ? b.calculated.goalsAgainst : 999999;
+          break;
         default:
           valA = Number(a.ovr || 0);
           valB = Number(b.ovr || 0);
@@ -412,6 +445,79 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
   // Head-to-Head Comparison
   const playerA = useMemo(() => enrichedPlayers.find((p) => String(p.player_id) === String(comparePlayerAId)), [enrichedPlayers, comparePlayerAId]);
   const playerB = useMemo(() => enrichedPlayers.find((p) => String(p.player_id) === String(comparePlayerBId)), [enrichedPlayers, comparePlayerBId]);
+
+  const comparisonMetrics = useMemo(() => {
+    if (!playerA || !playerB) return [];
+
+    const isDefA = tracksDefense(playerA);
+    const isDefB = tracksDefense(playerB);
+    const hasDef = isDefA || isDefB ||
+      playerA.calculated?.cleanSheets != null || playerB.calculated?.cleanSheets != null ||
+      playerA.calculated?.goalsAgainst != null || playerB.calculated?.goalsAgainst != null;
+
+    const list = [
+      { label: 'Điểm OVR', valA: Number(playerA.ovr || 0), valB: Number(playerB.ovr || 0) },
+      { label: 'Bàn thắng (Goals)', valA: playerA.calculated.goals, valB: playerB.calculated.goals },
+      { label: 'Kiến tạo (Assists)', valA: playerA.calculated.assists, valB: playerB.calculated.assists },
+      { label: 'Tổng G + A', valA: playerA.calculated.gaTotal, valB: playerB.calculated.gaTotal },
+      { label: 'Số trận đấu', valA: playerA.calculated.matches, valB: playerB.calculated.matches },
+      { label: 'Hiệu suất G+A / Trận', valA: parseFloat(playerA.calculated.gaPerMatch), valB: parseFloat(playerB.calculated.gaPerMatch) },
+      { label: 'Danh hiệu MVP', valA: playerA.calculated.mvp, valB: playerB.calculated.mvp },
+      { label: 'Số mùa giải tham gia', valA: playerA.calculated.seasons, valB: playerB.calculated.seasons },
+      {
+        label: 'Tỷ lệ thắng (Win Rate %)',
+        valA: playerA.calculated.winRate != null ? parseFloat(playerA.calculated.winRate.toFixed(1)) : 0,
+        valB: playerB.calculated.winRate != null ? parseFloat(playerB.calculated.winRate.toFixed(1)) : 0,
+        suffix: '%'
+      },
+      { label: 'Kỷ lục & Danh hiệu đạt được', valA: playerA.calculated.totalHonours, valB: playerB.calculated.totalHonours }
+    ];
+
+    if (hasDef) {
+      list.push(
+        {
+          label: 'Giữ sạch lưới (Clean Sheets)',
+          valA: playerA.calculated.cleanSheets != null ? playerA.calculated.cleanSheets : 0,
+          valB: playerB.calculated.cleanSheets != null ? playerB.calculated.cleanSheets : 0,
+          suffix: ' trận',
+          isDefense: true
+        },
+        {
+          label: 'Số bàn thua (Goals Conceded)',
+          valA: playerA.calculated.goalsAgainst != null ? playerA.calculated.goalsAgainst : 0,
+          valB: playerB.calculated.goalsAgainst != null ? playerB.calculated.goalsAgainst : 0,
+          suffix: ' bàn',
+          lowerIsBetter: true,
+          isDefense: true
+        },
+        {
+          label: 'Tỷ lệ giữ sạch lưới',
+          valA: playerA.calculated.matches > 0 && playerA.calculated.cleanSheets != null
+            ? parseFloat(((playerA.calculated.cleanSheets / playerA.calculated.matches) * 100).toFixed(1))
+            : 0,
+          valB: playerB.calculated.matches > 0 && playerB.calculated.cleanSheets != null
+            ? parseFloat(((playerB.calculated.cleanSheets / playerB.calculated.matches) * 100).toFixed(1))
+            : 0,
+          suffix: '%',
+          isDefense: true
+        },
+        {
+          label: 'Bàn thua trung bình / Trận',
+          valA: playerA.calculated.matches > 0 && playerA.calculated.goalsAgainst != null
+            ? parseFloat((playerA.calculated.goalsAgainst / playerA.calculated.matches).toFixed(2))
+            : 0,
+          valB: playerB.calculated.matches > 0 && playerB.calculated.goalsAgainst != null
+            ? parseFloat((playerB.calculated.goalsAgainst / playerB.calculated.matches).toFixed(2))
+            : 0,
+          suffix: ' bàn/trận',
+          lowerIsBetter: true,
+          isDefense: true
+        }
+      );
+    }
+
+    return list;
+  }, [playerA, playerB]);
 
   if (players.length === 0) {
     return (
@@ -762,6 +868,12 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
                     <th onClick={() => { setSortBy('matches'); setSortOrder((o) => (o === 'asc' ? 'desc' : 'asc')); }} className="text-center">
                       Trận {sortBy === 'matches' ? (sortOrder === 'asc' ? '▲' : '▼') : ''}
                     </th>
+                    <th onClick={() => { setSortBy('cleansheets'); setSortOrder((o) => (o === 'asc' ? 'desc' : 'asc')); }} className="text-center" title="Số trận giữ sạch lưới">
+                      Sạch lưới {sortBy === 'cleansheets' ? (sortOrder === 'asc' ? '▲' : '▼') : ''}
+                    </th>
+                    <th onClick={() => { setSortBy('goalsagainst'); setSortOrder((o) => (o === 'asc' ? 'desc' : 'asc')); }} className="text-center" title="Số bàn thua phải nhận">
+                      Bàn thua {sortBy === 'goalsagainst' ? (sortOrder === 'asc' ? '▲' : '▼') : ''}
+                    </th>
                     <th onClick={() => { setSortBy('mvp'); setSortOrder((o) => (o === 'asc' ? 'desc' : 'asc')); }} className="text-center">
                       MVP {sortBy === 'mvp' ? (sortOrder === 'asc' ? '▲' : '▼') : ''}
                     </th>
@@ -817,6 +929,12 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
                         <td className="text-center font-semibold text-slate-700">
                           {p.calculated.matches}
                         </td>
+                        <td className="text-center font-bold text-emerald-600">
+                          {p.calculated.cleanSheets != null ? p.calculated.cleanSheets : '—'}
+                        </td>
+                        <td className="text-center font-semibold text-slate-500">
+                          {p.calculated.goalsAgainst != null ? p.calculated.goalsAgainst : '—'}
+                        </td>
                         <td className="text-center text-yellow-600 font-bold">
                           {p.calculated.mvp}
                         </td>
@@ -863,7 +981,7 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
           </div>
 
           <div className="analytics-positions-grid">
-            {positionAnalysis.map(({ group, count, avgOvr, goals, assists, matches, topPlayer, players: groupPlayers }) => (
+            {positionAnalysis.map(({ group, count, avgOvr, goals, assists, cleanSheets, goalsAgainst, matches, topPlayer, players: groupPlayers }) => (
               <div key={group.id} className="analytics-position-card" style={{ borderTopColor: group.color }}>
                 <div className="analytics-pos-card-header">
                   <div className="analytics-pos-card-title">
@@ -880,14 +998,29 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
                     <span>OVR TB</span>
                     <strong>{avgOvr}</strong>
                   </div>
-                  <div className="analytics-pos-stat-item">
-                    <span>Bàn thắng</span>
-                    <strong className="text-rose-600">{goals}</strong>
-                  </div>
-                  <div className="analytics-pos-stat-item">
-                    <span>Kiến tạo</span>
-                    <strong className="text-amber-600">{assists}</strong>
-                  </div>
+                  {group.id === 'DF' || group.id === 'GK' ? (
+                    <>
+                      <div className="analytics-pos-stat-item">
+                        <span>Giữ sạch lưới</span>
+                        <strong className="text-emerald-600">{cleanSheets}</strong>
+                      </div>
+                      <div className="analytics-pos-stat-item">
+                        <span>Bàn thua</span>
+                        <strong className="text-rose-600">{goalsAgainst}</strong>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="analytics-pos-stat-item">
+                        <span>Bàn thắng</span>
+                        <strong className="text-rose-600">{goals}</strong>
+                      </div>
+                      <div className="analytics-pos-stat-item">
+                        <span>Kiến tạo</span>
+                        <strong className="text-amber-600">{assists}</strong>
+                      </div>
+                    </>
+                  )}
                   <div className="analytics-pos-stat-item">
                     <span>Tổng trận</span>
                     <strong>{matches}</strong>
@@ -904,7 +1037,11 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
                       <img src={resolvePlayerImage(topPlayer) || '/RankImages/young_talent.png'} alt="" />
                       <div>
                         <strong>{topPlayer.name}</strong>
-                        <small>OVR {topPlayer.ovr} · {topPlayer.calculated.goals}⚽ · {topPlayer.calculated.assists}🅰️</small>
+                        {group.id === 'DF' || group.id === 'GK' ? (
+                          <small>OVR {topPlayer.ovr} · {topPlayer.calculated.cleanSheets ?? 0}🛡️ Sạch lưới · {topPlayer.calculated.goalsAgainst ?? 0} Bàn thua</small>
+                        ) : (
+                          <small>OVR {topPlayer.ovr} · {topPlayer.calculated.goals}⚽ · {topPlayer.calculated.assists}🅰️</small>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -1186,37 +1323,39 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
 
               {/* Comparative Metrics Bars */}
               <div className="analytics-compare-metrics-list">
-                {[
-                  { label: 'Điểm OVR', valA: Number(playerA.ovr || 0), valB: Number(playerB.ovr || 0) },
-                  { label: 'Bàn thắng (Goals)', valA: playerA.calculated.goals, valB: playerB.calculated.goals },
-                  { label: 'Kiến tạo (Assists)', valA: playerA.calculated.assists, valB: playerB.calculated.assists },
-                  { label: 'Tổng G + A', valA: playerA.calculated.gaTotal, valB: playerB.calculated.gaTotal },
-                  { label: 'Số trận đấu', valA: playerA.calculated.matches, valB: playerB.calculated.matches },
-                  { label: 'Hiệu suất G+A / Trận', valA: parseFloat(playerA.calculated.gaPerMatch), valB: parseFloat(playerB.calculated.gaPerMatch) },
-                  { label: 'Danh hiệu MVP', valA: playerA.calculated.mvp, valB: playerB.calculated.mvp },
-                  { label: 'Số mùa giải tham gia', valA: playerA.calculated.seasons, valB: playerB.calculated.seasons },
-                  {
-                    label: 'Tỷ lệ thắng (Win Rate %)',
-                    valA: playerA.calculated.winRate != null ? parseFloat(playerA.calculated.winRate.toFixed(1)) : 0,
-                    valB: playerB.calculated.winRate != null ? parseFloat(playerB.calculated.winRate.toFixed(1)) : 0,
-                    suffix: '%'
-                  },
-                  { label: 'Kỷ lục & Danh hiệu đạt được', valA: playerA.calculated.totalHonours, valB: playerB.calculated.totalHonours }
-                ].map(({ label, valA, valB, suffix = '' }) => {
+                {comparisonMetrics.map(({ label, valA, valB, suffix = '', isDefense, lowerIsBetter }) => {
                   const max = Math.max(valA, valB, 1);
                   const pctA = Math.min((valA / max) * 100, 100);
                   const pctB = Math.min((valB / max) * 100, 100);
-                  const aWins = valA > valB;
-                  const bWins = valB > valA;
+
+                  let aWins = false;
+                  let bWins = false;
+
+                  if (lowerIsBetter) {
+                    if (valA > 0 && valB > 0) {
+                      aWins = valA < valB;
+                      bWins = valB < valA;
+                    } else if (valA > 0 && valB === 0) {
+                      aWins = true;
+                    } else if (valB > 0 && valA === 0) {
+                      bWins = true;
+                    }
+                  } else {
+                    aWins = valA > valB;
+                    bWins = valB > valA;
+                  }
 
                   return (
-                    <div key={label} className="analytics-compare-row">
+                    <div key={label} className={`analytics-compare-row ${isDefense ? 'is-defense-metric' : ''}`}>
                       <div className={`analytics-compare-val is-left ${aWins ? 'is-winner' : ''}`}>
                         {valA}{suffix}
                       </div>
 
                       <div className="analytics-compare-bar-container">
-                        <div className="analytics-compare-label">{label}</div>
+                        <div className="analytics-compare-label">
+                          {isDefense && <span className="analytics-def-tag">🛡️ PHÒNG NGỰ</span>}
+                          <span>{label}</span>
+                        </div>
                         <div className="analytics-compare-dual-bar">
                           <div className="analytics-bar-track is-left">
                             <div

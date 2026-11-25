@@ -6131,6 +6131,26 @@ html, body, #root, button, input, select, textarea { font-family: "Times New Rom
   background: #2563eb;
 }
 
+.analytics-def-tag {
+  display: inline-block;
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-right: 6px;
+  letter-spacing: 0.5px;
+}
+
+.analytics-compare-row.is-defense-metric {
+  background: #f0fdf4;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #dcfce7;
+}
+
 @media (max-width: 768px) {
   .analytics-page {
     padding: 16px 16px 40px;
