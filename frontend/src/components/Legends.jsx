@@ -57,7 +57,11 @@ const cardImageOf = (legend) => {
 function AwardBreakdown({ legend, compact = false }) {
   return <div className={`legend-award-breakdown${compact ? ' is-compact' : ''}`}>
     {AWARDS.filter(({ key }) => legend.awards?.[key] > 0).map(({ key, title, icon }) => (
-      <span key={key} title={title}><i>{icon}</i>{legend.awards[key]}<small>{compact ? '' : title}</small></span>
+      <span key={key} title={title}>
+        <i>{icon}</i>
+        <b className="award-count">{legend.awards[key]}</b>
+        <small>{compact ? '' : title}</small>
+      </span>
     ))}
   </div>;
 }
@@ -502,7 +506,7 @@ export default function Legends({ initialView = 'legends', targetRecordId = null
                 <span className="legend-rank">{['🥇', '🥈', '🥉'][index]}</span>
                 <LegendAvatar legend={legend} />
                 <strong>{legend.player?.name}</strong>
-                <span>{legend.totalAwards} danh hiệu</span>
+                <span><b className="legend-podium-count">{legend.totalAwards}</b> danh hiệu</span>
                 <AwardBreakdown legend={legend} compact />
               </button>
             ))}
