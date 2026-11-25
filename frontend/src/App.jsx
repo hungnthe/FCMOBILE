@@ -10,6 +10,7 @@ import Sessions from './components/Sessions';
 import Programs from './components/Programs';
 import Legends from './components/Legends';
 import RankJourney from './components/RankJourney';
+import PlayerStatsAnalytics from './components/PlayerStatsAnalytics';
 
 import {
   getPlayers,
@@ -453,6 +454,17 @@ export default function App() {
           {activeTab === 'rank-journey' && (
             <RankJourney
               profiles={masterPlayers}
+              onNavigateToRecord={handleNavigateToRecord}
+            />
+          )}
+          {activeTab === 'player-stats' && (
+            <PlayerStatsAnalytics
+              players={masterPlayers}
+              nations={nations}
+              onSelectPlayer={(p) => {
+                setSelectedPlayer(p);
+                setActiveTab('players');
+              }}
               onNavigateToRecord={handleNavigateToRecord}
             />
           )}
