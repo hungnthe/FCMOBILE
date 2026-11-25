@@ -467,12 +467,48 @@ html, body, #root, button, input, select, textarea { font-family: "Times New Rom
   background: #fff0f2;
 }
 
+.detail-career-stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-stats-row {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 9px;
+}
+
+@media (max-width: 760px) {
+  .detail-stats-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 .detail-stats-grid.has-match-results {
   grid-template-columns: repeat(9, minmax(0, 1fr));
 }
 
 @media (max-width: 760px) {
-  .detail-stats-grid.has-match-results {
+  .detail-career-stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-stats-row {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 9px;
+}
+
+@media (max-width: 760px) {
+  .detail-stats-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.detail-stats-grid.has-match-results {
     grid-template-columns: repeat(9, minmax(96px, 1fr));
     overflow-x: auto;
     overscroll-behavior-inline: contain;

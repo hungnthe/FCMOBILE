@@ -270,12 +270,24 @@ export default function PlayerDetail({ player, nations = [], imageCards: imageCa
     return playerMatch ? { session, stats: playerMatch.stats || {} } : null;
   }).filter(Boolean);
   const showResults = seasonHistory.some(({ session }) => supportsMatchResult(session));
-  const careerFields = [
-    ['goalAmounts', 'BÀN THẮNG'], ['assistAmounts', 'KIẾN TẠO'], ['match', 'TRẬN ĐẤU'],
-    ['bestPlayerAmount', 'MVP'], ['sessionAmount', 'MÙA GIẢI'],
-    ...(player?.tracksDefensiveStats ? [['goalsAgainst', 'BÀN THUA'], ['cleanSheets', 'GIỮ SẠCH LƯỚI']] : []),
-    ...(showResults ? [['wins', 'THẮNG'], ['draws', 'HÒA'], ['losses', 'THUA']] : [])
+  const careerRow1 = [
+    ['goalAmounts', 'BÀN THẮNG'],
+    ['assistAmounts', 'KIẾN TẠO'],
+    ['match', 'TRẬN ĐẤU'],
+    ['bestPlayerAmount', 'MVP'],
+    ['sessionAmount', 'MÙA GIẢI']
   ];
+  const careerRow2 = [
+    ['wins', 'THẮNG'],
+    ['draws', 'HÒA'],
+    ['losses', 'THUA']
+  ];
+  const careerRow3 = [
+    ['goalsAgainst', 'BÀN THUA'],
+    ['cleanSheets', 'GIỮ SẠCH LƯỚI']
+  ];
+  const showMatchResults = showResults || draft.stats?.wins != null || isNew;
+  const showDefensiveStats = player?.tracksDefensiveStats || draft.stats?.goalsAgainst != null || isNew;
 
   const currentRankCode = draft.rank || player?.rank || (isNew ? '' : 'young_talent');
   const currentRankMeta = getRankMeta(currentRankCode);
@@ -420,18 +432,57 @@ export default function PlayerDetail({ player, nations = [], imageCards: imageCa
         <div className="detail-section-heading"><div><span className="detail-eyebrow detail-section-eyebrow">THỐNG KÊ SỰ NGHIỆP</span></div>
           <span className="detail-hint">{isNew ? 'Tự động tổng hợp từ các mùa giải' : 'Sửa tổng tại đây rồi chọn "Lưu thay đổi". Các trận sau tiếp tục được cộng dồn.'}</span>
         </div>
-        <div className={`detail-stats-grid ${showResults ? 'has-match-results' : ''}`}>
-          <NumberTile label="OVR" value={draft.ovr} accent="is-red" />
-          {careerFields.map(([key, label]) => <NumberTile key={key} label={label} value={editedStats[key] ?? draft.stats[key]}
-            placeholder={['goalsAgainst', 'cleanSheets'].includes(key) && draft.stats.match ? '—' : '0'}
-            required={!isNew && draft.stats[key] != null}
-            onChange={isNew ? undefined : (value) => setEditedStats((current) => ({ ...current, [key]: value }))} />)}
+        <div className="detail-career-stats-container">
+          {/* Hàng 1: OVR + Bàn thắng, Kiến tạo, Trận đấu, MVP, Mùa giải */}
+          <div className="detail-stats-row detail-stats-row-1">
+            <NumberTile label="OVR" value={draft.ovr} accent="is-red" />
+            {careerRow1.map(([key, label]) => (
+              <NumberTile
+                key={key}
+                label={label}
+                value={editedStats[key] ?? draft.stats[key]}
+                required={!isNew && draft.stats[key] != null}
+                onChange={isNew ? undefined : (value) => setEditedStats((current) => ({ ...current, [key]: value }))}
+              />
+            ))}
+          </div>
+
+          {/* Hàng 2: Thắng, Hòa, Thua */}
+          {showMatchResults && (
+            <div className="detail-stats-row detail-stats-row-2">
+              {careerRow2.map(([key, label]) => (
+                <NumberTile
+                  key={key}
+                  label={label}
+                  value={editedStats[key] ?? draft.stats[key]}
+                  required={!isNew && draft.stats[key] != null}
+                  onChange={isNew ? undefined : (value) => setEditedStats((current) => ({ ...current, [key]: value }))}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Hàng 3: Bàn thua, Giữ sạch lưới */}
+          {showDefensiveStats && (
+            <div className="detail-stats-row detail-stats-row-3">
+              {careerRow3.map(([key, label]) => (
+                <NumberTile
+                  key={key}
+                  label={label}
+                  value={editedStats[key] ?? draft.stats[key]}
+                  placeholder={draft.stats.match ? '—' : '0'}
+                  required={!isNew && draft.stats[key] != null}
+                  onChange={isNew ? undefined : (value) => setEditedStats((current) => ({ ...current, [key]: value }))}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
       <div className="detail-honours-row">
         <section className="detail-panel detail-archive-panel">
           <div className="detail-archive-heading">
-            <span className="detail-eyebrow detail-section-eyebrow">DANH HIỆU & ARCHIVE</span>
+            <span className="detail-eyebrow detail-section-eyebrow">DANH HIỆU TẬP THỂ</span>
             <button type="button" className="archive-new-button" onClick={addHthValue}>+ Thêm</button>
           </div>
           <div className="detail-secondary-grid">
@@ -499,7 +550,7 @@ export default function PlayerDetail({ player, nations = [], imageCards: imageCa
         <section className="detail-panel player-records-panel">
           <div className="detail-section-heading">
             <div>
-              <span className="detail-eyebrow detail-section-eyebrow">KỶ LỤC & DANH HIỆU CÁ NHÂN</span>
+              <span className="detail-eyebrow detail-section-eyebrow">KỶ LỤC ĐÃ DÀNH ĐƯỢC</span>
             </div>
             {playerRecords.length > 0 && (
               <span className="player-record-count-badge">{playerRecords.length} kỷ lục</span>
