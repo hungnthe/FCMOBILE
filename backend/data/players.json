@@ -18,13 +18,13 @@
     "number": 10,
     "name": "Kylian Mbappe",
     "stats": {
-      "goalAmounts": 326,
+      "goalAmounts": 328,
       "assistAmounts": 222,
-      "match": 664,
-      "bestPlayerAmount": 121,
+      "match": 667,
+      "bestPlayerAmount": 122,
       "sessionAmount": 5,
-      "wins": 267,
-      "draws": 83,
+      "wins": 268,
+      "draws": 85,
       "losses": 95
     },
     "active": {
@@ -92,13 +92,13 @@
     "number": 7,
     "name": "Son Heung-Min",
     "stats": {
-      "goalAmounts": 347,
+      "goalAmounts": 349,
       "assistAmounts": 213,
-      "match": 657,
+      "match": 660,
       "bestPlayerAmount": 107,
       "sessionAmount": 5,
-      "wins": 266,
-      "draws": 83,
+      "wins": 267,
+      "draws": 85,
       "losses": 92
     },
     "active": {
@@ -304,13 +304,13 @@
     "number": 11,
     "name": "Gareth Bale",
     "stats": {
-      "goalAmounts": 335,
+      "goalAmounts": 337,
       "assistAmounts": 199,
-      "match": 630,
-      "bestPlayerAmount": 116,
+      "match": 633,
+      "bestPlayerAmount": 117,
       "sessionAmount": 5,
-      "wins": 266,
-      "draws": 83,
+      "wins": 267,
+      "draws": 85,
       "losses": 95
     },
     "active": {
@@ -375,15 +375,15 @@
     "name": "Declan Rice",
     "stats": {
       "goalAmounts": 44,
-      "assistAmounts": 90,
-      "match": 648,
+      "assistAmounts": 93,
+      "match": 651,
       "bestPlayerAmount": 13,
       "sessionAmount": 5,
-      "wins": 264,
-      "draws": 83,
+      "wins": 265,
+      "draws": 85,
       "losses": 94,
-      "goalsAgainst": 388,
-      "cleanSheets": 183
+      "goalsAgainst": 392,
+      "cleanSheets": 184
     },
     "active": {
       "HTH": [
@@ -723,14 +723,14 @@
     "stats": {
       "goalAmounts": 0,
       "assistAmounts": 0,
-      "match": 664,
+      "match": 667,
       "bestPlayerAmount": 1,
       "sessionAmount": 5,
-      "wins": 267,
-      "draws": 82,
+      "wins": 268,
+      "draws": 84,
       "losses": 95,
-      "goalsAgainst": 388,
-      "cleanSheets": 183
+      "goalsAgainst": 392,
+      "cleanSheets": 184
     },
     "active": {
       "HTH": [
@@ -1393,15 +1393,15 @@
     "number": 21,
     "stats": {
       "goalAmounts": 16,
-      "assistAmounts": 42,
-      "match": 524,
+      "assistAmounts": 43,
+      "match": 527,
       "bestPlayerAmount": 8,
       "sessionAmount": 4,
-      "wins": 267,
-      "draws": 83,
+      "wins": 268,
+      "draws": 85,
       "losses": 95,
-      "goalsAgainst": 388,
-      "cleanSheets": 183
+      "goalsAgainst": 392,
+      "cleanSheets": 184
     },
     "active": {
       "HTH": [
@@ -1457,14 +1457,14 @@
     "stats": {
       "goalAmounts": 3,
       "assistAmounts": 13,
-      "match": 451,
+      "match": 454,
       "bestPlayerAmount": 0,
       "sessionAmount": 4,
-      "wins": 253,
-      "draws": 79,
+      "wins": 254,
+      "draws": 81,
       "losses": 93,
-      "goalsAgainst": 388,
-      "cleanSheets": 183
+      "goalsAgainst": 392,
+      "cleanSheets": 184
     },
     "active": {
       "HTH": [
@@ -1641,14 +1641,14 @@
     "stats": {
       "goalAmounts": 7,
       "assistAmounts": 4,
-      "match": 313,
+      "match": 316,
       "bestPlayerAmount": 1,
       "sessionAmount": 3,
-      "wins": 190,
-      "draws": 60,
+      "wins": 191,
+      "draws": 62,
       "losses": 63,
-      "goalsAgainst": 388,
-      "cleanSheets": 183
+      "goalsAgainst": 392,
+      "cleanSheets": 184
     },
     "active": {
       "HTH": [
@@ -1702,14 +1702,14 @@
     "stats": {
       "goalAmounts": 1,
       "assistAmounts": 29,
-      "match": 247,
+      "match": 250,
       "bestPlayerAmount": 1,
       "sessionAmount": 2,
-      "wins": 152,
-      "draws": 49,
+      "wins": 153,
+      "draws": 51,
       "losses": 46,
-      "goalsAgainst": 232,
-      "cleanSheets": 103
+      "goalsAgainst": 236,
+      "cleanSheets": 104
     },
     "active": {
       "HTH": [
@@ -1757,14 +1757,14 @@
     "stats": {
       "goalAmounts": 0,
       "assistAmounts": 2,
-      "match": 247,
+      "match": 250,
       "bestPlayerAmount": 0,
       "sessionAmount": 2,
-      "wins": 152,
-      "draws": 49,
+      "wins": 153,
+      "draws": 51,
       "losses": 46,
-      "goalsAgainst": 232,
-      "cleanSheets": 103
+      "goalsAgainst": 236,
+      "cleanSheets": 104
     },
     "active": {
       "HTH": [
@@ -1891,15 +1891,15 @@
     "number": 4,
     "stats": {
       "goalAmounts": 38,
-      "assistAmounts": 36,
-      "match": 100,
+      "assistAmounts": 37,
+      "match": 103,
       "bestPlayerAmount": 20,
       "sessionAmount": 2,
-      "wins": 67,
-      "draws": 19,
+      "wins": 68,
+      "draws": 21,
       "losses": 14,
-      "goalsAgainst": 66,
-      "cleanSheets": 51
+      "goalsAgainst": 70,
+      "cleanSheets": 52
     },
     "is_active": true,
     "active": {

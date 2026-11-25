@@ -1,1 +1,149 @@
-[]
+[
+  {
+    "session_id": 5,
+    "title": "",
+    "date": "2026-11-25",
+    "appearances": [
+      1,
+      31,
+      5,
+      6,
+      23,
+      29,
+      28,
+      2,
+      24,
+      11,
+      27
+    ],
+    "goals": [
+      {
+        "scorer_id": 2,
+        "assist_id": 6
+      },
+      {
+        "scorer_id": 1,
+        "assist_id": 6
+      }
+    ],
+    "best_player_id": 1,
+    "status": "finalized",
+    "score": {
+      "for": 2,
+      "against": 0
+    },
+    "result": "WIN",
+    "match_id": 1,
+    "createdAt": "2026-11-25T14:29:44.062Z",
+    "updatedAt": "2026-11-25T14:29:44.088Z",
+    "defensive_appearances": [
+      31,
+      6,
+      23,
+      29,
+      28,
+      24,
+      11,
+      27
+    ],
+    "finalizedAt": "2026-11-25T14:29:44.088Z"
+  },
+  {
+    "session_id": 5,
+    "title": "",
+    "date": "2026-11-25",
+    "appearances": [
+      1,
+      31,
+      5,
+      6,
+      23,
+      29,
+      28,
+      2,
+      24,
+      11,
+      27
+    ],
+    "goals": [
+      {
+        "scorer_id": 2,
+        "assist_id": null
+      },
+      {
+        "scorer_id": 5,
+        "assist_id": 23
+      }
+    ],
+    "best_player_id": 5,
+    "status": "finalized",
+    "score": {
+      "for": 2,
+      "against": 2
+    },
+    "result": "DRAW",
+    "match_id": 2,
+    "createdAt": "2026-11-25T14:36:58.020Z",
+    "updatedAt": "2026-11-25T14:36:58.031Z",
+    "defensive_appearances": [
+      31,
+      6,
+      23,
+      29,
+      28,
+      24,
+      11,
+      27
+    ],
+    "finalizedAt": "2026-11-25T14:36:58.031Z"
+  },
+  {
+    "session_id": 5,
+    "title": "",
+    "date": "2026-11-25",
+    "appearances": [
+      1,
+      31,
+      5,
+      6,
+      23,
+      29,
+      28,
+      2,
+      24,
+      11,
+      27
+    ],
+    "goals": [
+      {
+        "scorer_id": 1,
+        "assist_id": 31
+      },
+      {
+        "scorer_id": 5,
+        "assist_id": 6
+      }
+    ],
+    "best_player_id": null,
+    "status": "finalized",
+    "score": {
+      "for": 2,
+      "against": 2
+    },
+    "result": "DRAW",
+    "match_id": 3,
+    "createdAt": "2026-11-25T14:43:30.252Z",
+    "updatedAt": "2026-11-25T14:43:30.266Z",
+    "defensive_appearances": [
+      31,
+      6,
+      23,
+      29,
+      28,
+      24,
+      11,
+      27
+    ],
+    "finalizedAt": "2026-11-25T14:43:30.266Z"
+  }
+]

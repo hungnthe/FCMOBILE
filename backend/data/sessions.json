@@ -1913,12 +1913,12 @@
         "objectId": "000000000000000000000001",
         "player_card_id": 1001,
         "stats": {
-          "matches": 46,
-          "goals": 25,
+          "matches": 49,
+          "goals": 27,
           "assists": 23,
-          "bestPlayer": 13,
-          "wins": 32,
-          "draws": 6,
+          "bestPlayer": 14,
+          "wins": 33,
+          "draws": 8,
           "losses": 8
         }
       },
@@ -1927,14 +1927,14 @@
         "objectId": "a318bf421eb38ff137b93a7b",
         "player_card_id": 1032,
         "stats": {
-          "matches": 46,
+          "matches": 49,
           "goals": 13,
-          "assists": 16,
+          "assists": 17,
           "bestPlayer": 8,
-          "goalsAgainst": 46,
-          "cleanSheets": 18,
-          "wins": 32,
-          "draws": 6,
+          "goalsAgainst": 50,
+          "cleanSheets": 19,
+          "wins": 33,
+          "draws": 8,
           "losses": 8
         }
       },
@@ -1943,12 +1943,12 @@
         "objectId": "000000000000000000000005",
         "player_card_id": 1005,
         "stats": {
-          "matches": 46,
-          "goals": 31,
+          "matches": 49,
+          "goals": 33,
           "assists": 13,
-          "bestPlayer": 7,
-          "wins": 32,
-          "draws": 6,
+          "bestPlayer": 8,
+          "wins": 33,
+          "draws": 8,
           "losses": 8
         }
       },
@@ -1957,14 +1957,14 @@
         "objectId": "000000000000000000000006",
         "player_card_id": 1006,
         "stats": {
-          "matches": 46,
+          "matches": 49,
           "goals": 6,
-          "assists": 10,
+          "assists": 13,
           "bestPlayer": 2,
-          "goalsAgainst": 46,
-          "cleanSheets": 18,
-          "wins": 32,
-          "draws": 6,
+          "goalsAgainst": 50,
+          "cleanSheets": 19,
+          "wins": 33,
+          "draws": 8,
           "losses": 8
         }
       },
@@ -1973,14 +1973,14 @@
         "objectId": "16e2402494ec82a7d8015d39",
         "player_card_id": 1023,
         "stats": {
-          "matches": 46,
+          "matches": 49,
           "goals": 1,
-          "assists": 5,
+          "assists": 6,
           "bestPlayer": 0,
-          "goalsAgainst": 46,
-          "cleanSheets": 18,
-          "wins": 32,
-          "draws": 6,
+          "goalsAgainst": 50,
+          "cleanSheets": 19,
+          "wins": 33,
+          "draws": 8,
           "losses": 8
         }
       },
@@ -1989,14 +1989,14 @@
         "objectId": "1724128c9e5e4292fab613f8",
         "player_card_id": 1029,
         "stats": {
-          "matches": 46,
+          "matches": 49,
           "goals": 0,
           "assists": 0,
           "bestPlayer": 0,
-          "goalsAgainst": 46,
-          "cleanSheets": 18,
-          "wins": 32,
-          "draws": 6,
+          "goalsAgainst": 50,
+          "cleanSheets": 19,
+          "wins": 33,
+          "draws": 8,
           "losses": 8
         }
       },
@@ -2005,14 +2005,14 @@
         "objectId": "3de915149e05beb910b858a2",
         "player_card_id": 1028,
         "stats": {
-          "matches": 46,
+          "matches": 49,
           "goals": 0,
           "assists": 3,
           "bestPlayer": 0,
-          "goalsAgainst": 46,
-          "cleanSheets": 18,
-          "wins": 32,
-          "draws": 6,
+          "goalsAgainst": 50,
+          "cleanSheets": 19,
+          "wins": 33,
+          "draws": 8,
           "losses": 8
         }
       },
@@ -2021,12 +2021,12 @@
         "objectId": "000000000000000000000002",
         "player_card_id": 1002,
         "stats": {
-          "matches": 46,
-          "goals": 26,
+          "matches": 49,
+          "goals": 28,
           "assists": 17,
           "bestPlayer": 7,
-          "wins": 32,
-          "draws": 6,
+          "wins": 33,
+          "draws": 8,
           "losses": 8
         }
       },
@@ -2035,14 +2035,14 @@
         "objectId": "19ae48db9118825163b9392d",
         "player_card_id": 1024,
         "stats": {
-          "matches": 46,
+          "matches": 49,
           "goals": 0,
           "assists": 2,
           "bestPlayer": 0,
-          "goalsAgainst": 46,
-          "cleanSheets": 18,
-          "wins": 32,
-          "draws": 6,
+          "goalsAgainst": 50,
+          "cleanSheets": 19,
+          "wins": 33,
+          "draws": 8,
           "losses": 8
         }
       },
@@ -2051,14 +2051,14 @@
         "objectId": "000000000000000000000011",
         "player_card_id": 1011,
         "stats": {
-          "matches": 46,
+          "matches": 49,
           "goals": 0,
           "assists": 0,
           "bestPlayer": 0,
-          "goalsAgainst": 46,
-          "cleanSheets": 18,
-          "wins": 32,
-          "draws": 6,
+          "goalsAgainst": 50,
+          "cleanSheets": 19,
+          "wins": 33,
+          "draws": 8,
           "losses": 8
         }
       },
@@ -2067,14 +2067,14 @@
         "objectId": "c593226ec5e4687c7ba82ede",
         "player_card_id": 1027,
         "stats": {
-          "matches": 46,
+          "matches": 49,
           "goals": 1,
           "assists": 0,
           "bestPlayer": 0,
-          "goalsAgainst": 46,
-          "cleanSheets": 18,
-          "wins": 32,
-          "draws": 6,
+          "goalsAgainst": 50,
+          "cleanSheets": 19,
+          "wins": 33,
+          "draws": 8,
           "losses": 8
         }
       },
@@ -2227,7 +2227,7 @@
     },
     "session_id": 5,
     "createdAt": "2026-11-21T08:25:54.704Z",
-    "updatedAt": "2026-11-25T09:02:06.368Z",
+    "updatedAt": "2026-11-25T14:43:30.275Z",
     "season_match_stats_baseline": {
       "matches": 46,
       "goalsFor": 103,
@@ -2238,12 +2238,12 @@
       "losses": 8
     },
     "season_match_stats": {
-      "matches": 46,
-      "goalsFor": 103,
-      "goalsAgainst": 46,
-      "cleanSheets": 18,
-      "wins": 32,
-      "draws": 6,
+      "matches": 49,
+      "goalsFor": 109,
+      "goalsAgainst": 50,
+      "cleanSheets": 19,
+      "wins": 33,
+      "draws": 8,
       "losses": 8
     },
     "last_week_cup_batches": [
