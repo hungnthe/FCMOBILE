@@ -27,12 +27,32 @@ const SORTS = [
 const publicAssetUrl = (value) => {
   if (!value) return '';
   const source = Array.isArray(value) ? value[0] : value;
-  return String(source).startsWith('public/') ? `/${String(source).slice(7)}` : String(source);
+  let str = String(source || '').trim();
+  if (!str) return '';
+  if (str.startsWith('public/')) {
+    str = str.slice(7);
+  } else if (str.startsWith('/public/')) {
+    str = str.slice(8);
+  }
+  if (!str.startsWith('/') && !str.startsWith('http://') && !str.startsWith('https://') && !str.startsWith('data:')) {
+    str = `/${str}`;
+  }
+  try {
+    return encodeURI(decodeURI(str));
+  } catch {
+    return str;
+  }
 };
 
-const cardImageOf = (legend) => publicAssetUrl(
-  legend.player?.currentCard?.imageCard || legend.player?.imageCard?.[0]
-);
+const cardImageOf = (legend) => {
+  const p = legend?.player;
+  const raw = p?.currentCard?.imageCard
+    || (Array.isArray(p?.imageCard) ? p.imageCard[0] : p?.imageCard)
+    || p?.currentCard?.ovr_images?.[String(p?.currentCard?.ovr || p?.ovr)]
+    || p?.avatar
+    || p?.photoUrl;
+  return publicAssetUrl(raw);
+};
 
 function AwardBreakdown({ legend, compact = false }) {
   return <div className={`legend-award-breakdown${compact ? ' is-compact' : ''}`}>
@@ -43,18 +63,58 @@ function AwardBreakdown({ legend, compact = false }) {
 }
 
 function LegendAvatar({ legend }) {
+  const [hasError, setHasError] = useState(false);
   const image = cardImageOf(legend);
-  return <div className="legend-player-avatar">{image ? <img src={image} alt="" /> : <Medal />}</div>;
+
+  useEffect(() => {
+    setHasError(false);
+  }, [image]);
+
+  return (
+    <div className="legend-player-avatar">
+      {image && !hasError ? (
+        <img
+          src={image}
+          alt={legend?.player?.name || 'Player card'}
+          onError={() => setHasError(true)}
+          loading="lazy"
+        />
+      ) : (
+        <Medal />
+      )}
+    </div>
+  );
 }
 
 function DetailModal({ legend, onClose }) {
+  useEffect(() => {
+    if (!legend) return;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    const prevOverflow = document.body.style.overflow;
+    const prevPaddingRight = document.body.style.paddingRight;
+
+    document.body.style.overflow = 'hidden';
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.body.style.paddingRight = prevPaddingRight;
+    };
+  }, [legend]);
+
   if (!legend) return null;
   return <div className="session-modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
     <section className="legend-detail-modal" role="dialog" aria-modal="true" aria-labelledby="legend-detail-title">
       <button className="session-close-button" onClick={onClose} aria-label="Đóng"><X /></button>
       <div className="legend-detail-hero">
         <LegendAvatar legend={legend} />
-        <div><span className="session-eyebrow">HALL OF LEGENDS</span><h2 id="legend-detail-title">{legend.player?.name}</h2><p>{legend.player?.position?.join?.(', ') || 'Cầu thủ Ajax'} · {legend.totalAwards} danh hiệu</p></div>
+        <div>
+          <span className="session-eyebrow">HALL OF LEGENDS</span>
+          <h2 id="legend-detail-title">{legend.player?.name}</h2>
+          <p>{Array.isArray(legend.player?.position) ? legend.player.position.join(' · ').toUpperCase() : (legend.player?.position || 'Cầu thủ Ajax')} · {legend.totalAwards} danh hiệu</p>
+        </div>
       </div>
       <AwardBreakdown legend={legend} />
       <div className="legend-detail-history">
@@ -62,7 +122,13 @@ function DetailModal({ legend, onClose }) {
         {legend.history.map((item, index) => <article className="legend-history-item" key={`${item.session_id}-${item.key}-${index}`}>
           {item.session_image && (
             <div className="legend-history-thumb-wrap">
-              <img src={publicAssetUrl(item.session_image)} alt="" className="legend-history-thumb" loading="lazy" />
+              <img
+                src={publicAssetUrl(item.session_image)}
+                alt=""
+                className="legend-history-thumb"
+                loading="lazy"
+                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+              />
             </div>
           )}
           <span className="legend-history-icon">{AWARDS.find((award) => award.key === item.key)?.icon}</span>
@@ -152,12 +218,9 @@ function CategoryView({ data, nations = [], onSelect }) {
       {seasonHistory.map((item, index) => {
         const legend = legendById.get(Number(item.player_id));
         return (
-          <button
+          <div
             key={`${item.session_id}-${item.player_id}-${index}`}
-            type="button"
-            className="legend-category-row is-clickable"
-            onClick={() => legend && onSelect(legend)}
-            title={`Xem chi tiết ${item.player_name || legend?.player?.name}`}
+            className="legend-category-row"
           >
             <div className="legend-row-season">
               {item.session_image && (
@@ -166,6 +229,7 @@ function CategoryView({ data, nations = [], onSelect }) {
                   alt=""
                   className="legend-row-season-img"
                   loading="lazy"
+                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
                 />
               )}
               <span className="legend-row-season-name">
@@ -194,9 +258,7 @@ function CategoryView({ data, nations = [], onSelect }) {
                 </span>
               )}
             </div>
-
-            <ChevronRight className="legend-row-arrow" />
-          </button>
+          </div>
         );
       })}
     </div>

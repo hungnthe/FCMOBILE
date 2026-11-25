@@ -249,5 +249,20 @@
     "record_id": 19,
     "createdAt": "2026-11-24T18:22:51.491Z",
     "updatedAt": "2026-11-24T18:22:51.491Z"
+  },
+  {
+    "name": "Cầu thủ đánh đầu tốt nhất",
+    "award_name": "Trùm Không chiến",
+    "note": "Vượt lên trên mọi hàng phòng ngự bằng những pha bật nhảy thách thức trọng lực, anh khiến mọi đối thủ phải bất lực trong những cuộc đấu tay đôi trên không. Xin vinh danh vị vua của những pha không chiến — biểu tượng của sức mạnh, sự quyết đoán và những bàn thắng bằng đầu mang tính biểu tượng.",
+    "player": "Gareth Bale",
+    "player_id": 5,
+    "co_players": [],
+    "player_history": [],
+    "image": "",
+    "record_type": "milestone",
+    "record_id": 20,
+    "createdAt": "2026-11-25T15:39:13.321Z",
+    "updatedAt": "2026-11-25T15:39:38.852Z",
+    "group_id": "skill_brilliance"
   }
 ]
