@@ -720,6 +720,17 @@ export default function Records({ targetRecordId, onClearTargetRecord }) {
     const coCount = record.co_players?.length || 0;
     const totalAchievers = 1 + coCount;
 
+    const playerHistoryList = breakable
+      ? [
+          record.player,
+          ...(record.co_players?.map((co) => co.player) || []),
+          ...(record.player_history ? [...record.player_history].reverse().map((h) => h.player) : [])
+        ].filter(Boolean)
+      : [
+          record.player,
+          ...(record.co_players?.map((co) => co.player) || [])
+        ].filter(Boolean);
+
     return (
       <article className={`record-card ${breakable ? 'is-breakable-record' : 'is-milestone-record'}`} key={record.record_id} id={`record-${record.record_id}`}>
         {record.award_name && <div className="record-card-tab">{record.award_name}</div>}
@@ -782,51 +793,21 @@ export default function Records({ targetRecordId, onClearTargetRecord }) {
             </div>
           </div>
 
-          {/* Danh sách lịch sử các cầu thủ nhận được - ĐỂ XUỐNG DƯỚI */}
-          {breakable ? (
-            <div className="record-card-history-footer is-breakable">
-              <div className="record-history-footer-header">
-                <Flame className="w-3.5 h-3.5 text-rose-600 inline mr-1" />
-                <span className="record-history-footer-label">
-                  Lịch sử các cầu thủ nắm giữ kỷ lục:
-                </span>
-              </div>
-              <div className="record-history-chips">
-                <span className="record-achiever-chip is-current" title="Đang nắm giữ hiện tại">
-                  👑 {record.player} <span className="record-chip-tag is-current">Hiện tại</span>
-                </span>
-                {record.co_players?.map((co, index) => (
-                  <span key={co.player_id || index} className="record-achiever-chip is-co-holder" title="Đồng nắm giữ kỷ lục">
-                    👑 {co.player} <span className="record-chip-tag is-co">Đồng nắm giữ</span>
-                  </span>
-                ))}
-                {record.player_history && record.player_history.length > 0 && [...record.player_history].reverse().map((entry, index) => (
-                  <span key={(entry.changed_at || '') + '-' + index} className="record-achiever-chip is-past" title={entry.changed_at ? `Từng nắm giữ đến ${new Date(entry.changed_at).toLocaleDateString('vi-VN')}` : 'Đã từng nắm giữ'}>
-                    ⏳ {entry.player}
-                    {entry.changed_at && <span className="record-chip-tag is-date">{new Date(entry.changed_at).toLocaleDateString('vi-VN')}</span>}
+          {/* Lịch sử các cầu thủ (Dropdown ô xám, không icon) */}
+          {playerHistoryList.length > 0 && (
+            <details className="record-card-history-dropdown">
+              <summary>
+                <span>Lịch sử các cầu thủ ({playerHistoryList.length})</span>
+                <ChevronDown size={14} />
+              </summary>
+              <div className="record-history-gray-list">
+                {playerHistoryList.map((playerName, index) => (
+                  <span key={playerName + '-' + index} className="record-gray-box">
+                    {playerName}
                   </span>
                 ))}
               </div>
-            </div>
-          ) : (
-            <div className="record-card-history-footer is-milestone">
-              <div className="record-history-footer-header">
-                <Sparkles className="w-3.5 h-3.5 text-amber-600 inline mr-1" />
-                <span className="record-history-footer-label">
-                  Danh sách các cầu thủ đã nhận được ({totalAchievers}):
-                </span>
-              </div>
-              <div className="record-history-chips">
-                <span className="record-achiever-chip is-milestone">
-                  🏆 {record.player}
-                </span>
-                {record.co_players?.map((co, index) => (
-                  <span key={co.player_id || index} className="record-achiever-chip is-milestone">
-                    🏆 {co.player}
-                  </span>
-                ))}
-              </div>
-            </div>
+            </details>
           )}
         </div>
       </article>

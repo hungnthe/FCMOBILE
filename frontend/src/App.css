@@ -1220,103 +1220,70 @@ html, body, #root, button, input, select, textarea { font-family: "Times New Rom
   .record-card-actions { justify-self: start; flex-wrap: wrap; }
 }
 
-/* Record Card History Footer (Placed down below) */
-.record-card-history-footer {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding-top: 12px;
+/* Record Card History Dropdown */
+.record-card-history-dropdown {
   border-top: 1px dashed #e6e2db;
+  padding-top: 10px;
+  margin-top: 2px;
 }
 
-.record-history-footer-header {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.record-history-footer-label {
-  font-size: 11px;
-  font-weight: 700;
-  color: #78716c;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.record-card-history-footer.is-milestone .record-history-footer-label {
-  color: #92400e;
-}
-
-.record-card-history-footer.is-breakable .record-history-footer-label {
-  color: #be123c;
-}
-
-.record-history-chips {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 7px;
-}
-
-.record-achiever-chip {
+.record-card-history-dropdown summary {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  transition: color 0.15s ease;
+}
+
+.record-card-history-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.record-card-history-dropdown summary:hover {
+  color: #1e293b;
+}
+
+.record-card-history-dropdown summary svg {
+  width: 14px;
+  height: 14px;
+  color: #94a3b8;
+  transition: transform 0.2s ease;
+}
+
+.record-card-history-dropdown[open] summary svg {
+  transform: rotate(180deg);
+}
+
+.record-history-gray-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.record-gray-box {
+  display: inline-block;
   padding: 4px 11px;
-  border-radius: 999px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  color: #334155;
   font-size: 12px;
   font-weight: 600;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
   transition: all 0.15s ease;
 }
 
-.record-achiever-chip.is-milestone {
-  background: #fefce8;
-  border: 1px solid #fef08a;
-  color: #854d0e;
-}
-.record-achiever-chip.is-milestone:hover {
-  background: #fef08a;
-}
-
-.record-achiever-chip.is-current {
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
-  color: #065f46;
-}
-
-.record-achiever-chip.is-co-holder {
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
-  color: #1e40af;
-}
-
-.record-achiever-chip.is-past {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  color: #64748b;
-}
-
-.record-chip-tag {
-  font-size: 9.5px;
-  font-weight: 700;
-  padding: 1px 6px;
-  border-radius: 4px;
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.record-chip-tag.is-current {
-  background: #bbf7d0;
-  color: #166534;
-}
-
-.record-chip-tag.is-co {
-  background: #dbeafe;
-  color: #1e40af;
-}
-
-.record-chip-tag.is-date {
-  color: #64748b;
-  font-weight: 500;
+.record-gray-box:hover {
+  background: #e2e8f0;
+  color: #0f172a;
 }
 
 /* Record Quick Action Buttons & Transfer Modals */
