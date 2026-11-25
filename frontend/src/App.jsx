@@ -170,6 +170,10 @@ export default function App() {
       loadPrograms();
       loadMasterPlayers();
     }
+    if (activeTab === 'player-stats') {
+      if (!masterPlayers.length) loadMasterPlayers();
+      if (!nations.length) getNations().then(setNations).catch(console.warn);
+    }
   }, [activeTab, search, cardTypeFilter, positionFilter, nationFilter, sortBy]);
 
   const handleCreateProgram = async (data) => { try { await createProgram(data); await loadPrograms(); showToast('Đã tạo chương trình!'); } catch (err) { showToast(err.response?.data?.error || 'Không thể tạo chương trình', 'error'); throw err; } };
@@ -459,7 +463,7 @@ export default function App() {
           )}
           {activeTab === 'player-stats' && (
             <PlayerStatsAnalytics
-              players={masterPlayers}
+              players={masterPlayers.length > 0 ? masterPlayers : players}
               nations={nations}
               onSelectPlayer={(p) => {
                 setSelectedPlayer(p);

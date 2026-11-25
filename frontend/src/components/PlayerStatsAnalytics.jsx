@@ -46,15 +46,41 @@ export function getPositionGroup(positions) {
   return 'MF';
 }
 
+export function resolveNationInfo(playerNation, nations = []) {
+  if (!playerNation) return { name: 'Không rõ', flag: '' };
+
+  if (typeof playerNation === 'object') {
+    const nid = Number(playerNation.nation_id);
+    const found = nations.find((n) => Number(n.nation_id) === nid);
+    if (found) {
+      return { name: found.name || `Quốc gia #${nid}`, flag: found.flag_url || '' };
+    }
+    if (playerNation.name) {
+      return { name: playerNation.name, flag: playerNation.flag_url || '' };
+    }
+    return { name: nid ? `Quốc gia #${nid}` : 'Không rõ', flag: '' };
+  }
+
+  const str = String(playerNation).trim();
+  const found = nations.find(
+    (n) => String(n.name).toLowerCase() === str.toLowerCase() || String(n.nation_id) === str
+  );
+  if (found) {
+    return { name: found.name, flag: found.flag_url || '' };
+  }
+  return { name: str || 'Không rõ', flag: '' };
+}
+
 function resolvePlayerImage(player) {
   if (!player) return '';
   const ovr = player.ovr;
   if (player.ovr_images && ovr && player.ovr_images[ovr]) {
-    const img = player.ovr_images[ovr];
+    const img = String(player.ovr_images[ovr]);
     return img.startsWith('public/') ? `/${img.slice('public/'.length)}` : img;
   }
   const fallback = player.imageCard?.[0] || player.metadata?.imageCard?.[0] || player.image || '';
-  return fallback.startsWith('public/') ? `/${fallback.slice('public/'.length)}` : fallback;
+  const fallbackStr = String(fallback);
+  return fallbackStr.startsWith('public/') ? `/${fallbackStr.slice('public/'.length)}` : fallbackStr;
 }
 
 export default function PlayerStatsAnalytics({ players = [], nations = [], onSelectPlayer, onNavigateToRecord }) {
@@ -120,6 +146,7 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
       const group = getPositionGroup(p.position);
       const rankCode = p.rank || 'young_talent';
       const rankMeta = getRankMeta(rankCode);
+      const nationInfo = resolveNationInfo(p.nation, nations);
 
       // Honours & records count
       const playerRecordEntries = records
@@ -156,6 +183,8 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
           group,
           rankCode,
           rankMeta,
+          nationName: nationInfo.name,
+          nationFlag: nationInfo.flag,
           currentRecordsCount,
           achievedRecordsCount,
           pastRecordsCount,
@@ -164,7 +193,7 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
         }
       };
     });
-  }, [players, records]);
+  }, [players, records, nations]);
 
   // Overall Club KPIs
   const clubKPIs = useMemo(() => {
@@ -246,13 +275,12 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
   const nationsAnalysis = useMemo(() => {
     const map = {};
     enrichedPlayers.forEach((p) => {
-      const nationName = p.nation ? p.nation.trim() : 'Không rõ';
+      const nationName = p.calculated?.nationName || 'Không rõ';
+      const nationFlag = p.calculated?.nationFlag || null;
       if (!map[nationName]) {
-        // match flag image from nations list
-        const nationObj = nations.find((n) => n.nation?.toLowerCase().trim() === nationName.toLowerCase());
         map[nationName] = {
           nation: nationName,
-          flag: nationObj?.image || null,
+          flag: nationFlag,
           players: [],
           totalGoals: 0,
           totalAssists: 0,
@@ -268,7 +296,7 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
     return Object.values(map)
       .map((item) => {
         const count = item.players.length;
-        const avgOvr = (item.players.reduce((s, p) => s + Number(p.ovr || 0), 0) / count).toFixed(1);
+        const avgOvr = count > 0 ? (item.players.reduce((s, p) => s + Number(p.ovr || 0), 0) / count).toFixed(1) : '0';
         const topScorer = [...item.players].sort((a, b) => b.calculated.goals - a.calculated.goals)[0];
         const highestOvr = [...item.players].sort((a, b) => Number(b.ovr || 0) - Number(a.ovr || 0))[0];
         return {
@@ -280,7 +308,7 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
         };
       })
       .sort((a, b) => b.count - a.count || b.totalGoals - a.totalGoals);
-  }, [enrichedPlayers, nations]);
+  }, [enrichedPlayers]);
 
   // Records & Rank Correlation
   const recordsAnalysis = useMemo(() => {
@@ -317,7 +345,10 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
 
     if (search.trim()) {
       const q = search.trim().toLowerCase();
-      list = list.filter((p) => p.name.toLowerCase().includes(q) || (p.nation && p.nation.toLowerCase().includes(q)));
+      list = list.filter((p) =>
+        (p.name && p.name.toLowerCase().includes(q)) ||
+        (p.calculated?.nationName && p.calculated.nationName.toLowerCase().includes(q))
+      );
     }
 
     if (posFilter !== 'all') {
@@ -382,6 +413,18 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
   const playerA = useMemo(() => enrichedPlayers.find((p) => String(p.player_id) === String(comparePlayerAId)), [enrichedPlayers, comparePlayerAId]);
   const playerB = useMemo(() => enrichedPlayers.find((p) => String(p.player_id) === String(comparePlayerBId)), [enrichedPlayers, comparePlayerBId]);
 
+  if (players.length === 0) {
+    return (
+      <div className="analytics-page">
+        <div className="analytics-empty-state">
+          <BarChart2 size={48} className="analytics-empty-icon" />
+          <h2>Đang tải dữ liệu số liệu cầu thủ...</h2>
+          <p>Hệ thống đang đồng bộ danh sách cầu thủ và số liệu thi đấu.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="analytics-page">
       {/* Header Banner */}
@@ -425,7 +468,7 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
                 <span className="analytics-kpi-label">Tổng bàn thắng & KT</span>
                 <strong className="analytics-kpi-value">{clubKPIs.totalGoals} <small>bàn</small></strong>
                 <span className="analytics-kpi-sub">
-                  {clubKPIs.totalAssists} kiến tạo · {clubKPIs.topScorer?.name} ({clubKPIs.topScorer?.calculated.goals}⚽)
+                  {clubKPIs.totalAssists} kiến tạo · {clubKPIs.topScorer ? `${clubKPIs.topScorer.name} (${clubKPIs.topScorer.calculated?.goals || 0}⚽)` : '—'}
                 </span>
               </div>
             </div>
@@ -757,7 +800,7 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
                           </span>
                         </td>
                         <td>
-                          <span className="analytics-nation-tag">{p.nation || '—'}</span>
+                          <span className="analytics-nation-tag">{p.calculated?.nationName || '—'}</span>
                         </td>
                         <td className="text-center">
                           <strong className="analytics-ovr-pill">{p.ovr || '—'}</strong>
@@ -1110,7 +1153,10 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
                   <img src={resolvePlayerImage(playerA) || '/RankImages/young_talent.png'} alt="" className="analytics-compare-img" />
                   <h3>{playerA.name}</h3>
                   <div className="analytics-compare-meta">
-                    <span>{playerA.nation || '—'}</span>
+                    {playerA.calculated?.nationFlag && (
+                      <img src={playerA.calculated.nationFlag} alt="" className="analytics-compare-flag" />
+                    )}
+                    <span>{playerA.calculated?.nationName || '—'}</span>
                     <span>·</span>
                     <span>{Array.isArray(playerA.position) ? playerA.position.join(' · ').toUpperCase() : playerA.position || '—'}</span>
                   </div>
@@ -1124,7 +1170,10 @@ export default function PlayerStatsAnalytics({ players = [], nations = [], onSel
                   <img src={resolvePlayerImage(playerB) || '/RankImages/young_talent.png'} alt="" className="analytics-compare-img" />
                   <h3>{playerB.name}</h3>
                   <div className="analytics-compare-meta">
-                    <span>{playerB.nation || '—'}</span>
+                    {playerB.calculated?.nationFlag && (
+                      <img src={playerB.calculated.nationFlag} alt="" className="analytics-compare-flag" />
+                    )}
+                    <span>{playerB.calculated?.nationName || '—'}</span>
                     <span>·</span>
                     <span>{Array.isArray(playerB.position) ? playerB.position.join(' · ').toUpperCase() : playerB.position || '—'}</span>
                   </div>
